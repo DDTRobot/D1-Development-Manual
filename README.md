@@ -9,13 +9,13 @@
 
 ---
 
-![tita](./_static/logo.png)
+![tita](./_static/tital.jpg)
 
 ## Installation 安装
 
 | Installation method | Supported platform[s] |                       Development Docs                       |
 | :-----------------: | :-------------------: | :----------------------------------------------------------: |
-|       Source        |  Ubuntu , ros-humble   | [TITA开发手册(Ubuntu)](file:///home/czj/TITA-Development-Manual/build/html/index.html) |
+|       Source        |  Ubuntu , ros-humble   | [D1开发手册(Ubuntu)](file:///home/czj/TITA-Development-Manual/build/html/index.html) |
 
 
 

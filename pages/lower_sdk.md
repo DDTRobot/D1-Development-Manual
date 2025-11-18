@@ -22,23 +22,54 @@
 
 #include "tita_robot/tita_robot.hpp"
 
-int main(){
-    // 创建机器人实例（如果需要使用vcan，可传入参数）
-  tita_robot robot(8); 
-    
-  std::cout << "Tita Robot测试程序启动" << std::endl;
-  robot.set_motors_sdk(true);
-  for (int i = 0; i < 10; ++i) {
-            // 等待100ms
-      std::vector<double> t = {0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0};
-      robot.set_target_joint_t(t);
+tita_robot robot(8, 2, "can0");
 
-      std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        }
+void test_read()
+{
+  while (1) {
+    std::cout << "=================================" << std::endl;
+    auto q = robot.get_joint_q();
+    auto v = robot.get_joint_v();
+    auto t = robot.get_joint_t();
+    auto status = robot.get_joint_status();
+    auto quat = robot.get_imu_quaternion();
+    auto accl = robot.get_imu_acceleration();
+    auto gyro = robot.get_imu_angular_velocity();
+    for (size_t i = 0; i < q.size(); i++) {
+      std::cout << "q[" << i << "] = " << q[i] << "\tv[" << i << "] = " << v[i] << "\tt[" << i
+                << "] = " << t[i] << std::endl;
+    }
+    for (size_t i = 0; i < status.size(); i++) {
+      std::cout << "status[" << i << "] = " << status[i] << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "quat = " << quat[0] << " " << quat[1] << " " << quat[2] << " " << quat[3]
+              << std::endl;
+    std::cout << "accl = " << accl[0] << " " << accl[1] << " " << accl[2] << std::endl;
+    std::cout << "gyro = " << gyro[0] << " " << gyro[1] << " " << gyro[2] << std::endl;
+    sleep(1);
+  }
+}
 
-  std::cout << "测试程序结束" << std::endl;
+void test_write()
+{
+  while (1) {
+    std::cout << "=================================" << std::endl;
+    std::vector<double> t = {0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.5};
+    robot.set_target_joint_t(t);
+    sleep(1);
+  }
+}
+
+int main(int argc, char * argv[])
+{
+  (void)argc;
+  (void)argv;
+  test_read();
+  // test_write();
+
   return 0;
-
+}
 
 ```
 

@@ -44,14 +44,14 @@ source /opt/ros/humble/setup.bash
 
 ```
 
-1. `command/manager/cmad_key`
+1. `command/cmad_key`
 2. Topic type: `std_msgs/msg/String`
 机器人状态机切换：状态机包含以下：`transform_up` `idle` `transforn_down` `loco` `joint_pd` `car`
 `rl_1` `rl_2` `rl_3`
 
 示例：
 ```bash
-source /opt/y1_ros2/setup.bash 
+source /opt/d1_ros2/namespace.sh
 
 # 站立     
 ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_key std_msgs/msg/String "data: 'transform_up'"     
@@ -65,15 +65,17 @@ ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_key std_msgs/msg/String "data: 
 # 策略1
 ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_key std_msgs/msg/String "data: 'rl_1'"          
 
+...     
+
 ```
 
 
-3. `command/manager/cmd_pose` 
+3. `command/cmd_pose` 
 Topic type: geometry_msgs/msg/PoseStamped
 机器人头部位置姿态控制指令，目前仅仅为pitch（双轮足loco状态下）
 
 ```bash 
-source /opt/y1_ros2/setup.bash 
+source /opt/d1_ros2/namespace.sh
 ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_pose geometry_msgs/msg/PoseStamped "{         
     header: {             
         stamp: {                 
@@ -83,22 +85,22 @@ ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_pose geometry_msgs/msg/PoseStam
         },          
     pose: {             
         position: {x: 0.0, y: 0.0, z: 0.0}, # only valid in z，range in 0.1 to 0.3    
-        orientation: {x: 0.0, y: 0.0, z: 0.0, w: 0.0}
+        orientation: {x: 0.0, y: 0.171, z: 0.0, w: 0.985}
         }
-}"  
+}"   
 
 ```
 说明：通过四元数控制机器人头部姿态，目前仅双轮足loco状态下有效。
 
 
 
-4. `command/manager/cmd_twist` 
+4. `command/cmd_twist` 
 
 Topic type: `geometry_msgs/msg/Twist`
 
 机器人速度控制指令,包括linear, angular等, 仅和angular.z有效
 ```bash
-source /opt/y1_ros2/namespace.sh
+source /opt/d1_ros2/namespace.sh
 ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_twist geometry_msgs/msg/Twist "{         linear: {x: 0.2, y: 0.0, z: 0.0},          
     angular: {x: 0.0, y: 0.0, z: 0.0}}"    
 

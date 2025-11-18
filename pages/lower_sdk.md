@@ -9,7 +9,7 @@
 
 本节介绍指导用户如何使用 D1_SDK 创建一个属于自己的底层运动控制程序。利用tita_robot.hpp 创建一个tita_robot对象，并调用相应的接口函数，实现单独的电机控制，提供底层电机控制接口，例子如下 ：
 
-```bash
+```
 #include <time.h>
 
 #include <algorithm>
@@ -26,7 +26,8 @@ tita_robot robot(8, 2, "can0");
 
 void test_read()
 {
-  while (1) {
+  while (1) 
+  {
     std::cout << "=================================" << std::endl;
     auto q = robot.get_joint_q();
     auto v = robot.get_joint_v();
@@ -48,6 +49,7 @@ void test_read()
     std::cout << "accl = " << accl[0] << " " << accl[1] << " " << accl[2] << std::endl;
     std::cout << "gyro = " << gyro[0] << " " << gyro[1] << " " << gyro[2] << std::endl;
     sleep(1);
+  
   }
 }
 

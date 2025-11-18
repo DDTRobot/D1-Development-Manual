@@ -44,7 +44,7 @@ source /opt/ros/humble/setup.bash
 
 ```
 
-1. `command/cmad_key`
+1. `command/cmd_key`
 2. Topic type: `std_msgs/msg/String`
 机器人状态机切换：状态机包含以下：`transform_up` `idle` `transforn_down` `loco` `joint_pd` `car`
 `rl_1` `rl_2` `rl_3`

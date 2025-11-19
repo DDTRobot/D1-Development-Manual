@@ -43,7 +43,8 @@ export ROS_DOMAIN_ID=42
 source /opt/ros/humble/setup.bash
 
 ```
-
+### 上层command_sdk 接口
+`08 SDK Mode` 带 `*`后遥控器不发送command话题，可由用户发送话题来控制机器，目前话题名称如下：
 1. `command/cmd_key`
 2. Topic type: `std_msgs/msg/String`
 机器人状态机切换：状态机包含以下：`transform_up` `idle` `transforn_down` `loco` `joint_pd` `car`

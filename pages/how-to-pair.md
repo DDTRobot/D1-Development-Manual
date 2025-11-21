@@ -38,7 +38,10 @@ sudo apt-get install crsf-app
 2. 长按接收机配对按钮5s，等待配对指示灯常亮。
 ![remote_switch2](../_static/remote_switch1.png)
 <br>
-3. 同时长按远程急停开关的1和2，直至遥控器上的指示灯常亮。
+3. 同时长按远程急停开关的按钮1和按钮2，直至遥控器上的指示灯常亮。
 ![remote_switch3](../_static/remote_switch3.png)
 <br>
-4. 配对完成！
+3. 再次按下按钮1
+![remote_switch4](../_static/remote_switch4.png)
+<br>
+4. 重启后，配对完成！

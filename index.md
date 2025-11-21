@@ -4,9 +4,10 @@
 :maxdepth: 1
 
 pages/Quick_Start
-pages/how-to-pair
+pages/SDK_Development
+pages/sim2sim_sim2real
 pages/D1_remote_ctrl
-pages/Started_with_Development
+pages/how-to-pair
 pages/OTA_model
 
 ```

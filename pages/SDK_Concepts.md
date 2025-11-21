@@ -21,7 +21,6 @@
 
 ```{warning}
 1、 使用windows系统的用户在USB type-c 线束后，无法识别 usb 网卡，因为缺少相关驱动，请自行安装:https://milkv.io/zh/docs/duo/getting-started/setup#
-
 2、 禁止使用使用刷机线进行调试，以免误操作，使系统进入刷机模式，系统无法正常启动。
 
 ```
@@ -69,14 +68,18 @@ sudo apt-get install python3-colcon-common-extensions
 ```
 遇到无法安装`python3-colcon-common-extensions`需要配置以下内容
 
-```{note}
+``````
 创建或编辑一个配置文件：
+```
 sudo vim /etc/apt/apt.conf.d/99insecure
+```
 添加以下内容：
+```
 Acquire::AllowInsecureRepositories "true";
 Acquire::AllowDowngradeToInsecureRepositories "true";
-然后再次运行`sudo apt update`。
 ```
+然后再次运行`sudo apt update`。
+``````
 
 ## D1 ROS2 SDK
 

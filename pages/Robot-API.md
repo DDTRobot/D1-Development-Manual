@@ -12,7 +12,7 @@
 ### 电池状态查询接口
 用于实时获取机器人电池的各项关键参数，支撑电量管理、低电量预警等功能。
 
-```bash
+```cpp{.hljs language-cpp background-color=#f0f0f0}
   /**
      * @brief Get the current battery is connected.
      * @param index: the index of battery.
@@ -54,7 +54,7 @@
 ### 机器人核心状态获取接口
 用于获取机器人运动控制、姿态感知的关键数据，为运动规划、姿态调整提供基础，涵盖 IMU（惯性测量单元）、电机、关节三大模块：
 
-```bash 
+```cpp{.hljs language-cpp background-color=#f0f0f0}
 /**
      * @brief Get the current states update timeout.
      * @return bool: if current states not update, return true.

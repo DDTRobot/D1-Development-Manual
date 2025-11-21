@@ -1,4 +1,4 @@
-# 底层运动控制 
+# 下层控制示例 
 ```{toctree}
 :maxdepth: 1
 :glob:
@@ -7,9 +7,14 @@
 
 一、应用示例
 
-本节介绍指导用户如何使用 D1_SDK 创建一个属于自己的底层运动控制程序。利用tita_robot.hpp 创建一个tita_robot对象，并调用相应的接口函数，实现单独的电机控制，提供底层电机控制接口，例子如下 ：
+这是一个关于如何使用 tita_robot 包来控制机器人关节并获取电池信息等示例。仅在真机上使用。
 
-```
+
+创建lower_sdk_example.cpp文件
+
+`根据您的要求，我将为代码块添加背景色。以下是修改后的代码块：
+
+```cpp{.hljs language-cpp background-color=#f0f0f0}
 #include <time.h>
 
 #include <algorithm>
@@ -76,7 +81,9 @@ int main(int argc, char * argv[])
 ```
 
 创建CMakeLists.txt文件
-```bash
+
+```
+
 cmake_minimum_required(VERSION 3.10)
 project(lower_sdk_example)
 
@@ -84,7 +91,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options(-Wall -Wextra -Wpedantic)
-set(LOWER_SDK "/opt/y1_ros2/")
+set(LOWER_SDK "/opt/d1_ros2/")   #tita_robot 安装路径
 
 include_directories(
     ${LOWER_SDK}/include
@@ -100,9 +107,21 @@ target_link_libraries(lower_sdk_example
     tita_robot  
     pthread     
 )
+
+```
+
+编译与测试
+
+```
+mkdir build  && cd build
+cmake .. 
+make -j8
+./lower_sdk_example 
+
 ```
 
 二、运动控制接口
+
 （1） 设置电机力矩
 ```bash
  /**
@@ -130,3 +149,6 @@ target_link_libraries(lower_sdk_example
     const std::vector<double> & q, const std::vector<double> & v, const std::vector<double> & kp,
     const std::vector<double> & kd, const std::vector<double> & t);
 ```
+
+
+更多详情请参考[tita_robot](Robot-API.md)

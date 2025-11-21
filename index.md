@@ -3,15 +3,14 @@
 ```{toctree}
 :maxdepth: 1
 
+pages/Quick_Start
+pages/how-to-pair
 pages/D1_remote_ctrl
-pages/SDK_guide
-pages/SDK_Concepts
-pages/lower_sdk
+pages/Started_with_Development
 pages/OTA_model
 
-
 ```
-最近更新时间：2025年11月7日
+最近更新时间：2025年11月21日
 
 --------
 

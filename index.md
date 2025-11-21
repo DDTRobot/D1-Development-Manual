@@ -4,6 +4,7 @@
 :maxdepth: 1
 
 pages/D1_remote_ctrl
+pages/SDK_guide
 pages/SDK_Concepts
 pages/Robot-API
 pages/lower_sdk

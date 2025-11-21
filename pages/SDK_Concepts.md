@@ -17,7 +17,7 @@
 
 #### 网络环境
 
-需将用户自备一根USB type-c 线束，插入距离网口最近的type-c口，（详细说明请查看产品使用说明书）。用户电脑与D1机器人通讯的网卡在42网段下，自动分配ip,无需配置。
+需将用户自备一根USB type-c 线束，插入距离网口最近的type-c口，（详细说明请查看产品使用说明书）。用户电脑与D1机器人通讯的网卡在192.168.42网段下，自动分配ip,无需配置。
 
 ```{warning}
 1、 使用windows系统的用户在USB type-c 线束后，无法识别 usb 网卡，因为缺少相关驱动，请自行安装:https://milkv.io/zh/docs/duo/getting-started/setup#
@@ -45,15 +45,6 @@
 sudo apt update
 sudo apt install network-manager
 ```
-
-#### 安装与编译
-
-在D1内置系统开发编译工具`colcon build `安装：
-```bash 
-sudo apt update
-sudo apt-get install python3-colcon-common-extensions
-```
-
 下载配置文件：
 ```bash
 sudo apt-get install git  #如果没有安装git，请先安装
@@ -69,7 +60,21 @@ sudo rm -rf /etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf #删除原有w
 完成以上步骤后，通过ifconfig能看到eth0自动分配IP 192.168.19.97，外部设备会被自动分配 192.168.19.xx 网段的ip。
 
 
+#### 安装编译工具
 
+在D1内置系统开发编译工具`colcon build `安装：
+```bash 
+sudo apt update
+sudo apt-get install python3-colcon-common-extensions
+```
+```{note}
+创建或编辑一个配置文件：
+sudo vim /etc/apt/apt.conf.d/99insecure
+添加以下内容：
+Acquire::AllowInsecureRepositories "true";
+Acquire::AllowDowngradeToInsecureRepositories "true";
+然后再次运行`sudo apt update`。
+```
 
 ## D1 ROS2 SDK
 

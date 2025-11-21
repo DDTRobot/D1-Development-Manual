@@ -1,4 +1,4 @@
-# 遥控器模块
+# 遥控器说明
 ```{toctree}
 :maxdepth: 1
 :glob:

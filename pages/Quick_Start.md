@@ -1,4 +1,12 @@
-# 应用开发
+<!--
+ * @Author: blank1 448913821@qq.com
+ * @Date: 2025-11-21 11:07:34
+ * @LastEditors: blank1 448913821@qq.com
+ * @LastEditTime: 2025-11-21 14:11:23
+ * @FilePath: \D1-Development-Manual\pages\Quick_Start.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+# 快速开始
 ```{toctree}
 :maxdepth: 1
 :glob:
@@ -6,16 +14,13 @@
 ------
 
 
-## 快速开始
+## 环境依赖 
 
-
-### 环境依赖 
-
-#### 系统环境
+### 系统环境
 
 推荐在Ubuntu 22.04 系统，ros2 humble 版本 下进行开发调试，支持在D1 内置电脑上进行开发，也可以在D1 外接电脑进行开发。
 
-#### 网络环境
+### 网络环境
 
 需将用户自备一根USB type-c 线束，插入距离网口最近的type-c口，（详细说明请查看产品使用说明书）。用户电脑与D1机器人通讯的网卡在192.168.42.xxx网段下，自动分配ip,无需配置。
 
@@ -24,7 +29,7 @@
 2、 禁止使用使用刷机线进行调试，以免误操作，使系统进入刷机模式，系统无法正常启动。
 
 ```
-##### wifi热点连接
+#### wifi热点连接
 在下载ros 包和其他依赖时，需要将机器人连接网络，能正常联网，操作如下：
 ```bash
 1.首先 `sudo vim /etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf`
@@ -34,11 +39,11 @@
 例子如图：
 ![wifi_connect](../_static/flash8.jpeg)
 
-##### wifi ap热点模式
+#### wifi ap热点模式
 详细参见[wifi热点模式](TITA-wifi_app.md)
 
 
-#### 网口配置
+### 网口配置
 此配置针对想通过网口网线外接电脑与D1机器人进行数据交互。
 ```bash
 sudo apt update
@@ -59,7 +64,7 @@ sudo rm -rf /etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf #删除原有w
 完成以上步骤后，通过ifconfig能看到eth0自动分配IP 192.168.19.97，外部设备会被自动分配 192.168.19.xx 网段的ip。
 
 
-#### 安装编译工具
+### 安装编译工具
 
 在D1内置系统开发编译工具`colcon build `安装：
 ```bash 
@@ -81,7 +86,7 @@ Acquire::AllowDowngradeToInsecureRepositories "true";
 然后再次运行`sudo apt update`。
 ``````
 
-## D1 ROS2 SDK
+## ROS2 SDK
 
 D1_sdk_ros2 是基于ROS2开发，将高层逻辑封装成ROS2节点，提供ROS2 API给用户使用，用户通过ROS2 topic 发送指令给机器人，完成机器人控制。
 

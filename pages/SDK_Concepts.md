@@ -17,7 +17,7 @@
 
 #### 网络环境
 
-需将用户自备一根USB type-c 线束，插入距离网口最近的type-c口，（详细说明请查看产品使用说明书）。用户电脑与D1机器人通讯的网卡在192.168.42 网段下，自动分配ip,无需配置。
+需将用户自备一根USB type-c 线束，插入距离网口最近的type-c口，（详细说明请查看产品使用说明书）。用户电脑与D1机器人通讯的网卡在192.168.42.xxx网段下，自动分配ip,无需配置。
 
 ```{warning}
 1、 使用windows系统的用户在USB type-c 线束后，无法识别 usb 网卡，因为缺少相关驱动，请自行安装:https://milkv.io/zh/docs/duo/getting-started/setup#
@@ -67,6 +67,8 @@ sudo rm -rf /etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf #删除原有w
 sudo apt update
 sudo apt-get install python3-colcon-common-extensions
 ```
+遇到无法安装`python3-colcon-common-extensions`需要配置以下内容
+
 ```{note}
 创建或编辑一个配置文件：
 sudo vim /etc/apt/apt.conf.d/99insecure

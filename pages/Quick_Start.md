@@ -133,16 +133,16 @@ source /opt/ros/humble/setup.bash
 source /opt/d1_ros2/namespace.sh
 
 # 站立     
-ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_key std_msgs/msg/String "data: 'transform_up'"     
+ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'transform_up'"     
 
 # 趴下     
-ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_key std_msgs/msg/String "data: 'transform_down'"    
+ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'transform_down'"    
  
 # 平地   
-ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_key std_msgs/msg/String "data: 'loco'"
+ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'loco'"
        
 # 策略1
-ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_key std_msgs/msg/String "data: 'rl_1'"          
+ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'rl_1'"          
 
 ...     
 
@@ -155,7 +155,7 @@ Topic type: geometry_msgs/msg/PoseStamped
 
 ```bash 
 source /opt/d1_ros2/namespace.sh
-ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_pose geometry_msgs/msg/PoseStamped "{         
+ros2 topic pub -1 /$ROBOT_NS/command/cmd_pose geometry_msgs/msg/PoseStamped "{         
     header: {             
         stamp: {                 
             sec: 0,   
@@ -180,7 +180,7 @@ Topic type: `geometry_msgs/msg/Twist`
 机器人速度控制指令,包括linear, angular等, 仅和angular.z有效
 ```bash
 source /opt/d1_ros2/namespace.sh
-ros2 topic pub -1 /$ROBOT_NS/command/manager/cmd_twist geometry_msgs/msg/Twist "{         linear: {x: 0.2, y: 0.0, z: 0.0},          
+ros2 topic pub -1 /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/Twist "{         linear: {x: 0.2, y: 0.0, z: 0.0},          
     angular: {x: 0.0, y: 0.0, z: 0.0}}"    
 
 ```

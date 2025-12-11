@@ -124,9 +124,12 @@ source /opt/ros/humble/setup.bash
 ### 上层command_sdk 接口
 `08 SDK Mode` 带 `*`后遥控器不发送command话题，可由用户发送话题来控制机器，目前话题名称如下：
 1. `command/cmd_key`
-2. Topic type: `std_msgs/msg/String`
-<br>机器人状态机切换：状态机包含以下：`transform_up` `idle` `transforn_down` `loco` `joint_pd` `car`
+2. Topic type: `std_msgs/msg/String` 机器人状态机切换：状态机包含以下：`transform_up` `idle` `transforn_down` `loco` `joint_pd` `car`
 `rl_1` `rl_2` `rl_3`
+
+**说明：**
+1、双轮足的状态切换，包含以下：`transform_up` `transform_down`、`car`、` loco`,而`idle`是空闲状态，`transform_down`之后，自动转入`idle`状态。
+2、四轮足的状态切换，包含以下：`transform_up`、`transform_down`、` loco`,而`idle`是空闲状态，`transform_down`之后，自动转入`idle`状态。
 
 示例：
 ```bash
@@ -177,7 +180,7 @@ ros2 topic pub -1 /$ROBOT_NS/command/cmd_pose geometry_msgs/msg/PoseStamped "{
 
 Topic type: `geometry_msgs/msg/Twist`
 
-机器人速度控制指令,包括linear, angular等, 仅和angular.z有效
+机器人速度控制指令,包括linear, angular等，双轮模式下linear.x为x轴速度，angular.z为y轴角速度。四轮模式下linear.x为x轴速度，linear.y为y轴侧走速度，angular.z为y轴角速度。
 ```bash
 source /opt/d1_ros2/namespace.sh
 ros2 topic pub -1 /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/Twist "{         linear: {x: 0.2, y: 0.0, z: 0.0},          

@@ -206,8 +206,8 @@ ros2 topic pub -1 /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/Twist "{       
 ```
 Value ranges:
 
-- `linear.x`: **-3.0 to 3.0**
-- `angular.z`: **-0.5 to 0.5**
+- `linear.x`: -3.0 to 3.0
+- `angular.z`: >= 0.5 / <= -0.5
 
 
 

@@ -187,7 +187,7 @@ ros2 topic pub -1 /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/Twist "{       
     angular: {x: 0.0, y: 0.0, z: 0.0}}"    
 
 ```
-说明：取值范围`linear.x`：-3.0 to 3.0、`angular.z`：-0.5 to 0.5
+说明：取值范围`linear.x`：-3.0 to 3.0、`angular.z`：>= 0.5
 
 
 

@@ -1,4 +1,4 @@
-# 遥控器说明
+# Remote Controller Instructions
 ```{toctree}
 :maxdepth: 1
 :glob:
@@ -9,65 +9,61 @@
 ![D1_remove_ctrl](../_static/D1_remove_ctrl.png)
 
 
-想详细了解如何进行遥控器配对，请查看[遥控器配对](how-to-pair.md)
+For detailed information on how to pair the remote controller, see:[Remote Controller Pairing](how-to-pair.md)
 
 
-## 常用组合
+## Common Control Mappings
 
-### 双轮足模式(默认)
+### Dual-Wheel-Leg Mode (Default)
 
-| 模式选择(mode) | 启动按键 | 三级开关(左) | 三级开关(右) | 描述       | 左摇杆     | 右摇杆             |
-| -------------- | -------- | ------------ | ------------ | ---------- | ---------- | ------------------ |
-| 不选           | 按下     | 中           | 任意         | 高度调节   | 前进及转弯 | 前推升高、后推降低 |
-| 不选           | 按下     | 上           | 上           | 俯仰调节   | 前进及转弯 | 前推抬头、后推低头 |
-| 03 (skill 1)   | 按下     | 中           | 任意         | RL平地模式 | 前进及转弯 | 侧走               |
-| 04 (skill 2)   | 按下     | 中           | 任意         | RL上楼梯模式 | 前进及转弯 | 无效               |
-| 06 (crawl mode) | 弹起     | 任意         | 任意         | 车模式     | 前进及转弯 | 无效               |
+| Mode            | Start Button | Left 3-Way Switch | Right 3-Way Switch | Description            | Left Stick     | Right Stick                              |
+| --------------- | ------------ | ----------------- | ------------------ | ---------------------- | -------------- | ---------------------------------------- |
+| None            | Pressed      | Middle            | Any                | Height adjustment      | Forward & turn | Push forward to raise, backward to lower |
+| None            | Pressed      | Up                | Up                 | Pitch adjustment       | Forward & turn | Forward = head up, backward = head down  |
+| 03 (skill 1)    | Pressed      | Middle            | Any                | RL flat-ground mode    | Forward & turn | Side-walking                             |
+| 04 (skill 2)    | Pressed      | Middle            | Any                | RL stair-climbing mode | Forward & turn | Disabled                                 |
+| 06 (crawl mode) | Released     | Any               | Any                | Vehicle mode           | Forward & turn | Disabled                                 |
 
-### 四轮足模式（默认）
+### Quadruped Mode (Default)
 
-| 模式选择(mode) | 跳跃按键 | 三级开关(左) | 三级开关(右) | 描述         | 左摇杆     | 右摇杆   |
-| -------------- | -------- | ------------ | ------------ | ------------ | ---------- | -------- |
-| 不选           | 弹起     | 中           | 任意         | RL平地模式   | 前进及转弯 | 侧走     |
-| 03 (skill 1)   | 弹起     | 中           | 任意         | RL上楼模式   | 前进及转弯 | 侧走     |
-| 04 (skill 2)   | 弹起     | 中           | 任意         | RL 高台模式  | 前进及转弯 | 无效     |
-| 05 (skill 3)   | 弹起     | 中           | 任意         | 回旋         | 转弯       | 无效     |
-| 不选           | 按下     | 中           | 任意         | 旋转跳跃模式 | 无效       | 无效     |
+| Mode         | Jump Button | Left 3-Way | Right 3-Way | Description           | Left Stick     | Right Stick  |
+| ------------ | ----------- | ---------- | ----------- | --------------------- | -------------- | ------------ |
+| None         | Released    | Middle     | Any         | RL flat-ground mode   | Forward & turn | Side-walking |
+| 03 (skill 1) | Released    | Middle     | Any         | RL stair mode         | Forward & turn | Side-walking |
+| 04 (skill 2) | Released    | Middle     | Any         | RL high-platform mode | Forward & turn | Disabled     |
+| 05 (skill 3) | Released    | Middle     | Any         | Spinning mode         | Turning        | Disabled     |
+| None         | Pressed     | Middle     | Any         | Rotational jump mode  | Disabled       | Disabled     |
 
-
-
-### 状态机
-控制器内部状态机流转如下图所示，箭头方向表示可从A状态切换到B状态，四足控制无car状态机。部分在菜单内显示的状态机星号表示处于当前状态机（03到07）。
+### State Machine
+The controller's internal FSM transitions as shown below.Arrows indicate permissible transitions between states.Quadruped control does not include the car state. An asterisk (*) in the menu indicates the current state (03–07).
 ![D1_ctrl_state_machine](../_static/D1_controler_state.png)
 
 
-### 遥控器菜单页
-1、进入菜单页
+### Remote Controller Menu
+1、Entering the Menu
 
-- 按下右侧按键进入菜单页，如下图：
+- Press the right-side button to enter the menu:
 ![D1_ctrl_menu_enter](../_static/menu.png)
 
-进入菜单,界面如上, 功能分别为:
-- 01 切换四足模式（本质为上述*.service切换）
-- 02 解锁拼接机构（先切换为双轮足后解锁）
-- 03 强化控制策略1(双轮足侧走/四轮足爬楼梯)
-- 04 强化控制策略2(双轮足爬台阶/四轮足爬高台)
-- 05 强化控制策略3(未启用)
-- 06 匍匐模式(双轮足启用)
-- 07 锁定关节
-- 08 joystick sdk mode，关闭ros2 command话题发布
+Menu items:
+- 01 Switch quadruped mode (switching system service)
+- 02 Unlock fusion/connection mechanism (requires switching to dual-wheel-leg first)
+- 03 RL control strategy 1 (dual-wheel side-walk / quadruped stair climbing)
+- 04 RL control strategy 2 (dual-wheel stair-climb / quadruped high-platform)
+- 05 RL control strategy 3 (not used)
+- 06 Crawl mode (dual-wheel only)
+- 07 Lock joints
+- 08 Joystick SDK mode (disables ROS 2 command publishing)
 
-### 解锁/拼接切换
+### Unlock / Fusion Switching
 
 ![unlock](../_static/lock.png)
 
+### Configuration Modification
 
+#### Remote Controller Configuration（ROS2）
 
-### 配置修改
-
-#### 遥控器 
-
-基于ROS2框架，修改对应文件来下的yaml文件来配置，下述为遥控器一些相关配置：
+Edit the YAML parameters in the teleop_command package:
 ```{Markdown}
   teleop_command:
     ros__parameters:
@@ -87,21 +83,31 @@
       max_roll: 0.2
       max_pitch: 0.4
 ```
-### 运动控制
+### Motion Control Adjustments
 
-- 修改控制频率
-`vim /opt/y1_ros2/share/rl_controller/config/y1v0/controllers.yaml` 修改四轮足
-`vim /opt/y1_ros2/share/rl_controller/config/y1v0h_evt1/controllers.yaml` 修改双轮足
-查找对应`update_rate`字段，修改对应控制器中`update_rate`整形值（控制频率，Hz）目前默认为500Hz。修改`controller_manager`和`*_rl_controller`）下的update_rate后重启即可。
-![D1_ctrl_update_rate](../_static/control_motion.png)
-![D1_ctrl_update_rate](../_static/control_motion_yaml.png)
+- Modify control frequency in:
 
+  Quadruped:
+
+  ```
+  vim /opt/y1_ros2/share/rl_controller/config/y1v0/controllers.yaml
+  ```
+
+  Dual-wheel-leg:
+
+  ```
+  vim /opt/y1_ros2/share/rl_controller/config/y1v0h_evt1/controllers.yaml
+  ```
+
+  Adjust the `update_rate` field (Hz). Default is 500 Hz.![D1_ctrl_update_rate](../_static/control_motion.png)
+  ![D1_ctrl_update_rate](../_static/control_motion_yaml.png)
 
 ### ERROR CODE 
-| 错误码 | 说明 | 版本 |
-| ---- | ---- | ---- |
-| 0x1000 | 第一个1代表读取错误，第二、三位代表电机错误信息（00 01 03），第四位表示错误的电机标号（0 1 … F）。例如<br>0x1000: 前机所有电机掉线，自检失败<br>0x1008: 后机所有电机掉线，自检失败<br>0x1010: 前机左腿0号电机掉线。<br>0x1033: 前机左腿3号电机（轮子）过压。<br>备注：目前只有了轮毂电机的错误信息比较丰富，关节电机只有01报错 |  |
-| 0x2000 | 电机指令无法下发，一般会报错：No buffer avalible |  |
-| 0x100 | 不能切换四足 |  |
-| 0x200 | 不能解锁 |  |
-| 0x385 | 指拼接件的can线数据异常，有可能can线未接，线材断裂 | |
+
+| Code   | Description                                                  | Version |
+| ------ | ------------------------------------------------------------ | ------- |
+| 0x1000 | First digit = read error, 2nd–3rd = motor error (00 01 03), 4th = motor index. <br>Examples: <br>0x1000: all front motors offline <br>0x1008: all rear motors offline <br>0x1010: front left leg motor 0 offline <br>0x1033: wheel motor overvoltage |         |
+| 0x2000 | Motor command transmission failure, usually "No buffer available" |         |
+| 0x100  | Cannot switch to quadruped mode                              |         |
+| 0x200  | Unlocking failed                                             |         |
+| 0x385  | Fusion connector CAN data abnormal, possibly disconnected or cable damaged |         |

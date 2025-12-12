@@ -1,34 +1,40 @@
-# SDK开发
+# SDK Development
 ```{toctree}
 :maxdepth: 1
 :glob:
 ```
 ------
 
-## SDK 概述
+## SDK Overview
 
 
-### 系统架构图
+### System Architecture Diagram
 
 ![D1](../_static/D1_Uint.png)
 
 
-D1 提供ros2 SDK，主要的数据交互采用两种模式：订阅/发布和请求/响应。
+D1 provides a ROS2 SDK, and the main data interaction uses two modes: Publish/Subscribe and Request/Response.
 
-- 订阅/发布： 接收方订阅某个消息，发送方根据订阅列表向接收方发送消息，主要用于中高频或持续的数据交互。
+- **Publish/Subscribe**:
+  The receiver subscribes to a message, and the sender publishes messages according to the subscription list.
+  Mainly used for medium/high frequency or continuous data interaction.
 
-- 请求/响应： 问答模式，通过请求实现数据获取或操作。用于低频或功能切换时的数据交互。
+- **Request/Response**:
+  A query–response mode, where data retrieval or operations are performed via requests.
+  Used for low-frequency or mode-switch operations.
 
-详细参见[Quick Start](Quick_Start.md)。
+
+For details, see[Quick Start](Quick_Start.md)。
 
 ------
 
 
-## 下层控制示例
+## Lower-Level Control Example
 
-### 应用示例
+### Application Example
 
-这是一个关于如何使用 tita_robot 包来控制机器人关节并获取电池信息等示例。仅在真机上使用。
+This example shows how to use the `tita_robot` package to control robot joints and obtain battery information.
+Use only on an actual robot.
 
 ```cpp{.hljs language-cpp background-color=#f0f0f0}
 #include <time.h>
@@ -96,7 +102,7 @@ int main(int argc, char * argv[])
 
 ```
 
-创建CMakeLists.txt文件
+Create the `CMakeLists.txt` file:
 ```bash
 cmake_minimum_required(VERSION 3.10)
 project(lower_sdk_example)
@@ -123,8 +129,8 @@ target_link_libraries(lower_sdk_example
 )
 ```
 
-### 运动控制接口
-（1） 设置电机力矩
+### Motion Control Interfaces
+(1) Set motor torque
 ```bash
  /**
      * @brief Set the target joint feed-forward torques.
@@ -134,7 +140,7 @@ target_link_libraries(lower_sdk_example
   bool set_target_joint_t(const std::vector<double> & t);
 ```
 
-（2）设置电机PD控制
+(2) Set MIT PD control
 ```bash
   /**
      * @brief MIT control method. Set the target joint positions, velocities, kp, kd and feed-forward torques of the
@@ -154,12 +160,13 @@ target_link_libraries(lower_sdk_example
 
 ------
 
-## 数据读取接口
+## Data Reading Interfaces
 
-以下接口是通过加载`opt/d1_ros2/lib/tita_robot.so`动态库，并调用接口获取数据，通讯协议为CANFD。引用方式看上方`CMakeLists.txt`示例
+The following interfaces are accessed by loading the dynamic library `/opt/d1_ros2/lib/tita_robot.so`, communicating via **CANFD**.
+Refer to the above *CMakeLists.txt* for linking.
 
-### 电池状态查询接口
-用于实时获取机器人电池的各项关键参数，支撑电量管理、低电量预警等功能。
+### Battery Status Query Interfaces
+Used to obtain real-time battery parameters for power management and low-battery warnings.
 
 ```cpp{.hljs language-cpp background-color=#f0f0f0}
   /**
@@ -200,8 +207,8 @@ target_link_libraries(lower_sdk_example
   std::vector<float> get_battery_cell_voltage(int index) const;
 ```
 
-### 机器人核心状态获取接口
-用于获取机器人运动控制、姿态感知的关键数据，为运动规划、姿态调整提供基础，涵盖 IMU（惯性测量单元）、电机、关节三大模块：
+### Robot Core State Interfaces
+These interfaces provide essential data for motion control and state estimation, covering IMU, motor, and joint modules.
 
 ```cpp{.hljs language-cpp background-color=#f0f0f0}
 /**

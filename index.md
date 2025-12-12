@@ -11,67 +11,66 @@ pages/how-to-pair
 pages/OTA_model
 
 ```
-最近更新时间：2025年11月21日
+Last updated: 2025-11-21
 
 --------
 
-## 产品介绍
+## Product Introduction
 
-本末无界（D-INFINITE，下称D1）是世界上首款支持整机模组化的轮足式机器人。在将轮式机器人的敏捷性与足式机器人的强适应性完美结合的同时，可支持两台机器之间的合体与分离。其采用模块化结构及开放式接口，可搭载视觉模块、通讯模块、Al主机、边缘处理器和各种传感器，也可更换轮毂变换为点足式、扁平足式机器人等，具备极高的可玩性与科研价值。
+D-INFINITE (referred to as D1) is the world’s first wheel-legged robot featuring fully modular whole-machine architecture. It perfectly combines the agility of wheeled robots with the adaptability of legged robots, and additionally supports physical fusion and separation between two robots. With a modular design and open interfaces, it can carry vision modules, communication modules, AI computers, edge processors, and a variety of sensors. It also supports replacing wheel hubs to transform into point-foot or flat-foot configurations, offering high playability and significant research value.
 
 ![tita](./_static/D1.png)
 
 -------
 
-#### D-infinite (D1) 规格说明 V2.3
-##### 一、中文规格参数表
-| 类别       | 参数名                 | 参数值                                                     |
-|------------|------------------------|------------------------------------------------------------|
-| 机械参数   | 站立尺寸               | 375/750 × 493 × 643mm                         |
-| 机械参数   | 匍匐尺寸               | 470/845 × 580 × 250mm                         |
-| 机械参数   | 材质                   | 铝合金+高强度工程塑料                                       |
-| 机械参数   | 重量(含拼接机构)       | 24.3kg / 48.5 kg                         |
-| 机械参数   | 自由度                 | 8 / 16dof                                        |
-| 机械参数   | 关节最大扭矩           | 120Nm                                           |
-| 机械参数   | 关节运动空间           | 机身: -45° ~ 45°；大腿: -195° ~ 105°；小腿: 22.46° ~ 132.46°|
-| 电气特性   | 处理器                 | 标配: Jetson Orin NX 8GB                                   |
-| 电气特性   | WiFi类型               | WIFI6                                                      |
-| 电气特性   | 遥控器通信             | ELRS                                                       |
-| 电气特性   | 电池参数               | 单机 43.2V 9Ah  (388.8 Wh)    |
-| 电气特性   | 电池仓                 | 单机单电池，双机双电池                                     |
-| 电气特性   | 外置接口               | USB Type C × 2，千兆网口 × 1，电池接口 × 1                  |
-| 电气特性   | 拼合通信接口           | CANFD                                                      |
-| 电气特性   | 远程断电               | 有                                                         |
-| 电气特性   | 电池热插拔             | 无热插拔，电池可拆出                                       |
-| 性能参数   | 默认组合构型           | 同屈(<<)                                                   |
-| 性能参数   | 车钥匙遥控断电距离     | 约 3m                                           |
-| 性能参数   | 运行续航时间           | 四轮足综合续航约 2h / 双轮足下综合续航约 5 h |
-| 性能参数   | 续航距离               | 四轮足综合续航约 15 km / 双轮足下综合续航约 25 km |
-| 性能参数   | 极限站立负荷           | 四轮足 80 kg / 双轮足 30 kg             |
-| 性能参数   | 标准充电时间           | <2h                                             |
-| 性能参数   | 工作温度               | 0~45°C                                   |
-| 性能参数   | 最大行走负荷           | 四轮足 >50 kg / 双轮足 >20kg           |
-| 性能参数   | 持续行走负荷           | 四轮足 >10 kg / 双轮足 >5 kg            |
-| 性能参数   | 楼梯行走能力           | 双轮足 15cm / 四轮足 15cm             |
-| 性能参数   | 匍匐姿态带负载能力     | >100kg                                          |
-| 性能参数   | 最高持续速度           | 约 3 m/s                                         |
-| 性能参数   | 斜坡行走能力           | 四轮足 >35° / 双轮足 >25°                  |
-| 性能参数   | 攀爬高度               | 极限 70，建议 50                  |
-| 性能参数   | 单机转弯半径           | 270 mm                                       |
-| 性能参数   | 匍匐姿态               | 有                                                         |
-| 性能参数   | 闪拼                   | 有（ <5s ）                                        |
-| 其他       | OTA升级                | 支持                                                       |
-| 其他       | 机械臂配件             | 持续升级                                                   |
-| 其他       | 电源板配件             | 持续升级                                                   |
-| 其他       | 激光雷达配件           | -                                                          |
-| 其他       | 大轮毂配件             | -                                                          |
-| 其他       | 操作系统               | Ubuntu 22.04                                                          |
-| 其他       | 标准API                | ROS 2                                                      |
+#### D-infinite (D1) Specification V2.3
+##### 1. Specification Table
+| Category    | Parameter Name                   | Parameter Value                                              |
+| ----------- | -------------------------------- | ------------------------------------------------------------ |
+| Mechanical  | Standing Dimensions              | 375/750 × 493 × 643 mm                                       |
+| Mechanical  | Crawling Dimensions              | 470/845 × 580 × 250 mm                                       |
+| Mechanical  | Material                         | Aluminum alloy + high-strength engineering plastic           |
+| Mechanical  | Weight (with connector)          | 24.3 kg / 48.5 kg                                            |
+| Mechanical  | Degrees of Freedom               | 8 / 16 DOF                                                   |
+| Mechanical  | Max Joint Torque                 | 120 Nm                                                       |
+| Mechanical  | Joint Motion Range               | Body: -45° ~ 45°; Thigh: -195° ~ 105°; Calf: 22.46° ~ 132.46° |
+| Electrical  | Processor                        | Default: Jetson Orin NX 8GB                                  |
+| Electrical  | WiFi Type                        | WIFI6                                                        |
+| Electrical  | Remote Controller Link           | ELRS                                                         |
+| Electrical  | Battery Specifications           | Single unit: 43.2V 9Ah (388.8 Wh)                            |
+| Electrical  | Battery Compartment              | Single battery for single-unit, two batteries for dual-unit  |
+| Electrical  | External Interfaces              | USB Type-C ×2, Gigabit Ethernet ×1, Battery Port ×1          |
+| Electrical  | Fusion Communication Port        | CAN-FD                                                       |
+| Electrical  | Remote Power Cutoff              | Supported                                                    |
+| Electrical  | Hot-swap Battery                 | Not hot-swappable; battery removable                         |
+| Performance | Default Fusion Mode              | Same-bend (<<)                                               |
+| Performance | Remote Key Power Cutoff Distance | ~3 m                                                         |
+| Performance | Runtime Endurance                | Four-leg mode: ~2 h / Dual-wheel-leg mode: ~5 h              |
+| Performance | Range                            | Four-leg: ~15 km / Dual-wheel-leg: ~25 km                    |
+| Performance | Max Standing Load                | Four-leg: 80 kg / Dual-wheel-leg: 30 kg                      |
+| Performance | Standard Charging Time           | <2 h                                                         |
+| Performance | Operating Temperature            | 0 ~ 45°C                                                     |
+| Performance | Max Walking Load                 | Four-leg: >50 kg / Dual-wheel-leg: >20 kg                    |
+| Performance | Continuous Walking Load          | Four-leg: >10 kg / Dual-wheel-leg: >5 kg                     |
+| Performance | Stair-climbing Ability           | Dual-wheel-leg: 15 cm / Four-leg: 15 cm                      |
+| Performance | Crawling Load Capacity           | >100 kg                                                      |
+| Performance | Max Continuous Speed             | ~3 m/s                                                       |
+| Performance | Slope Capability                 | Four-leg: >35° / Dual-wheel-leg: >25°                        |
+| Performance | Climbing Height                  | Max 70 cm, recommended 50 cm                                 |
+| Performance | Turning Radius (Single)          | 270 mm                                                       |
+| Performance | Crawling Mode                    | Supported                                                    |
+| Performance | Flash-fusion                     | Supported (<5 s)                                             |
+| Others      | OTA Upgrade                      | Supported                                                    |
+| Others      | Robotic Arm Accessories          | Continuously updated                                         |
+| Others      | Power Board Accessories          | Continuously updated                                         |
+| Others      | LiDAR Accessories                | -                                                            |
+| Others      | Large Wheel-hub Option           | -                                                            |
+| Others      | Operating System                 | Ubuntu 22.04                                                 |
+| Others      | Standard API                     | ROS 2                                                        |
 
+### Acknowledgment
+Thank you very much for choosing our product. We are committed to providing the highest-quality products and services. Your satisfaction is our greatest pursuit. If you have any questions or need assistance during use, please feel free to contact us. We will serve you wholeheartedly.
+ Thank you again for your trust and support!
 
-
-### 致谢
-非常感谢您选择我们的产品，我们承诺将为您提供最优质的产品和服务。您的满意是我们最大的追求。如果您在使用过程中有任何问题或需要帮助，请随时联系我们，我们将竭诚为您服务。再次感谢您的信任和支持！
-
-<!-- 快速上手请跳转[Quick Start](https://tita-development-manual-uc.readthedocs.io/zh-cn/latest/pages/quickstart.html) -->
+<!-- For quick start please refer to Quick Start page -->
 

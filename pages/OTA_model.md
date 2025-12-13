@@ -80,7 +80,7 @@ sudo apt install abootimg binfmt-support binutils cpio cpp device-tree-compiler 
 # Copy everything — these are dependencies required by NVIDIA for flashing.
 # Install all dependencies on the computer used for flashing, NOT on the robot.
 ```
-1. Download apollo-ubuntu-${date}.tar （下Download the system package of the corresponding date; contact our FAE team for the latest system package.)
+1. Download apollo-ubuntu-${date}.tar （Download the system package of the corresponding date; contact our FAE team for the latest system package.)
 2. mkdir apollo-ubuntu（You may create this folder anywhere on the computer.）
 3. tar -xf apollo-ubuntu-${date}.tar -C apollo-ubuntu （Extract the package into the newly created folder）
 

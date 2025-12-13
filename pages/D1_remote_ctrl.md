@@ -70,11 +70,11 @@ Edit the YAML parameters in the teleop_command package:
       net_interface: wlan0 
       uart_interface: /dev/ttyUSB0
       update_rate: 10 # Hz
-      use_sdk: false # 默认是否启动joystick的sdk模式，默认false不启动
-      enable_low_battery_check: false # 低电量，电量低机器会趴下，true为启动
-      battery_percentage_threshold: 0.1 # 阈值，当电量低于此值进入到低电量状态，
-      enable_joystick_disconnect_check: false # 遥控器断连检测，断连后机器会趴下，true为启动
-      joystick_disconnect_time_threshold: 1.0 # 检测时间，超出此时间，遥控器断连
+      use_sdk: false # Whether to enable joystick SDK mode by default; false means disabled
+      enable_low_battery_check: false  # Low-battery protection; if enabled, the robot will lay down when battery is low
+      battery_percentage_threshold: 0.1 # Threshold; when battery percentage falls below this value, robot enters low-battery state
+      enable_joystick_disconnect_check: false # Joystick disconnection detection; if enabled, the robot will lay down when the joystick disconnects
+      joystick_disconnect_time_threshold: 1.0 # Detection timeout; joystick is considered disconnected if exceeded
       joystick_deadzone: 0.013
       speed_ratio: [0.33, 0.66, 1.0]
       max_twist_linear: 3.0

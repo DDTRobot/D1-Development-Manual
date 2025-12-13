@@ -31,7 +31,6 @@ For detailed information on how to pair the remote controller, see:[Remote Contr
 | None         | Released    | Middle     | Any         | RL flat-ground mode   | Forward & turn | Side-walking |
 | 03 (skill 1) | Released    | Middle     | Any         | RL stair mode         | Forward & turn | Side-walking |
 | 04 (skill 2) | Released    | Middle     | Any         | RL high-platform mode | Forward & turn | Disabled     |
-| 05 (skill 3) | Released    | Middle     | Any         | Spinning mode         | Turning        | Disabled     |
 | None         | Pressed     | Middle     | Any         | Rotational jump mode  | Disabled       | Disabled     |
 
 ### State Machine

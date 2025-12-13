@@ -163,7 +163,7 @@ target_link_libraries(lower_sdk_example
 ## Data Reading Interfaces
 
 The following interfaces are accessed by loading the dynamic library `/opt/d1_ros2/lib/tita_robot.so`, communicating via **CANFD**.
-Refer to the above *CMakeLists.txt* for linking.
+Refer to the above `CMakeLists.txt` for linking.
 
 ### Battery Status Query Interfaces
 Used to obtain real-time battery parameters for power management and low-battery warnings.

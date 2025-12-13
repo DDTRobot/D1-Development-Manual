@@ -18,9 +18,9 @@ You may develop directly on the D1 built-in computer or on an external computer 
 Prepare a USB Type-C cable and plug it into the Type-C port closest to the Ethernet port (see the product user manual for details).
 The network interface used for communication between the user’s computer and the D1 robot is in the **192.168.42.xxx** subnet, and the IP is assigned automatically—no configuration is required.
 
-```{bash}
+```{warning}
 1. Windows users cannot recognize the USB network interface after inserting the USB Type-C cable due to missing drivers. Please install the driver manually:https://milkv.io/zh/docs/duo/getting-started/setup#
-2. Do NOT use the flashing cable for debugging, to avoid accidental entry into flashing mode, which may prevent the system from booting properly.
+2. Do NOT use the flashing cable for debugging, to avoid accidental entry into flashing mode, which may pree systvent them from booting properly.
 ```
 #### Wi-Fi Hotspot Connection
 To download ROS packages and other dependencies, the robot must connect to the internet. Steps:
@@ -32,7 +32,7 @@ To download ROS packages and other dependencies, the robot must connect to the i
 Example:
 ![wifi_connect](../_static/flash8.jpeg)
 
-#### Wi-Fi AP Mode
+#### Wi-Fi AP Hotspot Mode
 See details in:[WIFI Hotspot Mode](TITA-wifi_app.md)
 
 
@@ -180,20 +180,14 @@ Note: Head orientation is controlled through quaternion; only valid in biped loc
 
 Topic type: `geometry_msgs/msg/Twist`
 
-Velocity command including linear and angular components.
-
-- **Biped mode**:
-
-  `linear.x` → forward speed
-
+Velocity command including linear and angular components.</br>
+- **Biped mode**:</br>
+  `linear.x` → forward speed</br>
   `angular.z` → yaw rate
 
-- **Quadruped mode**:
-
-  `linear.x` → forward speed
-  
-  `linear.y` → lateral walking
-  
+- **Quadruped mode**:</br>
+  `linear.x` → forward speed</br>
+  `linear.y` → lateral walking</br>
   `angular.z` → yaw rate
 
 Example:

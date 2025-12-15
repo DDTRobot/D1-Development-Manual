@@ -14,9 +14,9 @@ For detailed information on how to pair the remote controller, see:[Remote Contr
 
 ## Common Control Mappings
 
-### Dual-Wheel-Leg Mode (Default)
+### Biped-Wheeled Mode (Default)
 
-| Mode            | Start Button | Left 3-Way Switch | Right 3-Way Switch | Description            | Left Stick     | Right Stick                              |
+| Mode            | Start Button | Left Switch | Right Switch | Description            | Left Stick     | Right Stick                              |
 | --------------- | ------------ | ----------------- | ------------------ | ---------------------- | -------------- | ---------------------------------------- |
 | None            | Pressed      | Middle            | Any                | Height adjustment      | Forward & turn | Push forward to raise, backward to lower |
 | None            | Pressed      | Up                | Up                 | Pitch adjustment       | Forward & turn | Forward = head up, backward = head down  |
@@ -26,7 +26,7 @@ For detailed information on how to pair the remote controller, see:[Remote Contr
 
 ### Quadruped Mode (Default)
 
-| Mode         | Jump Button | Left 3-Way | Right 3-Way | Description           | Left Stick     | Right Stick  |
+| Mode         | Jump Button | Left Switch | Right Switch | Description           | Left Stick     | Right Stick  |
 | ------------ | ----------- | ---------- | ----------- | --------------------- | -------------- | ------------ |
 | None         | Released    | Middle     | Any         | RL flat-ground mode   | Forward & turn | Side-walking |
 | 03 (skill 1) | Released    | Middle     | Any         | RL stair mode         | Forward & turn | Side-walking |
@@ -45,12 +45,12 @@ The controller's internal FSM transitions as shown below.Arrows indicate permiss
 ![D1_ctrl_menu_enter](../_static/menu.png)
 
 Menu items:
-- 01 Switch quadruped mode (switching system service)
-- 02 Unlock fusion/connection mechanism (requires switching to dual-wheel-leg first)
-- 03 RL control strategy 1 (dual-wheel side-walk / quadruped stair climbing)
-- 04 RL control strategy 2 (dual-wheel stair-climb / quadruped high-platform)
-- 05 RL control strategy 3 (not used)
-- 06 Crawl mode (dual-wheel only)
+- 01 Quadruped Mode (switching system service)
+- 02 Unlock Bolt (requires switching to Biped-wheeled first)
+- 03 Skill 1 (Biped-wheeled side-walk / quadruped stair climbing)
+- 04 Skill 2 (Biped-wheeled stair-climb / quadruped high-platform)
+- 05 Skill 3 (not used)
+- 06 Crawl mode (Biped-wheeled only)
 - 07 Lock joints
 - 08 Joystick SDK mode (disables ROS 2 command publishing)
 
@@ -92,7 +92,7 @@ Edit the YAML parameters in the teleop_command package:
   vim /opt/y1_ros2/share/rl_controller/config/y1v0/controllers.yaml
   ```
 
-  Dual-wheel-leg:
+  Biped-wheeled:
 
   ```
   vim /opt/y1_ros2/share/rl_controller/config/y1v0h_evt1/controllers.yaml

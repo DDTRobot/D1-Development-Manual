@@ -32,7 +32,7 @@ rl16_controller.service # RL Y1.0 robot, 16 DOF
 joy_controller.service # Joystick controller
 ```
 ```{warning}
-If users are developing new controllers or new features, please stop the above services and do not perform biped/quadruped mode switching.
+If users are developing new controllers or new features, please stop the above services and do not perform biped-wheeled/quadruped mode switching.
 ```
 
 ## 2. MCU Module OTA

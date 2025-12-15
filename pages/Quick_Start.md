@@ -124,7 +124,7 @@ When the remote controller is in **"08 SDK Mode"**, entries with `*` indicate th
 
 **Notes:**
 
-**Biped mode** switching states:`transform_up`, `transform_down`, `car`, `loco`
+**Biped-wheeled mode** switching states:`transform_up`, `transform_down`, `car`, `loco`
  `idle` is an idle state. After `transform_down`, the system automatically enters `idle`.
 
 **Quadruped mode** switching states:`transform_up`, `transform_down`, `loco`
@@ -181,7 +181,7 @@ Note: Head orientation is controlled through quaternion; only valid in biped loc
 Topic type: `geometry_msgs/msg/Twist`
 
 Velocity command including linear and angular components.</br>
-- **Biped mode**:</br>
+- **Biped-wheeled mode**:</br>
   `linear.x` → forward speed</br>
   `angular.z` → yaw rate
 

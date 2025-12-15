@@ -1,11 +1,4 @@
-<!--
- * @Author: blank1 448913821@qq.com
- * @Date: 2025-11-18 14:54:10
- * @LastEditors: blank1 448913821@qq.com
- * @LastEditTime: 2025-12-11 17:06:41
- * @FilePath: \D1-Development-Manual\pages\how-to-pair.md
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
+
 # Hardware Pairing and Connection
 
 ```{toctree}
@@ -56,7 +49,7 @@ sudo apt-get install crsf-app
   <br>
 
 2. Long‑press the pairing button on the receiver for 5 seconds until the indicator LED stays solid.
-  ![remote_switch2](../_static/remote_switch1.png)
+  ![remote_switch1](../_static/remote_switch1.png)
   <br>
 
 3. Simultaneously long‑press button 1 and button 2 on the emergency stop remote until its indicator light stays solid.

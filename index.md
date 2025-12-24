@@ -38,7 +38,7 @@ D-INFINITE (referred to as D1) is the world’s first wheel-legged robot featuri
 | Electrical  | WiFi Type                        | WIFI6                                                        |
 | Electrical  | Remote Controller Link           | ELRS                                                         |
 | Electrical  | Battery Specifications           | Single unit: 43.2V 9Ah (388.8 Wh)                            |
-| Electrical  | Battery Compartment              | Single battery for single-unit, two batteries for Biped-unit  |
+| Electrical  | Battery Compartment              | Single battery for single-unit, two batteries for Biped-unit |
 | Electrical  | External Interfaces              | USB Type-C ×2, Gigabit Ethernet ×1, Battery Port ×1          |
 | Electrical  | Fusion Communication Port        | CAN-FD                                                       |
 | Electrical  | Remote Power Cutoff              | Supported                                                    |
@@ -50,21 +50,23 @@ D-INFINITE (referred to as D1) is the world’s first wheel-legged robot featuri
 | Performance | Max Standing Load                | Quadruped: 80 kg / Biped-wheeled: 30 kg                      |
 | Performance | Standard Charging Time           | <2 h                                                         |
 | Performance | Operating Temperature            | 0 ~ 45°C                                                     |
-| Performance | Max Walking Load                 | Quadruped: >50 kg / Biped-wheeled: >20 kg                    |
+| Performance | Max Walking Load                 | Quadruped: >30 kg / Biped-wheeled: >15 kg                    |
 | Performance | Continuous Walking Load          | Quadruped: >10 kg / Biped-wheeled: >5 kg                     |
 | Performance | Stair-climbing Ability           | Biped-wheeled: 15 cm / Quadruped: 15 cm                      |
 | Performance | Crawling Load Capacity           | >100 kg                                                      |
 | Performance | Max Continuous Speed             | ~3 m/s                                                       |
 | Performance | Slope Capability                 | Quadruped: >35° / Biped-wheeled: >25°                        |
 | Performance | Climbing Height                  | Max 70 cm, recommended 50 cm                                 |
-| Performance | Turning Radius (Single)          | 270 mm                                                       |
-| Performance | Crawling Mode                    | Supported                                                    |
-| Performance | Flash-fusion                     | Supported (<5 s)                                             |
-| Others      | OTA Upgrade                      | Supported                                                    |
+| Performance | Turning Radius (Single)          | About 270 mm                                                 |
+| Performance | Crawling Mode                    | Support                                                      |
+| Performance | Flash-Dock                       | Available (<5 s)                                             |
+| Others      | OTA Upgrade                      | Support                                                      |
+| Others      | Secondary Development            | Support                                                      |
 | Others      | Robotic Arm Accessories          | Continuously updated                                         |
+| Others      | Depth Camera Accessories         | Continuously updated                                         |
 | Others      | Power Board Accessories          | Continuously updated                                         |
-| Others      | LiDAR Accessories                | -                                                            |
-| Others      | Large Wheel-hub Option           | -                                                            |
+| Others      | LiDAR Accessories                | Continuously updated                                         |
+| Others      | Large Wheel-hub Option           | Continuously updated                                         |
 | Others      | Operating System                 | Ubuntu 22.04                                                 |
 | Others      | Standard API                     | ROS 2                                                        |
 

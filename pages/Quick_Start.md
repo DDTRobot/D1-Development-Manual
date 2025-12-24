@@ -15,7 +15,11 @@ You may develop directly on the D1 built-in computer or on an external computer 
 
 ### Network Environment
 
-Prepare a USB Type-C cable and plug it into the Type-C port closest to the Ethernet port (see the product user manual for details).
+Prepare a USB Type-C cable and plug it into the Type-C port closest to the Ethernet port,enter the command below to access the robot system:
+```bash
+ssh robot@192.168.42.1
+#password ： ddt
+```
 The network interface used for communication between the user’s computer and the D1 robot is in the **192.168.42.xxx** subnet, and the IP is assigned automatically—no configuration is required.
 
 ```{warning}

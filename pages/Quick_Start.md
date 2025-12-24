@@ -1,11 +1,3 @@
-<!--
- * @Author: blank1 448913821@qq.com
- * @Date: 2025-11-21 11:07:34
- * @LastEditors: blank1 448913821@qq.com
- * @LastEditTime: 2025-11-21 14:11:23
- * @FilePath: \D1-Development-Manual\pages\Quick_Start.md
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
 # 快速开始
 ```{toctree}
 :maxdepth: 1
@@ -22,12 +14,18 @@
 
 ### 网络环境
 
-需将用户自备一根USB type-c 线束，插入距离网口最近的type-c口，（详细说明请查看产品使用说明书）。用户电脑与D1机器人通讯的网卡在192.168.42.xxx网段下，自动分配ip,无需配置。
+需将用户自备一根USB type-c 线束，插入距离网口最近的type-c口，输入以下信息，即可进入机器人系统
+
+```Bash
+ssh robot@192.168.42.1
+#密码 ： ddt
+```
+
+详细说明请查看产品使用说明书，用户电脑与D1机器人通讯的网卡在192.168.42.xxx网段下，自动分配ip，无需配置。
 
 ```{warning}
 1、 使用windows系统的用户在USB type-c 线束后，无法识别 usb 网卡，因为缺少相关驱动，请自行安装:https://milkv.io/zh/docs/duo/getting-started/setup#
 2、 禁止使用使用刷机线进行调试，以免误操作，使系统进入刷机模式，系统无法正常启动。
-
 ```
 #### wifi热点连接
 在下载ros 包和其他依赖时，需要将机器人连接网络，能正常联网，操作如下：

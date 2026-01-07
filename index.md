@@ -9,6 +9,7 @@ pages/sim2sim_sim2real
 pages/D1_remote_ctrl
 pages/how-to-pair
 pages/OTA_model
+pages/FAQ
 
 ```
 最近更新时间：2025年11月21日

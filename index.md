@@ -9,6 +9,7 @@ pages/sim2sim_sim2real
 pages/D1_remote_ctrl
 pages/how-to-pair
 pages/OTA_model
+pages/FAQ
 
 ```
 Last updated: 2025-11-21

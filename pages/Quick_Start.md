@@ -119,6 +119,28 @@ export ROS_LOCALHOST_ONLY=1
 export ROS_DOMAIN_ID=42
 source /opt/ros/humble/setup.bash
 ```
+
+### Get the Quadruped / Biped Controller Status
+1. Get Status
+```bash
+source /opt/d1_ros2/namespace.sh
+ros2 service call /$ROBOT_NS/command/get_controller_status std_srvs/srv/Trigger
+# requester: making request: std_srvs.srv.Trigger_Request()
+
+# response:
+# std_srvs.srv.Trigger_Response(success=True, message='biped') # 'quadruped' indicates quadruped mode
+
+```
+2. Set Status
+```bash
+source /opt/d1_ros2/namespace.sh
+ros2 service call /$ROBOT_NS/command/set_controller_status std_srvs/srv/SetBool data:\ false # true = quadruped, false = biped
+# requester: making request: std_srvs.srv.SetBool_Request(data=False)
+
+# response:
+# std_srvs.srv.SetBool_Response(success=True, message='biped')
+```
+
 ### Upper-Level command_sdk Interface
 
 When the remote controller is in **"08 SDK Mode"**, entries with `*` indicate that the controller does NOT send command topics; users must publish them manually.

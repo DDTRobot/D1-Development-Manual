@@ -119,6 +119,28 @@ export ROS_DOMAIN_ID=42
 source /opt/ros/humble/setup.bash
 
 ```
+
+### 获取四足控制器/双足控制器状态
+1. 获取状态
+```bash
+source /opt/d1_ros2/namespace.sh
+ros2 service call /$ROBOT_NS/command/get_controller_status std_srvs/srv/Trigger 
+# requester: making request: std_srvs.srv.Trigger_Request()
+
+# response:
+# std_srvs.srv.Trigger_Response(success=True, message='biped') # quadruped代表四足
+```
+2. 设置状态
+
+```bash
+source /opt/d1_ros2/namespace.sh
+ros2 service call /$ROBOT_NS/command/set_controller_status std_srvs/srv/SetBool data:\ false # true 代表四足， false 代表双足
+# requester: making request: std_srvs.srv.SetBool_Request(data=False)
+
+# response:
+# std_srvs.srv.SetBool_Response(success=True, message='biped')
+```
+
 ### 上层command_sdk 接口
 `08 SDK Mode` 带 `*`后遥控器不发送command话题，可由用户发送话题来控制机器，目前话题名称如下：
 1. `command/cmd_key`

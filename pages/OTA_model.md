@@ -26,13 +26,8 @@ sudo rm -rf /opt/d1_ros2
 dpkg -l d1-ros2
 
 ```
-安装后会有三个服务放在lib/systemd/system下
-```bash
-robot@tita:~$ ls /lib/systemd/system/ | grep controller
-rl8_controller.service # rl y1.0机器 8dof
-rl16_controller.service # rl y1.0机器 16dof
-joy_controller.service # 遥控器
-```
+安装后服务放在lib/systemd/system下,新增服务d1_bringup.service
+
 ```{warning}
 如果用户在开发控制器、新功能时，需要停止上述服务，并且不要进行双足/四足切换。
 ```

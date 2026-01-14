@@ -91,22 +91,26 @@ D1_sdk_ros2 是基于ROS2开发，将高层逻辑封装成ROS2节点，提供ROS
 查看ros话题
 ```bash 
 robot@tita:~$ ros2 topic list 
-/d13043495/battery_info_broadcaster/battery/battery1 # 主机电池信息
-/d13043495/battery_info_broadcaster/battery/battery2 # 从机电池信息
-/d13043495/battery_info_broadcaster/transition_event
-/d13043495/body/fsm_mode # 本体状态机
-/d13043495/body/motors_status # 电机状态
-/d13043495/command/cmd_key # 控制指令，状态机切换
-/d13043495/command/cmd_pose # 控制指令，位姿
-/d13043495/command/cmd_twist # 控制指令，速度
-/d13043495/dynamic_joint_states
-/d13043495/imu_sensor_broadcaster/imu # imu状态
-/d13043495/imu_sensor_broadcaster/transition_event
-/d13043495/joint_state_broadcaster/transition_event
-/d13043495/joint_states # 关节信息 位置速度力据
-/d13043495/joy # 遥控器stick值相关
-/d13043495/robot_description 
-/d13043495/y1v0h_rl_controller/transition_event
+/d13007137/command/cmd_key # 控制指令，状态机切换
+/d13007137/command/cmd_pose # 控制指令，位姿
+/d13007137/command/cmd_twist # 控制指令，速度
+/d13007137/command/joint_command # 控制指令，速度
+/d13007137/d1_rl_controller/transition_event
+/d13007137/d1h_rl_controller/transition_event
+/d13007137/dynamic_joint_states
+/d13007137/imu_sensor_broadcaster/imu # imu状态
+/d13007137/imu_sensor_broadcaster/transition_event
+/d13007137/joint_state_broadcaster/transition_event
+/d13007137/joint_states # 关节信息 位置速度力据
+/d13007137/joy # 遥控器stick值相关
+/d13007137/rl_controller/fsm # rl控制器状态机
+/d13007137/rl_controller/joint_command # rl控制器实际输出：kp kd p v t 
+/d13007137/robot_description
+/d13007137/system_status_broadcaster/battery1 # 主机电池信息
+/d13007137/system_status_broadcaster/battery2 # 从机电池信息
+/d13007137/system_status_broadcaster/dock # 拼接机构状态
+/d13007137/system_status_broadcaster/motors_status # 电机状态
+/d13007137/system_status_broadcaster/transition_event
 /parameter_events
 /rosout
 /tf
@@ -203,11 +207,31 @@ Topic type: `geometry_msgs/msg/Twist`
 机器人速度控制指令,包括linear, angular等，双轮模式下linear.x为x轴速度，angular.z为y轴角速度。四轮模式下linear.x为x轴速度，linear.y为y轴侧走速度，angular.z为y轴角速度。
 ```bash
 source /opt/d1_ros2/namespace.sh
-ros2 topic pub -1 /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/Twist "{         linear: {x: 0.2, y: 0.0, z: 0.0},          
+ros2 topic pub -1 /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/TwistStamped "{         linear: {x: 0.2, y: 0.0, z: 0.0},          
     angular: {x: 0.0, y: 0.0, z: 0.0}}"    
 
 ```
 说明：取值范围`linear.x`：-3.0 to 3.0、`angular.z`：>= 0.5
 
+ctrl + c 后机器人停止运动
 
 
+5. 关节控制
+
+新增关节控制接口，将遥控器`left_button`弹出，`letf_switch`打在最上方，控制器进入到`debug`状态，此时可以发送此话题:
+![joint_control_topic](.././_static/joint_contrl_topic.png)
+
+```bash
+source /opt/d1_ros2/namespace.sh
+source /opt/d1_ros2/setup.bash
+ros2 topic pub /$ROBOT_NS/command/joint_command ddt_msgs/msg/JointControlCommand   "{
+    name: ['FL_foot_joint'],
+    kp: [0.0],
+    kd: [0.5],
+    position: [0.0],
+    velocity: [1.0],
+    effort: [0.0]
+  }" --rate 10
+
+```
+此时可以发现左腿轮子在旋转，Ctrl+c后停止旋转

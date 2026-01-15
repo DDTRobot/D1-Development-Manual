@@ -92,26 +92,30 @@ View ROS topics:
 
 ```bash 
 robot@tita:~$ ros2 topic list 
-/d13043495/battery_info_broadcaster/battery/battery1 # Main battery info
-/d13043495/battery_info_broadcaster/battery/battery2 # Sub battery info
-/d13043495/battery_info_broadcaster/transition_event
-/d13043495/body/fsm_mode  # Body finite-state machine
-/d13043495/body/motors_status  # Motor status
-/d13043495/command/cmd_key # Command: state switching
-/d13043495/command/cmd_pose # Command: pose
-/d13043495/command/cmd_twist # Command: velocity
-/d13043495/dynamic_joint_states
-/d13043495/imu_sensor_broadcaster/imu # IMU status
-/d13043495/imu_sensor_broadcaster/transition_event
-/d13043495/joint_state_broadcaster/transition_event
-/d13043495/joint_states # Joint data: position, velocity, torque
-/d13043495/joy # Joystick stick values
-/d13043495/robot_description 
-/d13043495/y1v0h_rl_controller/transition_event
-/parameter_events
-/rosout
-/tf
-/tf_static
+/d13007137/command/cmd_key # Control command, state machine switching
+/d13007137/command/cmd_pose # Control command, pose
+/d13007137/command/cmd_twist # Control command, velocity
+/d13007137/command/joint_command # Control command, joint velocity
+/d13007137/d1_rl_controller/transition_event # D1 reinforcement learning controller transition event
+/d13007137/d1h_rl_controller/transition_event # D1H reinforcement learning controller transition event
+/d13007137/dynamic_joint_states # Dynamic joint states
+/d13007137/imu_sensor_broadcaster/imu # IMU sensor status
+/d13007137/imu_sensor_broadcaster/transition_event # IMU sensor broadcaster transition event
+/d13007137/joint_state_broadcaster/transition_event # Joint state broadcaster transition event
+/d13007137/joint_states # Joint information: position, velocity and torque
+/d13007137/joy # Remote controller stick value related
+/d13007137/rl_controller/fsm # Reinforcement learning controller finite state machine
+/d13007137/rl_controller/joint_command # Reinforcement learning controller actual output: kp, kd, p, v, t
+/d13007137/robot_description # Robot description
+/d13007137/system_status_broadcaster/battery1 # Host battery information
+/d13007137/system_status_broadcaster/battery2 # Slave battery information
+/d13007137/system_status_broadcaster/dock # Splicing mechanism status
+/d13007137/system_status_broadcaster/motors_status # Motors status
+/d13007137/system_status_broadcaster/transition_event # System status broadcaster transition event
+/parameter_events # Parameter events
+/rosout # ROS output
+/tf # Transform
+/tf_static # Static transform
 ```
 If the topics cannot be shown, add the following to the end of `~/.bashrc`, then run `source ~/.bashrc`:
 ```bash 
@@ -231,3 +235,23 @@ Value ranges:
 
 
 
+5 `/command/joint_command`
+
+A new joint control interface is added. Pop up the remote controller's left_button and set the left_switch to the topmost position. The controller will then enter the debug state, where this topic can be sent.
+
+![debug](../_static/joint_ctrl_topic.png)
+
+```bash 
+source /opt/d1_ros2/namespace.sh
+source /opt/d1_ros2/setup.bash
+ros2 topic pub /$ROBOT_NS/command/joint_command ddt_msgs/msg/JointControlCommand   "{
+    name: ['FL_foot_joint'],
+    kp: [0.0],
+    kd: [0.5],
+    position: [0.0],
+    velocity: [1.0],
+    effort: [0.0]
+  }" --rate 10
+
+```
+At this point, it can be observed that the left leg wheel is rotating, and it stops rotating after pressing Ctrl+c.

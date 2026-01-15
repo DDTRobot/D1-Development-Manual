@@ -26,10 +26,7 @@ dpkg -l d1-ros2
 ```
 After installation, three services will be placed in the directory lib/systemd/system:
 ```bash
-robot@tita:~$ ls /lib/systemd/system/ | grep controller
-rl8_controller.service  # RL Y1.0 robot, 8 DOF
-rl16_controller.service # RL Y1.0 robot, 16 DOF
-joy_controller.service # Joystick controller
+robot@tita:~$ ls /lib/systemd/system/ | grep d1_bringup.service
 ```
 ```{warning}
 If users are developing new controllers or new features, please stop the above services and do not perform biped-wheeled/quadruped mode switching.

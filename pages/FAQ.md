@@ -21,3 +21,44 @@
 ![faq1](../_static/faq1.png) 
 
 
+
+## 腿部零位校准
+
+```bash 
+robot@d1:~$ ros2 run canfd_api leg_zero_calibration -h
+Usage: leg_zero_calibration [options]
+Options:
+  -c, --can-interface  CAN interface name (default: can0)
+  -r, --read           Read joint status 
+  -l, --leg            Leg name (left/right) (default: left)
+  -h, --help           Show this help message
+
+```
+
+- 校准零位
+先分开主从机，依次校准，终端输入：
+```bash 
+ros2 run canfd_api leg_zero_calibration -l left
+Please place the left leg at the zero position, then press Enter...
+
+```
+先将对应腿摆到机械零位上，然后回车...
+
+另一条腿将left换成right即可，重复上述步骤。然后重启机器
+
+- - 打印当前位置与机械零位的差值，可以查验下校准是否ok
+
+```bash 
+
+ros2 run canfd_api leg_zero_calibration -r
+# Read joint imu status...
+# motor[0] Kinematics Position: 0.229697  Mechanical Position: -0.555701
+# motor[1] Kinematics Position: 1.29583   Mechanical Position: -2.10756
+# motor[2] Kinematics Position: -2.75634  Mechanical Position: -1.88839
+# motor[3] Kinematics Position: -2.69203  Mechanical Position: -2.69203
+# motor[4] Kinematics Position: -0.237942         Mechanical Position: 0.547456
+# motor[5] Kinematics Position: 1.29602   Mechanical Position: -2.10737
+# motor[6] Kinematics Position: -2.75768  Mechanical Position: -1.88973
+# motor[7] Kinematics Position: -2.32942  Mechanical Position: -2.32942
+
+```

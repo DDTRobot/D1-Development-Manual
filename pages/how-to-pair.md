@@ -7,7 +7,7 @@
 
 ------
 
-## 遥控器配对
+## 遥控器配对方法一
 
 ```{note}
 对于较旧的系统版本，使用 `sudo apt install crsf-app` 安装遥控器配对软件
@@ -30,6 +30,14 @@ sudo apt-get install crsf-app
 ![controller4](../_static/controller4.jpg) 
 ---
  <br> <br>  
+
+
+## 遥控器配对方法二
+1. 机器人保持开机状态，将数据线连接到原理网口的type-c口以及遥控器（如下图所示）
+![remote_switch1](../_static/typec_connect.png)
+遥控器和机器人连接后，遥控器会出现`Select mode`的界面，并选择第三个选项`USB Serial`
+![remote_switch1](../_static/usb_serial.png)
+2. 等待遥控器的蓝灯慢闪或常亮后，即完成配对
 ## 远程急停开关配对
 
 1. 将机器的侧板拆开，露出远程急停开关的接收机和按钮。

@@ -207,9 +207,12 @@ Topic type: `geometry_msgs/msg/Twist`
 机器人速度控制指令,包括linear, angular等，双轮模式下linear.x为x轴速度，angular.z为y轴角速度。四轮模式下linear.x为x轴速度，linear.y为y轴侧走速度，angular.z为y轴角速度。
 ```bash
 source /opt/d1_ros2/namespace.sh
-ros2 topic pub -1 /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/TwistStamped "{         linear: {x: 0.2, y: 0.0, z: 0.0},          
-    angular: {x: 0.0, y: 0.0, z: 0.0}}"    
-
+ros2 topic pub /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/TwistStamped "{         
+    twist: {
+        linear: {x: 0.2, y: 0.0, z: 0.0},          
+        angular: {x: 0.0, y: 0.0, z: 0.0}  
+    }
+}"
 ```
 说明：取值范围`linear.x`：-3.0 to 3.0、`angular.z`：>= 0.5
 

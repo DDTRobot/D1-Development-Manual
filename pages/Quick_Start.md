@@ -179,48 +179,33 @@ ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'jump'"
 
 ```
 
-
-3. `command/cmd_pose` 
-Topic type: geometry_msgs/msg/PoseStamped
-机器人头部位置姿态控制指令，目前仅仅为pitch（双轮足loco状态下）
-
-```bash 
+- 速度控制
+```
+source /opt/d1_ros2/setup.bash
 source /opt/d1_ros2/namespace.sh
-ros2 topic pub -1 /$ROBOT_NS/command/cmd_pose geometry_msgs/msg/PoseStamped "{         
-    header: {             
-        stamp: {                 
-            sec: 0,   
-            nanosec: 0}, 
-        frame_id: 'world'
-        },          
+ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
+    twist: {
+        linear: {x: 0.5, y: 0.0, z: 0.0},          
+        angular: {x: 0.0, y: 0.0, z: 0.0}  
+    }
+}"
+
+```
+此时机器以一定的恒速前进。
+- 位姿控制
+```
+source /opt/d1_ros2/setup.bash
+source /opt/d1_ros2/namespace.sh
+ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{            
     pose: {             
         position: {x: 0.0, y: 0.0, z: 0.0}, # only valid in z，range in 0.1 to 0.3    
         orientation: {x: 0.0, y: 0.171, z: 0.0, w: 0.985}
         }
-}"   
-
-```
-说明：通过四元数控制机器人头部姿态，目前仅双轮足loco状态下有效。
-
+}" 
+```   
+此时头部应该低下一定角度。
 
 
-4. `command/cmd_twist` 
-
-Topic type: `geometry_msgs/msg/Twist`
-
-机器人速度控制指令,包括linear, angular等，双轮模式下linear.x为x轴速度，angular.z为y轴角速度。四轮模式下linear.x为x轴速度，linear.y为y轴侧走速度，angular.z为y轴角速度。
-```bash
-source /opt/d1_ros2/namespace.sh
-ros2 topic pub /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/TwistStamped "{         
-    twist: {
-        linear: {x: 0.2, y: 0.0, z: 0.0},          
-        angular: {x: 0.0, y: 0.0, z: 0.0}  
-    }
-}"
-```
-说明：取值范围`linear.x`：-3.0 to 3.0、`angular.z`：>= 0.5
-
-ctrl + c 后机器人停止运动
 
 
 5. 关节控制

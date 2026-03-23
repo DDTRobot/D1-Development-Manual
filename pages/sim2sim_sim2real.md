@@ -95,9 +95,7 @@ colcon build --symlink-install --packages-up-to rl_controller hardware_bridge
 ```
 ### 停止默认的系统服务
 ```bash
-sudo systemctl stop joy_controller.service
-sudo systemctl stop rl8_controller.service
-sudo systemctl stop rl16_controller.service
+sudo systemctl stop d1_bringup.service
 ```
 ### 启动硬件控制器
 ```bash

@@ -122,6 +122,7 @@ If the topics cannot be shown, add the following to the end of `~/.bashrc`, then
 export ROS_LOCALHOST_ONLY=1
 export ROS_DOMAIN_ID=42
 source /opt/ros/humble/setup.bash
+source /opt/d1_ros2/setup.bash
 ```
 
 ### Get the Quadruped / Biped Controller Status
@@ -150,7 +151,7 @@ ros2 service call /$ROBOT_NS/command/set_controller_status std_srvs/srv/SetBool 
 When the remote controller is in **"08 SDK Mode"**, entries with `*` indicate that the controller does NOT send command topics; users must publish them manually.
 1. `command/cmd_key`
 2. Topic type: `std_msgs/msg/String` Controls robot state machine. States include:`transform_up` `idle` `transform_down` `loco` `joint_pd` `car`
-`rl_1` `rl_2` `rl_3`
+`rl_1` `rl_2` `rl_3` `jump`
 
 **Notes:**
 
@@ -176,65 +177,47 @@ ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'loco'"
 # Strategy 1
 ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'rl_1'"
 
+# jump
+ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'jump'"
 ...
 
 ```
 
 
-3. `command/cmd_pose` 
+3. cmd_vel control 
 
   Topic type: `geometry_msgs/msg/PoseStamped`
   Controls robot head pose (currently only pitch in biped **loco** state).
 
 ```bash 
+source /opt/d1_ros2/setup.bash
 source /opt/d1_ros2/namespace.sh
-ros2 topic pub -1 /$ROBOT_NS/command/cmd_pose geometry_msgs/msg/PoseStamped "{         
-    header: {             
-        stamp: {                 
-            sec: 0,   
-            nanosec: 0}, 
-        frame_id: 'world'
-        },          
+ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
+    twist: {
+        linear: {x: 0.5, y: 0.0, z: 0.0},          
+        angular: {x: 0.0, y: 0.0, z: 0.0}  
+    }
+}"
+
+...
+```
+in now robot keep vel forward 
+
+
+
+4. pose control
+
+```
+source /opt/d1_ros2/setup.bash
+source /opt/d1_ros2/namespace.sh
+ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{            
     pose: {             
         position: {x: 0.0, y: 0.0, z: 0.0}, # only valid in z，range in 0.1 to 0.3    
         orientation: {x: 0.0, y: 0.171, z: 0.0, w: 0.985}
         }
-}"   
-
+}"    
 ```
-Note: Head orientation is controlled through quaternion; only valid in biped loco.
 
-
-
-4. `command/cmd_twist` 
-
-Topic type: `geometry_msgs/msg/Twist`
-
-Velocity command including linear and angular components.</br>
-- **Biped-wheeled mode**:</br>
-  `linear.x` → forward speed</br>
-  `angular.z` → yaw rate
-
-- **Quadruped mode**:</br>
-  `linear.x` → forward speed</br>
-  `linear.y` → lateral walking</br>
-  `angular.z` → yaw rate
-
-Example:
-
-```bash
-source /opt/d1_ros2/namespace.sh
-ros2 topic pub /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/TwistStamped "{         
-    twist: {
-        linear: {x: 0.2, y: 0.0, z: 0.0},          
-        angular: {x: 0.0, y: 0.0, z: 0.0}  
-    }
-}"
-```
-Value ranges:
-
-- `linear.x`: -3.0 to 3.0
-- `angular.z`: >= 0.5 / <= -0.5
 
 
 

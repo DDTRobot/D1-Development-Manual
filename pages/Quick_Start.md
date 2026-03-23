@@ -90,7 +90,7 @@ D1_sdk_ros2 是基于ROS2开发，将高层逻辑封装成ROS2节点，提供ROS
 
 查看ros话题
 ```bash 
-robot@tita:~$ ros2 topic list 
+robot@d1:~$ ros2 topic list 
 /d13007137/command/cmd_key # 控制指令，状态机切换
 /d13007137/command/cmd_pose # 控制指令，位姿
 /d13007137/command/cmd_twist # 控制指令，速度
@@ -121,6 +121,7 @@ robot@tita:~$ ros2 topic list
 export ROS_LOCALHOST_ONLY=1
 export ROS_DOMAIN_ID=42
 source /opt/ros/humble/setup.bash
+source /opt/d1_ros2/setup.bash
 
 ```
 
@@ -149,7 +150,7 @@ ros2 service call /$ROBOT_NS/command/set_controller_status std_srvs/srv/SetBool 
 `08 SDK Mode` 带 `*`后遥控器不发送command话题，可由用户发送话题来控制机器，目前话题名称如下：
 1. `command/cmd_key`
 2. Topic type: `std_msgs/msg/String` 机器人状态机切换：状态机包含以下：`transform_up` `idle` `transform_down` `loco` `joint_pd` `car`
-`rl_1` `rl_2` `rl_3`
+`rl_1` `rl_2` `rl_3` `jump`
 
 **说明：**
 1、双轮足的状态切换，包含以下：`transform_up` `transform_down`、`car`、` loco`,而`idle`是空闲状态，`transform_down`之后，自动转入`idle`状态。
@@ -169,7 +170,10 @@ ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'transfo
 ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'loco'"
        
 # 策略1
-ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'rl_1'"          
+ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'rl_1'" 
+
+# jump
+ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'jump'" 
 
 ...     
 

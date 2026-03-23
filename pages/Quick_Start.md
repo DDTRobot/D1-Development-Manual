@@ -224,9 +224,12 @@ Example:
 
 ```bash
 source /opt/d1_ros2/namespace.sh
-ros2 topic pub -1 /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/Twist "{         linear: {x: 0.2, y: 0.0, z: 0.0},          
-    angular: {x: 0.0, y: 0.0, z: 0.0}}"    
-
+ros2 topic pub /$ROBOT_NS/command/cmd_twist geometry_msgs/msg/TwistStamped "{         
+    twist: {
+        linear: {x: 0.2, y: 0.0, z: 0.0},          
+        angular: {x: 0.0, y: 0.0, z: 0.0}  
+    }
+}"
 ```
 Value ranges:
 

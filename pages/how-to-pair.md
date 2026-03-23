@@ -8,7 +8,7 @@
 
 ------
 
-## Remote Controller Pairing
+## Remote Controller Pairing Method 1
 
 Note: For older system versions, install the pairing tool using:
 
@@ -42,6 +42,15 @@ sudo apt-get install crsf-app
   ![controller4](../_static/controller4.jpg) 
 ---
  <br> <br>
+
+## Remote Control Pairing Method 2
+1. Obtain the supplied dual-head USB-C cable or use your own full-featured USB-C to USB-C cable.
+![alt text](../_static/image.png)
+2. Keep the robot powered on; connect the cable to the USB-C port located next to the Gigabit-Ethernet jack and to the remote controller (see illustration).
+![alt text](../_static/image_2.png)
+Once the remote controller is linked to the robot, the handset will display a “Select Mode” menu—choose the third option: USB Serial.
+![alt text](../_static/image_3.png)
+3. Wait until the remote controller’s blue LED begins to blink slowly or stays solid; pairing is then complete.
 ## Remote Emergency Stop Switch Pairing
 
 1. Remove the robot side panel to expose the emergency-stop receiver and buttons.

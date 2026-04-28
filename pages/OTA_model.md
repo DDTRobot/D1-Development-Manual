@@ -12,7 +12,7 @@ This chapter describes the OTA upgrade methods for each D1 module.
 ## 1. D1 ros2
 1. Before upgrading, please ensure that the robot is operating normally and that the robot is in the prone position.
 ```bash 
-
+sudo systemctl stop d1_bringup.service
 sudo apt update # If installation of the .deb package fails, execute this command and try installing again.
 
 sudo apt install d1-ros2 
@@ -42,7 +42,7 @@ sudo apt-get install motor-upgrade
 
 # Note: Please check whether python3-pip is installed. Install if necessary.
 # Command to upgrade MCU firmware and motor firmware
-
+sudo systemctl stop d1_bringup.service
 otafifth_demo -f $BIN_PATH
 
 # After upgrading, you may check the MCU version

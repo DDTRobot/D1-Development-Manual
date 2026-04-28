@@ -13,7 +13,7 @@
 1. 升级前请先确认机器人运行正常，并确认机器人处于趴下状态。**注意**：更新之前关闭48v电源，只留12v，否则机器人容易失控
 ![off_48v](../_static/off_48v.jpg)
 ```bash 
-
+sudo systemctl stop d1_bringup.service
 
 sudo apt update #若安装.deb包失败，请执行此命令,再重新安装.deb包
 
@@ -44,7 +44,7 @@ sudo apt-get install motor-upgrade
 #注意电脑中是否安装python3-pip 依赖，若无需安装
 
 # 升级MCU模块固件 and 电机固件 指令
-
+sudo systemctl stop d1_bringup.service
 otafifth_demo -f $BIN_PATH
 
 # 升级完成后可查询MCU版本

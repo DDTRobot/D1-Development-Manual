@@ -52,4 +52,5 @@ sudo apt-get install crsf-app
 3. 再次按下按钮1
 ![remote_switch4](../_static/remote_switch4.png)
 <br>
+
 4. 重启后，配对完成！

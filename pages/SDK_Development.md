@@ -29,100 +29,7 @@ D1 提供ros2 SDK，主要的数据交互采用两种模式：订阅/发布和�
 ### 应用示例
 
 这是一个关于如何使用 tita_robot 包来控制机器人关节并获取电池信息等示例。仅在真机上使用。
-
-```cpp{.hljs language-cpp background-color=#f0f0f0}
-#include <time.h>
-
-#include <algorithm>
-#include <chrono>
-#include <iostream>
-#include <map>
-#include <memory>
-#include <string>
-#include <thread>
-
-#include "tita_robot/tita_robot.hpp"
-
-tita_robot robot(8, 2, "can0");
-
-void test_read()
-{
-  while (1) 
-  {
-    std::cout << "=================================" << std::endl;
-    auto q = robot.get_joint_q();
-    auto v = robot.get_joint_v();
-    auto t = robot.get_joint_t();
-    auto status = robot.get_joint_status();
-    auto quat = robot.get_imu_quaternion();
-    auto accl = robot.get_imu_acceleration();
-    auto gyro = robot.get_imu_angular_velocity();
-    for (size_t i = 0; i < q.size(); i++) {
-      std::cout << "q[" << i << "] = " << q[i] << "\tv[" << i << "] = " << v[i] << "\tt[" << i
-                << "] = " << t[i] << std::endl;
-    }
-    for (size_t i = 0; i < status.size(); i++) {
-      std::cout << "status[" << i << "] = " << status[i] << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "quat = " << quat[0] << " " << quat[1] << " " << quat[2] << " " << quat[3]
-              << std::endl;
-    std::cout << "accl = " << accl[0] << " " << accl[1] << " " << accl[2] << std::endl;
-    std::cout << "gyro = " << gyro[0] << " " << gyro[1] << " " << gyro[2] << std::endl;
-    sleep(1);
-  
-  }
-}
-
-void test_write()
-{
-  while (1) {
-    std::cout << "=================================" << std::endl;
-    std::vector<double> t = {0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.5};
-    robot.set_target_joint_t(t);
-    sleep(1);
-  }
-}
-
-int main(int argc, char * argv[])
-{
-  (void)argc;
-  (void)argv;
-  test_read();
-  // test_write();
-
-  return 0;
-}
-
-```
-
-创建CMakeLists.txt文件
-```bash
-cmake_minimum_required(VERSION 3.10)
-project(lower_sdk_example)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-add_compile_options(-Wall -Wextra -Wpedantic)
-set(LOWER_SDK "/opt/d1_ros2/")  #tita_robot 安装路径
-
-include_directories(
-    ${LOWER_SDK}/include
-)
-
-link_directories(
-    ${LOWER_SDK}/lib  
-)
-
-add_executable(lower_sdk_example lower_sdk_example.cpp)
-
-target_link_libraries(lower_sdk_example
-    tita_robot  
-    pthread     
-)
-```
-
+参考示例：https://github.com/DDTRobot/ddt_ros2_control/tree/main/hardware/tita_robot/test
 ### 运动控制接口
 （1） 设置电机力矩
 ```bash
@@ -156,7 +63,6 @@ target_link_libraries(lower_sdk_example
 
 ## 数据读取接口
 
-以下接口是通过加载`opt/d1_ros2/lib/tita_robot.so`动态库，并调用接口获取数据，通讯协议为CANFD。引用方式看上方`CMakeLists.txt`示例
 
 ### 电池状态查询接口
 用于实时获取机器人电池的各项关键参数，支撑电量管理、低电量预警等功能。

@@ -149,7 +149,7 @@ ros2 service call /$ROBOT_NS/command/set_controller_status std_srvs/srv/SetBool 
 ### 上层command_sdk 接口
 `08 SDK Mode`带*后遥控不发送command话题，可由用户发送话题来控制机器状态机切换，速度控制。
 
-**例程参考:** https://github.com/DDTRobot/D1-ROS2-SDK-Demo.git
+**例程参考:** `https://github.com/DDTRobot/D1-ROS2-SDK-Demo.git`
 
 1. 切换sdk模式
 ```bash
@@ -162,7 +162,7 @@ ros2 param set /$ROBOT_NS/teleop_command use_sdk false
 ```
 2. `command/user_command`
 使用一个话题来进行机器人状态机切换，速度控制，位姿控制
-- 机器人状态机切换：状态机包含以下: `transform_up`，`transform_down`,`loco`,`joint_pd`,`car`,`rl_1`,`rl_2`,`rl_3`,`jump`
+- 机器人状态机切换：状态机包含以下: `transform_up`,`transform_down`,`loco`,`joint_pd`,`car`,`rl_1`,`rl_2`,`rl_3`,`jump`
 
 **说明：**
 1、双轮足的状态切换，包含以下：`transform_up` `transform_down`、`car`、` loco`,而`idle`是空闲状态，`transform_down`之后，自动转入`idle`状态。

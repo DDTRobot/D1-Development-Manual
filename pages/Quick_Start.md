@@ -147,10 +147,22 @@ ros2 service call /$ROBOT_NS/command/set_controller_status std_srvs/srv/SetBool 
 ```
 
 ### 上层command_sdk 接口
-`08 SDK Mode` 带 `*`后遥控器不发送command话题，可由用户发送话题来控制机器，目前话题名称如下：
-1. `command/cmd_key`
-2. Topic type: `std_msgs/msg/String` 机器人状态机切换：状态机包含以下：`transform_up` `idle` `transform_down` `loco` `joint_pd` `car`
-`rl_1` `rl_2` `rl_3` `jump`
+`08 SDK Mode`带*后遥控不发送command话题，可由用户发送话题来控制机器状态机切换，速度控制。
+
+**例程参考:** https://github.com/DDTRobot/D1-ROS2-SDK-Demo.git
+
+1. 切换sdk模式
+```bash
+source /opt/d1_ros2/setup.bash
+source /opt/d1_ros2/namespace.sh
+# 开启sdk模式
+ros2 param set /$ROBOT_NS/teleop_command use_sdk true
+# 关闭sdk模式
+ros2 param set /$ROBOT_NS/teleop_command use_sdk false
+```
+2. `command/user_command`
+使用一个话题来进行机器人状态机切换，速度控制，位姿控制
+- 机器人状态机切换：状态机包含以下: `transform_up`，`transform_down`,`loco`,`joint_pd`,`car`,`rl_1`,`rl_2`,`rl_3`,`jump`
 
 **说明：**
 1、双轮足的状态切换，包含以下：`transform_up` `transform_down`、`car`、` loco`,而`idle`是空闲状态，`transform_down`之后，自动转入`idle`状态。
@@ -158,47 +170,46 @@ ros2 service call /$ROBOT_NS/command/set_controller_status std_srvs/srv/SetBool 
 
 示例：
 ```bash
+source /opt/d1_ros2/setup.bash
 source /opt/d1_ros2/namespace.sh
-
-# 站立     
-ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'transform_up'"     
-
-# 趴下     
-ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'transform_down'"    
- 
+# 站立      
+ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
+    fsm_mode : 'transform_up'
+}" 
+# 趴下      
+ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
+    fsm_mode : 'transform_down'
+}"   
 # 平地   
-ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'loco'"
-       
+ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
+    fsm_mode : 'loco'
+}"    
 # 策略1
-ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'rl_1'" 
-
-# jump
-ros2 topic pub -1 /$ROBOT_NS/command/cmd_key std_msgs/msg/String "data: 'jump'" 
-
-...     
-
+ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
+    fsm_mode : 'rl_1'
+}"   
+  
 ```
 
 - 速度控制
 ```
 source /opt/d1_ros2/setup.bash
 source /opt/d1_ros2/namespace.sh
-ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
-    twist: {
-        linear: {x: 0.5, y: 0.0, z: 0.0},          
-        angular: {x: 0.0, y: 0.0, z: 0.0}  
-    }
+ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{
+    header: 'auto',      
+    twist: { linear: { x: 0.0, y: 0.0, z: 0.0 }, angular: { x: 0.0, y: 0.0, z: 0.5 } }
 }"
 
 ```
-此时机器以一定的恒速前进。
+此时机器以一定的恒速自转。
 - 位姿控制
 ```
 source /opt/d1_ros2/setup.bash
 source /opt/d1_ros2/namespace.sh
-ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{            
+ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{ 
+    header: 'auto',            
     pose: {             
-        position: {x: 0.0, y: 0.0, z: 0.0}, # only valid in z，range in 0.1 to 0.3    
+        position: {x: 0.0, y: 0.0, z: 0.0}, # 暂时不可控   
         orientation: {x: 0.0, y: 0.171, z: 0.0, w: 0.985}
         }
 }" 
@@ -210,13 +221,22 @@ ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{
 
 5. 关节控制
 
-新增关节控制接口，将遥控器`left_button`弹出，`letf_switch`打在最上方，控制器进入到`debug`状态，此时可以发送此话题:
+新增关节控制接口，控制器进入到`debug`状态，先发送
+```bash
+source /opt/d1_ros2/namespace.sh
+source /opt/d1_ros2/setup.bash
+ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
+    fsm_mode : 'debug'
+}"   
+```
+此时:
 ![joint_control_topic](.././_static/joint_contrl_topic.png)
 
 ```bash
 source /opt/d1_ros2/namespace.sh
 source /opt/d1_ros2/setup.bash
 ros2 topic pub /$ROBOT_NS/command/joint_command ddt_msgs/msg/JointControlCommand   "{
+    header: 'auto', 
     name: ['FL_foot_joint'],
     kp: [0.0],
     kd: [0.5],

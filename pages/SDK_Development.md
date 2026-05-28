@@ -28,8 +28,8 @@ D1 提供ros2 SDK，主要的数据交互采用两种模式：订阅/发布和�
 
 ### 应用示例
 
-这是一个关于如何使用 tita_robot 包来控制机器人关节并获取电池信息等示例。仅在真机上使用。
-参考示例：**https://github.com/DDTRobot/ddt_ros2_control/tree/main/hardware/tita_robot/test**
+这是一个关于如何使用 tita_robot 包来控制机器人关节并获取电池信息等示例。仅在真机上使用，同时请认真读readme.md 文档。
+参考示例：`https://github.com/DDTRobot/ddt_ros2_control/tree/compress_v1/hardware/examples`
 ### 运动控制接口
 （1） 设置电机力矩
 ```bash

@@ -202,6 +202,9 @@ ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{
 
 ```
 此时机器以一定的恒速自转。
+实际最大速度由内部控制器决定,此处为指令输入最大限制。以四足为例:lin_vel_x为3.0(m/s)、max_twist_angular: 6.0(rad/s)
+
+
 - 位姿控制
 ```
 source /opt/d1_ros2/setup.bash
@@ -215,8 +218,11 @@ ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{
 }" 
 ```   
 此时头部应该低下一定角度。
-
-
+此处指令输入最大限制：
+```bash 
+max_roll: 0.2
+max_pitch: 0.4
+```
 
 
 5. 关节控制
@@ -247,3 +253,98 @@ ros2 topic pub /$ROBOT_NS/command/joint_command ddt_msgs/msg/JointControlCommand
 
 ```
 此时可以发现左腿轮子在旋转，Ctrl+c后停止旋转
+
+
+
+## 策略替换
+
+1. 将你的policy拷贝在对应的文件夹下，例如test.onnx放在
+  - 双足/opt/d1_ros2/share/rl_controller/config/d1h
+  - 四足/opt/d1_ros2/share/rl_controller/config/d1
+2. 修改配置文件
+以双轮足为例，vim /opt/d1_ros2/share/rl_controller/config/d1h/controller.yaml如下，在rl_policy_names中插入你的策略，例如test_policy，然后在rl_policy_names最下面新增字段如下所示。或者直接修改原有的策略，例如双轮足下的rl_climb字段
+
+```bash
+ ...     
+      rl_policy_names:
+        ...
+        - "test_policy"
+ ...
+      test_policy:
+        policy_path: config/d1h/test.onnx
+        output_name: "nn_output"
+
+        # env
+        num_obs: 31
+        num_actions: 8
+        history_len: 10
+        observations_name: ["ang_vel", "gravity", "commands", "dof_pos_nwp", "dof_vel", "last_actions"]
+        commands_name: ["lin_vel_x", "lin_vel_y", "ang_vel_z"]
+        commands_scale: [2.0, 2.0, 0.25] # lin_vel_scale, lin_vel_scale, ang_vel_scale
+        max_commands: [1.0, 0.7, 1.0]
+        min_commands: [-0.5, -0.7, -1.0]
+        commands_comp: [0.0, 0.0, 0.0] # direct add offset to command
+        # control parameters
+        time_interval: 0.02 # forward thread seconds
+        default_joint_angles: [0.0, 0.8, -1.5, 0.0, 0.0, 0.8, -1.5, 0.0]
+        joint_kp: [40.0, 40.0, 40.0, 10.0, 40.0, 40.0, 40.0, 10.0]
+        joint_kd: [1.2, 1.2, 1.2, 0.6, 1.2, 1.2, 1.2, 0.6]
+
+        action_scales: [ 0.25, 0.5, 0.5, 0.5, 0.25, 0.5, 0.5, 0.5 ]
+
+        lin_vel_scale: 2.0
+        ang_vel_scale: 0.25
+        dof_pos_scale: 1.0
+        dof_vel_scale: 0.05
+
+        # Compensation items
+        output_torque_scale: 1.0
+
+```
+
+修改后重启service，systemctl restart d1_bringup后，查看journal中是否有正确加载在对应按键上journalctl -u d1_bringup
+
+```bash 
+[×××_d1-5] [INFO] [2026-01-30 18:27:10] [d1h_rl_controller]: Get policy: /opt/d1_ros2/share/rl_controller/config/d1h/test.onnx in "rl_1" fsm
+```
+```{note}
+注意以下事项：
+1. 对于四足，出厂默认平地模式使用强化控制，因此policy_loco_name字段必须不为空且对应的字段必须在rl_policy_names中出现。其他policy_jump_name，policy_recovery_name也是使用强化学习实现的，如果使用则需要在rl_policy_names中注册对应名字的policy并且在policy_jump_name，policy_recovery_name中声明，不声明则使用内置默认值（如果有）
+2. 已经在policy_jump_name，policy_recovery_name和policy_recovery_name注册过的rl_policy_names在rl_*按键中不会被映射上，剩下的策略则按照先后顺序映射在对应的rl_*中。
+3. 双足policy_loco_name默认使用lqr为非强化学习控制器。
+```
+```bash 
+...     
+      policy_jump_name: "rl_forward_jump" 
+      policy_loco_name: "rl_flat_np3o_still"
+      policy_recovery_name: "rl_recovery_np3o" 
+      rl_policy_names:
+        - "rl_flat_np3o_still"
+        ...
+...
+```
+
+## LQR参数修改
+在双轮足模式下，通过vim /opt/d1_ros2/share/rl_controller/config/d1h/controllers.yaml中的lqr_controller可以修改LQR参数
+目前提供了以下几种LQR参数可供修改
+||参数名|默认值|
+|-----|------|-----|
+| 最大前进速度 | forward_velocity_max |2.1|
+| 最大旋转速度 | otate_velocity_max |3.0|
+| 最大前进加速度 | forward_acceleration_max |3.0|
+| 最大旋转加速度 | rotate_acceleration_max |6.0|
+| 最大变形速度 | transform_velocity_max |0.2|
+| 质心相关参数 | x_mass1(x_mass2)<br>z_mass(z_mass2) |-0.002<br>0.0|
+
+
+
+根据机器前后机对质心参数进行手动修改
+后机使用默认参数即可
+前机将参数修改如下
+```bash 
+x_mass1: -0.01
+z_mass1: 0.0
+x_mass2: -0.01
+z_mass2: 0.0
+```
+修改后重启生效

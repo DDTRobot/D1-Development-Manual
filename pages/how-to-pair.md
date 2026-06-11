@@ -21,7 +21,7 @@ sudo apt-get install crsf-app
 ```
 2. 执行指令`crsf-app -bind`，可以观察到返回：
 ![f9](../_static/flash9.jpg) 
-<br>
+<br> 
 3. 遥控器开机后 右边按键向左推进入界面后 按键依次进入Tools ->ExpressLRS-> bind模式，进行配对接收机.
  ![controller2](../_static/controller2.JPEG)
  ![controller3](../_static/controller3.JPEG) 

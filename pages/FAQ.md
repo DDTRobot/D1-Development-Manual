@@ -42,8 +42,8 @@ ros2 run canfd_api leg_zero_calibration -l left
 Please place the left leg at the zero position, then press Enter...
 
 ```
-先将对应腿摆到机械零位上，然后回车...
-
+先将对应腿摆到机械零位上，如下图，然后回车...
+![faq1](../_static/leg_setzero.png) 
 另一条腿将left换成right即可，重复上述步骤。然后重启机器
 
 - - 打印当前位置与机械零位的差值，可以查验下校准是否ok

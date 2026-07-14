@@ -118,7 +118,7 @@ sudo apt install abootimg binfmt-support binutils cpio cpp device-tree-compiler 
 （3）将USB-C数据线与手柄断开，按下右边按钮，一直按着直到手柄界面出现**writing**的界面，即在烧写固件中。随即请耐心等待其烧写完毕出现**Writing Complete**的界面。如图
 ![cup5](../_static/cup5.PNG)
 ![cup6](../_static/cup6.PNG)
-![cup7](../_static/cup7.PNG)
+![cup7](../_static/remote_1.png)
 （4）随后按下开关机键重启手柄，按下右边按钮，朝中间按下，会出现`mode select`界面
 ![cup8](../_static/cup8.JPEG)
 **3.更新接收机**

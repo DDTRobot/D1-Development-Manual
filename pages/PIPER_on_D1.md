@@ -7,6 +7,9 @@
 
 ------
 
+开源仓库链接：`https://github.com/lrz8080/piper-environment-deployment.git`
+
+
 ## 硬件拓扑
 
 ```
@@ -43,7 +46,7 @@ sudo modprobe gs_usb
 
 ### 2. 激活 CAN 接口
 
-# can1 (Piper，通过 USB-CAN)
+can1 (Piper，通过 USB-CAN)
 ```
 sudo ip link set can1 down
 sudo ip link set can1 type can bitrate 1000000

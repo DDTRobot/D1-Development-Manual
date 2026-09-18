@@ -7,7 +7,7 @@
 
 ------
 
-开源仓库链接：`https://github.com/lrz8080/piper-environment-deployment.git`
+开源仓库链接：`https://github.com/DDTRobot/piper-environment-deployment.git`
 
 
 ## 硬件拓扑

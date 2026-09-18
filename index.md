@@ -8,6 +8,7 @@ pages/SDK_Development
 pages/sim2sim_sim2real
 pages/D1_remote_ctrl
 pages/how-to-pair
+pages/Airbot_on_D1
 pages/PIPER_on_D1
 pages/OTA_model
 pages/FAQ

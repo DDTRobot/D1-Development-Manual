@@ -318,6 +318,45 @@ ros2 topic pub /$ROBOT_NS/command/joint_command ddt_msgs/msg/JointControlCommand
 ```bash 
 [×××_d1-5] [INFO] [2026-01-30 18:27:10] [d1h_rl_controller]: Get policy: /opt/d1_ros2/share/rl_controller/config/d1h/test.onnx in "rl_1" fsm
 ```
+3. 四足换策略
+vim /opt/d1_ros2/share/rl_controller/config/d1/controller.yaml如下，在rl_policy_names中插入你的策略，例如rl_flat_lab2，然后在rl_policy_names最下面新增字段如下所示。
+```bash
+      rl_policy_names:
+        ...
+        - "rl_flat_lab2"
+
+      rl_flat_lab2:
+        policy_path: config/d1/flat_lab18.onnx
+        output_name: "nn_output"
+        control_type: "P_V"
+        # env
+        num_obs: 57
+        num_actions: 16
+        history_len: 10
+        decimation: 8
+        observations_name: ["ang_vel", "gravity", "commands", "dof_pos", "dof_vel", "last_actions"]
+        commands_name: ["lin_vel_x", "lin_vel_y", "ang_vel_z"]
+        max_commands: [1.0, 1.0, 1.0]
+        min_commands: [-1.0, -1.0, -1.0]
+        # commands_gain: [1.0, 0.0, 1.0]
+        # max_commands_rate: [5.0, .inf, .inf]
+        # min_commands_rate: [-5.0, -.inf, -.inf]
+        # control parameters
+        default_joint_angles: [0.0, 0.8, -1.5, 0.0, -0.0, 0.8, -1.5, 0.0, 0.0, 0.8, -1.5, 0.0, -0.0, 0.8, -1.5, 0.0]
+        joint_kp: [96.0, 96.0, 96.0, 0.0, 96.0, 96.0, 96.0, 0.0, 96.0, 96.0, 96.0, 0.0, 96.0, 96.0, 96.0, 0.0]
+        joint_kd: [3.2, 3.2, 3.2, 0.5, 3.2, 3.2, 3.2, 0.5, 3.2, 3.2, 3.2, 0.5, 3.2, 3.2, 3.2, 0.5]
+        action_scales: [ 0.25, 0.25, 0.25, 5.0, 0.25, 0.25, 0.25, 5.0, 0.25, 0.25, 0.25, 5.0, 0.25, 0.25, 0.25, 5.0 ]
+        # zero_cmd_brake_thresholds: [0.01, 0.5]  # [cmd_magnitude, actual_vel(m/s)]
+        # zero_cmd_brake_gains: [0.00, 0.05]  # [P(integral), D(velocity)]
+        # zero_cmd_brake_integral_clamp: 20.0
+```
+如果修改原有的策略，对应字段下框选出来的位置
+```bash
+    loco:
+        policy_name: "rl_flat_lab2"
+```
+修改后重启service，systemctl restart d1_bringup后，查看journal中是否有正确加载在对应按键上journalctl -u d1_bringup
+
 ```{note}
 注意以下事项：
 1. 对于四足，出厂默认平地模式使用强化控制，因此policy_loco_name字段必须不为空且对应的字段必须在rl_policy_names中出现。其他policy_jump_name，policy_recovery_name也是使用强化学习实现的，如果使用则需要在rl_policy_names中注册对应名字的policy并且在policy_jump_name，policy_recovery_name中声明，不声明则使用内置默认值（如果有）

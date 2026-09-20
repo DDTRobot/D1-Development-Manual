@@ -21,6 +21,8 @@
 
 文档使用 Sphinx、MyST 与 Furo。固定依赖见 `docs/requirements.txt`，建议使用 Python 3.11。
 
+中文搜索依赖 `jieba` 分词，已包含在上述依赖文件中；仅设置 `html_search_language = 'zh'` 不会自动安装分词库。调整搜索语言或分词依赖后，请在构建命令中同时使用 `-E -a`，从源文件重新生成搜索索引。
+
 已安装 `uv` 时，在仓库根目录运行：
 
 ```bash

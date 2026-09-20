@@ -8,17 +8,12 @@
 -->
 # 常见问题
 
-```{toctree}
-:maxdepth: 1
-:glob:
-```
 
-------
 
 ## 机器人连接处异响
 
 若听见机器人连接处有异响，可能是由于连接机构螺丝松动导致,为了方便对接机构快速拆装/替换,因此连接处螺丝并未使用防松措施,用户可以在使用中定期检查连接处螺丝的紧固情况,如有松动请使用内六角扳手进行紧固.
-![faq1](../_static/faq1.png) 
+![机器人拼接机构螺丝位置](../_static/faq1.webp)
 
 
 
@@ -43,7 +38,7 @@ Please place the left leg at the zero position, then press Enter...
 
 ```
 先将对应腿摆到机械零位上，如下图，然后回车...
-![faq1](../_static/leg_setzero.png) 
+![腿部机械零位示意](../_static/leg_setzero.webp)
 另一条腿将left换成right即可，重复上述步骤。然后重启机器
 
 - - 打印当前位置与机械零位的差值，可以查验下校准是否ok

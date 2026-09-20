@@ -1,10 +1,6 @@
 
 # 求之airbot 机械臂在d1 上的控制指南
 
-```{toctree}
-:maxdepth: 1
-:glob:
-```
 
 ## 环境部署
 

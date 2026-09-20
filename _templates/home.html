@@ -1,0 +1,68 @@
+<div class="d1-home">
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="hero-copy">
+      <h1 id="home-title">D1 开发文档</h1>
+      <p class="hero-description">D1 机器人的连接配置、接口说明与开发示例。<br>涵盖 ROS 2 应用开发与 C++ / CAN FD 底层接口。</p>
+      <dl class="hero-environment">
+        <dt>适用环境</dt>
+        <dd>Ubuntu 22.04 <span aria-hidden="true">/</span> ROS 2 Humble</dd>
+      </dl>
+    </div>
+    <figure class="hero-visual" id="id1">
+      <span class="home-legacy-anchor" id="d-infinite-d1-v2-3"></span><span class="home-legacy-anchor" id="id2"></span><span class="home-legacy-anchor" id="id3"></span>
+      <a class="product-preview" href="{{ pathto('pages/Specifications') }}" aria-labelledby="product-model product-category product-specifications">
+        <img class="product-preview-image" src="{{ pathto('_static/d1-product.webp', 1) }}" width="1600" height="1000" alt="D1 模块化轮足机器人，四轮足组合构型" fetchpriority="high">
+        <span class="product-preview-heading">
+          <strong id="product-model">D1</strong>
+          <span id="product-category">模块化<br>轮足机器人</span>
+        </span>
+        <span class="product-preview-action"><span id="product-specifications">产品规格</span><span class="product-preview-arrow" aria-hidden="true">→</span></span>
+      </a>
+    </figure>
+  </section>
+
+  <section class="home-section" aria-labelledby="development-paths">
+    <h2 id="development-paths">开发入口</h2>
+    <p class="start-note">实机操作前，请核对交付版本与安全要求。</p>
+    <div class="development-paths">
+      <a class="path-card path-card-primary" href="{{ pathto('pages/Quick_Start') }}">
+        <h3>ROS 2 应用开发</h3>
+        <p>通过话题与服务读取状态、控制机器人。</p>
+        <span class="path-card-link">快速开始 <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="path-card" href="{{ pathto('pages/SDK_Development') }}">
+        <h3>C++ / CAN FD 开发</h3>
+        <p>查阅关节控制、传感器数据与底层通信接口。</p>
+        <span class="path-card-link">查看底层 SDK <span aria-hidden="true">→</span></span>
+      </a>
+    </div>
+  </section>
+
+  <div class="home-resources">
+    <section class="task-section" aria-labelledby="task-heading">
+      <h2 id="task-heading">常用文档</h2>
+      <div class="task-list">
+        <a href="{{ pathto('pages/ROS2_Reference') }}"><strong>ROS 2 接口参考</strong><small>话题、服务与状态反馈</small></a>
+        <a href="{{ pathto('pages/sim2sim_sim2real') }}"><strong>仿真与实机部署</strong><small>仿真环境与 sim2real 工作流</small></a>
+        <a href="{{ pathto('pages/Control_Tuning') }}"><strong>策略与参数调优</strong><small>策略替换、LQR 与控制器配置</small></a>
+        <a href="{{ pathto('pages/OTA_model') }}"><strong>OTA 与系统恢复</strong><small>固件升级与系统维护</small></a>
+      </div>
+    </section>
+    <div class="home-support">
+      <section class="hardware-section" aria-labelledby="hardware-heading">
+        <h2 id="hardware-heading">机械臂接入</h2>
+        <div class="hardware-links">
+          <a href="{{ pathto('pages/Airbot_on_D1') }}">Airbot</a>
+          <a href="{{ pathto('pages/PIPER_on_D1') }}">Piper</a>
+        </div>
+      </section>
+      <section aria-labelledby="support-heading">
+        <h2 id="support-heading">支持</h2>
+        <div class="support-links">
+          <a href="{{ pathto('pages/FAQ') }}">常见问题</a>
+          <a href="https://github.com/DDTRobot/D1-Development-Manual/issues">反馈文档问题 <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,455 +1,123 @@
+(ros-2)=
+(quick-start)=
+
 # 快速开始
-```{toctree}
-:maxdepth: 1
-:glob:
-```
-------
 
-
-## 环境依赖 
-
-### 系统环境
-
-推荐在Ubuntu 22.04 系统，ros2 humble 版本 下进行开发调试，支持在D1 内置电脑上进行开发，也可以在D1 外接电脑进行开发。
-
-### 网络环境
-
-需将用户自备一根USB type-c 线束，插入距离网口最近的type-c口，输入以下信息，即可进入机器人系统
-
-```Bash
-ssh robot@192.168.42.1
-#密码 ： ddt
-```
-
-详细说明请查看产品使用说明书，用户电脑与D1机器人通讯的网卡在192.168.42.xxx网段下，自动分配ip，无需配置。
-
-```{warning}
-1、 使用windows系统的用户在USB type-c 线束后，无法识别 usb 网卡，因为缺少相关驱动，请自行安装:https://milkv.io/zh/docs/duo/getting-started/setup#
-2、 禁止使用使用刷机线进行调试，以免误操作，使系统进入刷机模式，系统无法正常启动。
-```
-#### wifi热点连接
-在下载ros 包和其他依赖时，需要将机器人连接网络，能正常联网，操作如下：
-```bash
-1.首先 `sudo vim /etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf`
-2.修改图中，ssid= "WIFI name"; psk="PassWord"
-3.修改完后 重启系统
-```
-例子如图：
-![wifi_connect](../_static/flash8.jpeg)
-
-#### wifi ap热点模式
-详细参见[wifi热点模式](TITA-wifi_app.md)
-
-
-### 网口配置
-此配置针对想通过网口网线外接电脑与D1机器人进行数据交互。
-```bash
-sudo apt update
-sudo apt install network-manager
-```
-下载配置文件：
-```bash
-sudo apt-get install git  #如果没有安装git，请先安装
-git clone https://github.com/DDTRobot/TowerNetworkManager.git
-```
-安装：
-```bash
-cd TowerNetworkManager/
-chmod 777 install.sh
-sudo ./install.sh
-sudo rm -rf /etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf #删除原有wifi配置文件,以免影响网络连接,后续联网使用 sudo nmcli device wifi connect "example" password "1111111" 方式连接
-```
-完成以上步骤后，通过ifconfig能看到eth0自动分配IP 192.168.19.97，外部设备会被自动分配 192.168.19.xx 网段的ip。
-
-
-### 安装编译工具
-
-在D1内置系统开发编译工具`colcon build `安装：
-```bash 
-sudo apt update
-sudo apt-get install python3-colcon-common-extensions
-```
-遇到无法安装`python3-colcon-common-extensions`需要配置以下内容
-
-``````
-创建或编辑一个配置文件：
-```
-sudo vim /etc/apt/apt.conf.d/99insecure
-```
-添加以下内容：
-```
-Acquire::AllowInsecureRepositories "true";
-Acquire::AllowDowngradeToInsecureRepositories "true";
-```
-然后再次运行`sudo apt update`。
-``````
-
-## ROS2 SDK
-
-D1_sdk_ros2 是基于ROS2开发，将高层逻辑封装成ROS2节点，提供ROS2 API给用户使用，用户通过ROS2 topic 发送指令给机器人，完成机器人控制。
-
-查看ros话题
-```bash 
-robot@d1:~$ ros2 topic list 
-/d13007137/command/cmd_key # 控制指令，状态机切换
-/d13007137/command/cmd_pose # 控制指令，位姿
-/d13007137/command/cmd_twist # 控制指令，速度
-/d13007137/command/joint_command # 控制指令，速度
-/d13007137/d1_rl_controller/transition_event
-/d13007137/d1h_rl_controller/transition_event
-/d13007137/dynamic_joint_states
-/d13007137/imu_sensor_broadcaster/imu # imu状态
-/d13007137/imu_sensor_broadcaster/transition_event
-/d13007137/joint_state_broadcaster/transition_event
-/d13007137/joint_states # 关节信息 位置速度力据
-/d13007137/joy # 遥控器stick值相关
-/d13007137/rl_controller/fsm # rl控制器状态机
-/d13007137/rl_controller/joint_command # rl控制器实际输出：kp kd p v t 
-/d13007137/robot_description
-/d13007137/system_status_broadcaster/battery1 # 主机电池信息
-/d13007137/system_status_broadcaster/battery2 # 从机电池信息
-/d13007137/system_status_broadcaster/dock # 拼接机构状态
-/d13007137/system_status_broadcaster/motors_status # 电机状态
-/d13007137/system_status_broadcaster/transition_event
-/parameter_events
-/rosout
-/tf
-/tf_static
-```
-如果没有，将下文添加在~/.bashrc结尾后执行source ~/.bashrc再输入查看ros话题命令
-```bash 
-export ROS_LOCALHOST_ONLY=1
-export ROS_DOMAIN_ID=42
-source /opt/ros/humble/setup.bash
-source /opt/d1_ros2/setup.bash
-
-```
-
-### 获取四足控制器/双足控制器状态
-1. 获取状态
-```bash
-source /opt/d1_ros2/namespace.sh
-ros2 service call /$ROBOT_NS/command/get_controller_status std_srvs/srv/Trigger 
-# requester: making request: std_srvs.srv.Trigger_Request()
-
-# response:
-# std_srvs.srv.Trigger_Response(success=True, message='biped') # quadruped代表四足
-```
-2. 设置状态
-
-```bash
-source /opt/d1_ros2/namespace.sh
-ros2 service call /$ROBOT_NS/command/set_controller_status std_srvs/srv/SetBool data:\ false # true 代表四足， false 代表双足
-# requester: making request: std_srvs.srv.SetBool_Request(data=False)
-
-# response:
-# std_srvs.srv.SetBool_Response(success=True, message='biped')
-```
-
-### 上层command_sdk 接口
-`08 SDK Mode`带*后遥控不发送command话题，可由用户发送话题来控制机器状态机切换，速度控制。
-
-**例程参考:** `https://github.com/DDTRobot/D1-ROS2-SDK-Demo.git`
-
-1. 切换sdk模式
-```bash
-source /opt/d1_ros2/setup.bash
-source /opt/d1_ros2/namespace.sh
-# 开启sdk模式
-ros2 param set /$ROBOT_NS/teleop_command use_sdk true
-# 关闭sdk模式
-ros2 param set /$ROBOT_NS/teleop_command use_sdk false
-```
-2. `command/user_command`
-使用一个话题来进行机器人状态机切换，速度控制，位姿控制
-- 机器人状态机切换：状态机包含以下: `transform_up`,`transform_down`,`loco`,`joint_pd`,`car`,`rl_1`,`rl_2`,`rl_3`,`jump`
-
-**说明：**
-1、双轮足的状态切换，包含以下：`transform_up` `transform_down`、`car`、` loco`,而`idle`是空闲状态，`transform_down`之后，自动转入`idle`状态。
-2、四轮足的状态切换，包含以下：`transform_up`、`transform_down`、` loco`,而`idle`是空闲状态，`transform_down`之后，自动转入`idle`状态。
-
-示例：
-```bash
-source /opt/d1_ros2/setup.bash
-source /opt/d1_ros2/namespace.sh
-# 站立      
-ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
-    fsm_mode : 'transform_up'
-}" 
-# 趴下      
-ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
-    fsm_mode : 'transform_down'
-}"   
-# 平地   
-ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
-    fsm_mode : 'loco'
-}"    
-# 策略1
-ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
-    fsm_mode : 'rl_1'
-}"   
-  
-```
-
-- 速度控制
-```
-source /opt/d1_ros2/setup.bash
-source /opt/d1_ros2/namespace.sh
-ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{
-    header: 'auto',      
-    twist: { linear: { x: 0.0, y: 0.0, z: 0.0 }, angular: { x: 0.0, y: 0.0, z: 0.5 } }
-}"
-
-```
-此时机器以一定的恒速自转。
-实际最大速度由内部控制器决定,此处为指令输入最大限制。以四足为例:lin_vel_x为3.0(m/s)、max_twist_angular: 6.0(rad/s)
-
-
-- 位姿控制
-```
-source /opt/d1_ros2/setup.bash
-source /opt/d1_ros2/namespace.sh
-ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{ 
-    header: 'auto',            
-    pose: {             
-        position: {x: 0.0, y: 0.0, z: 0.0}, # 暂时不可控   
-        orientation: {x: 0.0, y: 0.171, z: 0.0, w: 0.985}
-        }
-}" 
-```   
-此时头部应该低下一定角度。
-此处指令输入最大限制：
-```bash 
-max_roll: 0.2
-max_pitch: 0.4
-```
-
-- 控制器状态反馈
-```
-source /opt/d1_ros2/setup.bash
-source /opt/d1_ros2/namespace.sh
-ros2 topic echo /$ROBOT_NS/rl_controller/fsm 
----
-data: idle
----
-
-```
-说明：控制器状态反馈主要用于反馈机器人当前状态
-
-5. 关节控制
-
-新增关节控制接口，控制器进入到`debug`状态，先发送
-```bash
-source /opt/d1_ros2/namespace.sh
-source /opt/d1_ros2/setup.bash
-ros2 topic pub /$ROBOT_NS/command/user_command ddt_msgs/msg/UserCommand "{         
-    fsm_mode : 'debug'
-}"   
-```
-此时:
-![joint_control_topic](.././_static/joint_contrl_topic.png)
-
-```bash
-source /opt/d1_ros2/namespace.sh
-source /opt/d1_ros2/setup.bash
-ros2 topic pub /$ROBOT_NS/command/joint_command ddt_msgs/msg/JointControlCommand   "{
-    header: 'auto', 
-    name: ['FL_foot_joint'],
-    kp: [0.0],
-    kd: [0.5],
-    position: [0.0],
-    velocity: [1.0],
-    effort: [0.0]
-  }" --rate 10
-
-```
-此时可以发现左腿轮子在旋转，Ctrl+c后停止旋转
-
-
-
-## 策略替换
-
-1. 将你的policy拷贝在对应的文件夹下，例如test.onnx放在
-  - 双足/opt/d1_ros2/share/rl_controller/config/d1h
-  - 四足/opt/d1_ros2/share/rl_controller/config/d1
-2. 修改配置文件
-以双轮足为例，vim /opt/d1_ros2/share/rl_controller/config/d1h/controller.yaml如下，在rl_policy_names中插入你的策略，例如test_policy，然后在rl_policy_names最下面新增字段如下所示。或者直接修改原有的策略，例如双轮足下的rl_climb字段
-
-```bash
- ...     
-      rl_policy_names:
-        ...
-        - "test_policy"
- ...
-      test_policy:
-        policy_path: config/d1h/test.onnx
-        output_name: "nn_output"
-
-        # env
-        num_obs: 31
-        num_actions: 8
-        history_len: 10
-        observations_name: ["ang_vel", "gravity", "commands", "dof_pos_nwp", "dof_vel", "last_actions"]
-        commands_name: ["lin_vel_x", "lin_vel_y", "ang_vel_z"]
-        commands_scale: [2.0, 2.0, 0.25] # lin_vel_scale, lin_vel_scale, ang_vel_scale
-        max_commands: [1.0, 0.7, 1.0]
-        min_commands: [-0.5, -0.7, -1.0]
-        commands_comp: [0.0, 0.0, 0.0] # direct add offset to command
-        # control parameters
-        time_interval: 0.02 # forward thread seconds
-        default_joint_angles: [0.0, 0.8, -1.5, 0.0, 0.0, 0.8, -1.5, 0.0]
-        joint_kp: [40.0, 40.0, 40.0, 10.0, 40.0, 40.0, 40.0, 10.0]
-        joint_kd: [1.2, 1.2, 1.2, 0.6, 1.2, 1.2, 1.2, 0.6]
-
-        action_scales: [ 0.25, 0.5, 0.5, 0.5, 0.25, 0.5, 0.5, 0.5 ]
-
-        lin_vel_scale: 2.0
-        ang_vel_scale: 0.25
-        dof_pos_scale: 1.0
-        dof_vel_scale: 0.05
-
-        # Compensation items
-        output_torque_scale: 1.0
-
-```
-
-修改后重启service，systemctl restart d1_bringup后，查看journal中是否有正确加载在对应按键上journalctl -u d1_bringup
-
-```bash 
-[×××_d1-5] [INFO] [2026-01-30 18:27:10] [d1h_rl_controller]: Get policy: /opt/d1_ros2/share/rl_controller/config/d1h/test.onnx in "rl_1" fsm
-```
-3. 四足换策略
-vim /opt/d1_ros2/share/rl_controller/config/d1/controller.yaml如下，在rl_policy_names中插入你的策略，例如rl_flat_lab2，然后在rl_policy_names最下面新增字段如下所示。
-```bash
-      rl_policy_names:
-        ...
-        - "rl_flat_lab2"
-
-      rl_flat_lab2:
-        policy_path: config/d1/flat_lab18.onnx
-        output_name: "nn_output"
-        control_type: "P_V"
-        # env
-        num_obs: 57
-        num_actions: 16
-        history_len: 10
-        decimation: 8
-        observations_name: ["ang_vel", "gravity", "commands", "dof_pos", "dof_vel", "last_actions"]
-        commands_name: ["lin_vel_x", "lin_vel_y", "ang_vel_z"]
-        max_commands: [1.0, 1.0, 1.0]
-        min_commands: [-1.0, -1.0, -1.0]
-        # commands_gain: [1.0, 0.0, 1.0]
-        # max_commands_rate: [5.0, .inf, .inf]
-        # min_commands_rate: [-5.0, -.inf, -.inf]
-        # control parameters
-        default_joint_angles: [0.0, 0.8, -1.5, 0.0, -0.0, 0.8, -1.5, 0.0, 0.0, 0.8, -1.5, 0.0, -0.0, 0.8, -1.5, 0.0]
-        joint_kp: [96.0, 96.0, 96.0, 0.0, 96.0, 96.0, 96.0, 0.0, 96.0, 96.0, 96.0, 0.0, 96.0, 96.0, 96.0, 0.0]
-        joint_kd: [3.2, 3.2, 3.2, 0.5, 3.2, 3.2, 3.2, 0.5, 3.2, 3.2, 3.2, 0.5, 3.2, 3.2, 3.2, 0.5]
-        action_scales: [ 0.25, 0.25, 0.25, 5.0, 0.25, 0.25, 0.25, 5.0, 0.25, 0.25, 0.25, 5.0, 0.25, 0.25, 0.25, 5.0 ]
-        # zero_cmd_brake_thresholds: [0.01, 0.5]  # [cmd_magnitude, actual_vel(m/s)]
-        # zero_cmd_brake_gains: [0.00, 0.05]  # [P(integral), D(velocity)]
-        # zero_cmd_brake_integral_clamp: 20.0
-```
-如果修改原有的策略，对应字段下框选出来的位置
-```bash
-    loco:
-        policy_name: "rl_flat_lab2"
-```
-修改后重启service，systemctl restart d1_bringup后，查看journal中是否有正确加载在对应按键上journalctl -u d1_bringup
+从连接 D1 到读取第一条状态信息。本页通过 SSH 在机器人内置电脑上运行 ROS 2 命令，**不发送运动指令**。
 
 ```{note}
-注意以下事项：
-1. 对于四足，出厂默认平地模式使用强化控制，因此policy_loco_name字段必须不为空且对应的字段必须在rl_policy_names中出现。其他policy_jump_name，policy_recovery_name也是使用强化学习实现的，如果使用则需要在rl_policy_names中注册对应名字的policy并且在policy_jump_name，policy_recovery_name中声明，不声明则使用内置默认值（如果有）
-2. 已经在policy_jump_name，policy_recovery_name和policy_recovery_name注册过的rl_policy_names在rl_*按键中不会被映射上，剩下的策略则按照先后顺序映射在对应的rl_*中。
-3. 双足policy_loco_name默认使用lqr为非强化学习控制器。
-```
-```bash 
-...     
-      policy_jump_name: "rl_forward_jump" 
-      policy_loco_name: "rl_flat_np3o_still"
-      policy_recovery_name: "rl_recovery_np3o" 
-      rl_policy_names:
-        - "rl_flat_np3o_still"
-        ...
-...
+
+本页面向 ROS 2 应用开发。如果你需要 C++ 关节控制或 CAN FD 通信，请阅读[底层 SDK](SDK_Development.md)。
 ```
 
-## LQR参数修改
-在双轮足模式下，通过vim /opt/d1_ros2/share/rl_controller/config/d1h/controllers.yaml中的lqr_controller可以修改LQR参数
-目前提供了以下几种LQR参数可供修改
-||参数名|默认值|
-|-----|------|-----|
-| 最大前进速度 | forward_velocity_max |2.1|
-| 最大旋转速度 | otate_velocity_max |3.0|
-| 最大前进加速度 | forward_acceleration_max |3.0|
-| 最大旋转加速度 | rotate_acceleration_max |6.0|
-| 最大变形速度 | transform_velocity_max |0.2|
-| 质心相关参数 | x_mass1(x_mass2)<br>z_mass(z_mass2) |-0.002<br>0.0|
+(start-environment)=
 
-**质心参数说明**
-x_mass1为前机
-x_mass2为后机
-x_mass是base_frame下x方向的值，单位m
-z_mass是base_frame下z方向的值，单位m
-例子：x_mass1: -0.01，大致基座中心X方向偏后，-0.01
-**Q:装上负载之后，机器人站立时，自动会后退？**
-**A:说明机器人的质心是靠后，则需要调整x_mass,往正向调整，数值改大**
-根据机器前后机对质心参数进行手动修改
-后机使用默认参数即可
-前机将参数修改如下
-```bash 
-x_mass1: -0.01
-z_mass1: 0.0
-x_mass2: -0.01
-z_mass2: 0.0
+## 开始前
+
+- **机器人环境：** 已交付的 Ubuntu 22.04 与 ROS 2 Humble 系统。
+- **连接方式：** 开发电脑通过 USB Type-C 连接机器人，随后使用 SSH。
+- **安全要求：** 先阅读产品使用说明，确认急停方式。首次验证只读取状态。
+
+```{warning}
+
+使用靠近网口的 USB Type-C 接口。不要使用刷机线调试，以免误进入刷机模式。Windows 无法识别 USB 网卡时，请先参考[环境与网络](Environment.md)处理驱动问题。
 ```
-修改后重启生效
 
+(connect-robot)=
 
-## 控制器参数修改
+## 连接机器人
 
-以四轮足模式为例子，/opt/d1_ros2/share/rl_controller/config/d1/controllers.yaml 
-- transform_up：从折叠姿态 → 先 fold_jpos 过渡姿态 → 再 stand_jpos 站立姿态
-- transform_down：从站立 → 直接运动到 fold_jpos 折叠收拢姿态
+在**开发电脑终端**中执行：
+
+```bash
+ssh robot@192.168.42.1
 ```
-transform_up:
-  policy_name: "" # 为空使用PD位置控制；填名字则加载RL策略
-  fold_jpos: [-0.05, 1.0, -2.4, 0.0, 0.05, 1.0, -2.4, 0.0, -0.05, 1.4, -2.4, 0.0, 0.05, 1.4, -2.4, 0.0]
-  stand_jpos: [-0.05, 0.8, -1.4, 0.0, 0.05, 0.8, -1.4, 0.0, -0.05, 0.8, -1.5, 0.0, 0.05, 0.8, -1.5, 0.0]
-  fold_timer: 0.5    # 折叠→过渡姿态耗时(s)
-  stand_timer: 1.0   # 过渡姿态→最终站立耗时(s)
-  ff_torque: [-0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 5.0, 0.0, -0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 5.0, 0.0] #前馈力矩
-  joint_kp: [400.0, 150.0, 300.0, 5.0, 400.0, 150.0, 300.0, 5.0, 400.0, 150.0, 300.0, 5.0, 400.0, 150.0, 300.0, 5.0]
-  joint_kd: [8.0, 8.0, 8.0, 0.5, 8.0, 8.0, 8.0, 0.5, 8.0, 8.0, 8.0, 0.5, 8.0, 8.0, 8.0, 0.5]
 
-transform_down:
-  fold_jpos: [0.3, 1.30, -2.7, 0.0, -0.3, 1.3, -2.7, 0.0, 0.3, 1.3, -2.7, 0.0, -0.3, 1.3, -2.7, 0.0]
-  fold_timer: 1.5    # 站立→完全折叠耗时(s)
-  joint_kp: [300.0, 150.0, 300.0, 5.0, 300.0, 150.0, 300.0, 5.0, 300.0, 150.0, 300.0, 5.0, 300.0, 150.0, 300.0, 5.0]
-  joint_kd: [4.0, 8.0, 8.0, 0.2, 4.0, 8.0, 8.0, 0.2, 4.0, 8.0, 8.0, 0.2, 4.0, 8.0, 8.0, 0.2]
+原手册记录的初始密码为 `ddt`，如交付时已修改，请使用实际密码。登录成功后，以下命令均在这个 **SSH 会话内**执行。
+
+```{tip}
+
+需要 Wi-Fi 或以太网连接？查看[环境与网络](Environment.md)。本页先使用 USB 网络完成最小验证，不需要修改现有网络配置。
 ```
-**字段详解**
-transform_up 起立流程（两段式运动）
-1、fold_jpos：起立中间过渡姿态（rad）
-- leg0：[-0.05, 1.0, -2.4, 0.0]
-- leg1：[0.05, 1.0, -2.4, 0.0]
-- leg2：[-0.05, 1.4, -2.4, 0.0]
-- leg[-0.05, 1.4, -2.4, 0.0]`
-- leg3：[0.05, 1.4, -2.4, 0.0]
-    注意后腿 (leg2/3) 第二个关节角度 1.4，比前腿 1.0 更大，后腿抬得更高，防止起立刮地。
-2、stand_jpos：最终稳定站立关节角
-- leg0：[-0.05, 0.8, -1.4, 0.0]
-- leg1：[0.05, 0.8, -1.4, 0.0]
-- leg2：[-0.05, 0.8, -1.5, 0.0]
-- leg3：[0.05, 0.8, -1.5, 0.0]
-    后腿第三关节 - 1.5，前腿 - 1.4，前后腿微小差异，匹配机身重心。
-3、fold_timer:0.5s：折叠姿态运动到中间过渡姿态耗时
-4、stand_timer:1.0s：过渡姿态运动到最终站立姿态耗时
-完整起立总时间：0.5 + 1.0 = 1.5 s
-5、ff_torque 前馈力矩：每个腿第 3 关节施加+5 N·m前馈力矩。
-    第三关节一般是膝关节，用来抵消机身重力，减轻 PD 负担，防止起立下垂。其余关节前馈为 0。
-6、joint_kp / joint_kd：起立阶段 PD 增益
-- kp 最高 400，刚度比趴下阶段更高；kd 也更大，抑制起立冲击抖动。
-- 第 4 关节（足）kp=5、kd=0.5，保持柔性。
+
+(load-environment)=
+
+## 加载 ROS 2 环境
+
+在**机器人终端**中执行：
+
+```bash
+source /opt/ros/humble/setup.bash
+source /opt/d1_ros2/setup.bash
+source /opt/d1_ros2/namespace.sh
+export ROS_LOCALHOST_ONLY=1
+export ROS_DOMAIN_ID=42
+```
+
+这里沿用原手册的本机通信配置，**不适用于开发电脑直接跨网络发现 ROS 2 节点的场景**。
+
+检查机器人的命名空间：
+
+```bash
+printf '%s\n' "$ROBOT_NS"
+```
+
+应返回设备对应的命名空间，而不是空行。后续命令使用 `$ROBOT_NS`，不要照搬其他机器的序列号。
+
+(read-status)=
+
+## 读取状态
+
+先查看当前可见的话题：
+
+```bash
+ros2 topic list
+```
+
+在列表中查找 `/<你的命名空间>/joint_states`，然后读取关节反馈：
+
+```bash
+ros2 topic echo /$ROBOT_NS/joint_states
+```
+
+当终端持续返回关节状态消息，说明这条状态读取路径已连通。按 **Ctrl+C** 结束读取，不会下发运动命令。
+
+(query-controller)=
+
+## 查询控制器构型
+
+以下服务只查询状态，不切换控制器：
+
+```bash
+ros2 service call /$ROBOT_NS/command/get_controller_status std_srvs/srv/Trigger
+```
+
+原手册中的返回值用 `biped` 表示双轮足、`quadruped` 表示四轮足。请以设备实际返回为准。
+
+```{tip}
+
+你已经完成连接、环境加载与只读状态查询。接下来按任务选择接口文档，不必先阅读全部控制参数。
+```
+
+(start-troubleshooting)=
+
+## 没有看到预期结果？
 
 
+| 现象              | 先检查什么                                         |
+| ----------------- | -------------------------------------------------- |
+| SSH 无法连接      | Type-C 端口、网卡驱动与 USB 网络是否正常           |
+| `ros2` 命令不存在 | 是否在机器人 SSH 会话内，是否加载 ROS 2 环境       |
+| 命名空间为空      | 交付系统是否提供`namespace.sh`，该文件是否正确加载 |
+| 没有话题或消息    | 当前环境变量、设备服务状态与交付镜像版本           |
+
+更多连接配置见[环境与网络](Environment.md)，硬件问题见[常见问题](FAQ.md)。
+
+(next-steps)=
+
+## 下一步
+
+- [ROS 2 接口参考](ROS2_Reference.md)：控制器查询、状态切换、速度与关节控制示例。
+- [仿真与实机部署](sim2sim_sim2real.md)：先了解仿真路径，再开展实机开发。
+- [策略与参数调优](Control_Tuning.md)：策略替换、LQR 参数和控制器配置。
+- [底层 SDK（C++ / CAN FD）](SDK_Development.md)：另一条开发入口，按交付 SDK 版本查阅。

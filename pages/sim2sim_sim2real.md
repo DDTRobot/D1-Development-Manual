@@ -1,11 +1,6 @@
 # sim2sim/sim2real
 
-```{toctree}
-:maxdepth: 1
-:glob:
-```
 
-------
 D1 机器人控制系统基于 ROS 2 Humble 构建，支持强化学习控制、硬件控制、以及多种仿真环境，提供完整的 sim2sim 与 sim2real 工作流。本章节介绍系统功能、运行环境、构建方式以及仿真与硬件运行方法。本章节基于[此仓库](https://github.com/DDTRobot/ddt_ros2_control)。
 
 ## 概述

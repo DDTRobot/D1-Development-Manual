@@ -1,9 +1,4 @@
 # 遥控器说明
-```{toctree}
-:maxdepth: 1
-:glob:
-```
-------
 
 
 ![D1_remove_ctrl](../_static/D1_remove_ctrl.png)
@@ -67,7 +62,7 @@
 #### 遥控器 
 
 基于ROS2框架，修改对应文件来下的yaml文件来配置，下述为遥控器一些相关配置：
-```{Markdown}
+```yaml
   teleop_command:
     ros__parameters:
       can_interface: vcan0

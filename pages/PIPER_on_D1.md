@@ -1,11 +1,6 @@
 # Piper 机械臂在d1 上的控制指南
 
-```{toctree}
-:maxdepth: 1
-:glob:
-```
 
-------
 
 开源仓库链接：`https://github.com/DDTRobot/piper-environment-deployment.git`
 

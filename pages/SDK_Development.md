@@ -1,25 +1,24 @@
-# SDK开发
-```{toctree}
-:maxdepth: 1
-:glob:
-```
-------
+# 底层 SDK（C++ / CAN FD）
 
 ## SDK 概述
 
+本章面向底层 C++ 开发，介绍关节控制与电池、IMU、关节状态读取接口。硬件通信链路采用 CAN FD，这与通过 ROS 2 话题、服务进行应用开发是不同的入口。
+
+如果你希望调用机器人的上层控制能力，请先阅读[快速开始](Quick_Start.md)与[ROS 2 接口参考](ROS2_Reference.md)。
+
+```{admonition} 核对 SDK 版本
+:class: important
+以下保留原手册中的 C++ 函数签名。链接的 `compress_v1` 示例仓库使用 `canfd_api` / `CanfdApi`，与本文部分接口命名不同。请以交付 SDK 的头文件及对应示例为准，不要混用不同版本或封装层的 API。
+```
 
 ### 系统架构图
 
-![D1](../_static/D1_Uint.png)
-
-
-D1 提供ros2 SDK，主要的数据交互采用两种模式：订阅/发布和请求/响应。
-
-- 订阅/发布： 接收方订阅某个消息，发送方根据订阅列表向接收方发送消息，主要用于中高频或持续的数据交互。
-
-- 请求/响应： 问答模式，通过请求实现数据获取或操作。用于低频或功能切换时的数据交互。
-
-详细参见[Quick Start](Quick_Start.md)。
+```{raw} html
+<details class="architecture-details">
+  <summary>查看 ROS 2 控制层与 CAN FD 通信链路</summary>
+  <a class="image-reference" href="../_static/D1_Uint.png"><img src="../_static/D1_Uint.png" alt="D1 系统架构：指令管理、ROS 2 控制、CAN 消息桥接与 MCU" width="768" height="843" loading="lazy"></a>
+</details>
+```
 
 ------
 
@@ -29,10 +28,10 @@ D1 提供ros2 SDK，主要的数据交互采用两种模式：订阅/发布和�
 ### 应用示例
 
 这是一个关于如何使用 tita_robot 包来控制机器人关节并获取电池信息等示例。仅在真机上使用，同时请认真读readme.md 文档。
-参考示例：`https://github.com/DDTRobot/ddt_ros2_control/tree/compress_v1/hardware/examples`
+参考示例：[CAN FD 底层接口示例（compress_v1）](https://github.com/DDTRobot/ddt_ros2_control/tree/compress_v1/hardware/examples)。运行条件与注意事项请以该版本 README 为准。
 ### 运动控制接口
 （1） 设置电机力矩
-```bash
+```cpp
  /**
      * @brief Set the target joint feed-forward torques.
      * @param t the target joint feed-forward torques.
@@ -42,7 +41,7 @@ D1 提供ros2 SDK，主要的数据交互采用两种模式：订阅/发布和�
 ```
 
 （2）设置电机PD控制
-```bash
+```cpp
   /**
      * @brief MIT control method. Set the target joint positions, velocities, kp, kd and feed-forward torques of the
      motors.
@@ -67,7 +66,7 @@ D1 提供ros2 SDK，主要的数据交互采用两种模式：订阅/发布和�
 ### 电池状态查询接口
 用于实时获取机器人电池的各项关键参数，支撑电量管理、低电量预警等功能。
 
-```cpp{.hljs language-cpp background-color=#f0f0f0}
+```cpp
   /**
      * @brief Get the current battery is connected.
      * @param index: the index of battery.
@@ -109,7 +108,7 @@ D1 提供ros2 SDK，主要的数据交互采用两种模式：订阅/发布和�
 ### 机器人核心状态获取接口
 用于获取机器人运动控制、姿态感知的关键数据，为运动规划、姿态调整提供基础，涵盖 IMU（惯性测量单元）、电机、关节三大模块：
 
-```cpp{.hljs language-cpp background-color=#f0f0f0}
+```cpp
 /**
      * @brief Get the current states update timeout.
      * @return bool: if current states not update, return true.

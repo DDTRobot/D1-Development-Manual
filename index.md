@@ -1,82 +1,53 @@
-> # Welcome to D1-Robot Documentation!
+---
+hide-toc: true
+myst:
+  html_meta:
+    description: D1 模块化轮足机器人开发文档。查阅 ROS 2 快速开始、C++ 与 CAN FD 底层 SDK、仿真部署、机械臂扩展及升级维护指南。
+---
+
+# D1 开发文档
+
+从 ROS 2 应用开发到 C++ / CAN FD 底层控制，选择适合你的开发路径。
 
 ```{toctree}
-:maxdepth: 1
+:caption: 开始使用
+:maxdepth: 3
+:hidden:
 
-pages/Quick_Start
-pages/SDK_Development
-pages/sim2sim_sim2real
-pages/D1_remote_ctrl
-pages/how-to-pair
-pages/Airbot_on_D1
-pages/PIPER_on_D1
-pages/OTA_model
-pages/FAQ
-
+快速开始 <pages/Quick_Start>
+环境与网络 <pages/Environment>
+产品与规格 <pages/Specifications>
 ```
-最近更新时间：2026年9月11日
 
---------
+```{toctree}
+:caption: 开发与控制
+:maxdepth: 3
+:hidden:
 
-## 产品介绍
+ROS 2 接口参考 <pages/ROS2_Reference>
+底层 SDK（CAN FD） <pages/SDK_Development>
+仿真与实机部署 <pages/sim2sim_sim2real>
+策略与参数调优 <pages/Control_Tuning>
+```
 
-本末无界（D-INFINITE，下称D1）是世界上首款支持整机模组化的轮足式机器人。在将轮式机器人的敏捷性与足式机器人的强适应性完美结合的同时，可支持两台机器之间的合体与分离。其采用模块化结构及开放式接口，可搭载视觉模块、通讯模块、Al主机、边缘处理器和各种传感器，也可更换轮毂变换为点足式、扁平足式机器人等，具备极高的可玩性与科研价值。
+```{toctree}
+:caption: 硬件与扩展
+:maxdepth: 3
+:hidden:
 
-![tita](./_static/D1.png)
+遥控器使用 <pages/D1_remote_ctrl>
+硬件配对 <pages/how-to-pair>
+Airbot 机械臂 <pages/Airbot_on_D1>
+Piper 机械臂 <pages/PIPER_on_D1>
+Wi-Fi 热点应用 <pages/TITA-wifi_app>
+```
 
--------
+```{toctree}
+:caption: 维护与支持
+:maxdepth: 3
+:hidden:
 
-#### D-infinite (D1) 规格说明 V2.3
-##### 一、中文规格参数表
-| 类别     | 参数名             | 参数值                                                       |
-| -------- | ------------------ | ------------------------------------------------------------ |
-| 机械参数 | 站立尺寸           | 375/750 × 493 × 643mm                                        |
-| 机械参数 | 匍匐尺寸           | 470/845 × 580 × 250mm                                        |
-| 机械参数 | 材质               | 铝合金+高强度工程塑料                                        |
-| 机械参数 | 重量(含拼接机构)   | 24.3kg / 48.5 kg                                             |
-| 机械参数 | 自由度             | 8 / 16dof                                                    |
-| 机械参数 | 关节最大扭矩       | 120Nm                                                        |
-| 机械参数 | 关节运动空间       | 机身: -45° ~ 45°；大腿: -195° ~ 105°；小腿: 22.46° ~ 132.46° |
-| 电气特性 | 处理器             | 标配: Jetson Orin NX 8GB                                     |
-| 电气特性 | WiFi类型           | WIFI6                                                        |
-| 电气特性 | 遥控器通信         | ELRS                                                         |
-| 电气特性 | 电池参数           | 单机 43.2V 9Ah  (388.8 Wh)                                   |
-| 电气特性 | 电池仓             | 单机单电池，双机双电池                                       |
-| 电气特性 | 外置接口           | USB Type C × 2，千兆网口 × 1，电池接口 × 1                   |
-| 电气特性 | 拼合通信接口       | CANFD                                                        |
-| 电气特性 | 远程断电           | 有                                                           |
-| 电气特性 | 电池热插拔         | 无热插拔，电池可拆出                                         |
-| 性能参数 | 默认组合构型       | 同屈(<<)                                                     |
-| 性能参数 | 车钥匙遥控断电距离 | 约 3m                                                        |
-| 性能参数 | 运行续航时间       | 四轮足综合续航约 2h / 双轮足下综合续航约 5 h                 |
-| 性能参数 | 续航距离           | 四轮足综合续航约 15 km / 双轮足下综合续航约 25 km            |
-| 性能参数 | 极限站立负荷       | 四轮足 80 kg / 双轮足 30 kg                                  |
-| 性能参数 | 标准充电时间       | <2h                                                          |
-| 性能参数 | 工作温度           | 0~45°C                                                       |
-| 性能参数 | 最大行走负荷       | 四轮足 >30 kg / 双轮足 >15kg                                 |
-| 性能参数 | 持续行走负荷       | 四轮足 >10 kg / 双轮足 >5 kg                                 |
-| 性能参数 | 楼梯行走能力       | 双轮足 15cm / 四轮足 15cm                                    |
-| 性能参数 | 匍匐姿态带负载能力 | >100kg                                                       |
-| 性能参数 | 最高持续速度       | 四轮足 3.2m/s / 双轮足2m/s                                   |
-| 性能参数 | 斜坡行走能力       | 四轮足 >35° / 双轮足 >25°                                    |
-| 性能参数 | 攀爬高度           | 极限 70cm，建议 50cm                                         |
-| 性能参数 | 单机转弯半径       | 270 mm                                                       |
-| 性能参数 | 匍匐姿态           | 有                                                           |
-| 性能参数 | 闪拼               | 有（ <5s ）                                                  |
-| 其他     | OTA升级            | 支持                                                         |
-| 其他     | 二次开发           | 支持                                                         |
-| 其他     | 机械臂配件         | 持续升级                                                     |
-| 其他     | 深度相机配件       | 持续升级                                                     |
-| 其他     | 电源板配件         | 持续升级                                                     |
-| 其他     | 激光雷达配件       | 持续升级                                                     |
-| 其他     | 大轮毂配件         | 持续升级                                                     |
-| 其他     | 操作系统           | Ubuntu 22.04                                                 |
-| 其他     | 标准API            | ROS 2                                                        |
-
-
-
-### 致谢
-非常感谢您选择我们的产品，我们承诺将为您提供最优质的产品和服务。您的满意是我们最大的追求。如果您在使用过程中有任何问题或需要帮助，请随时联系我们，我们将竭诚为您服务。再次感谢您的信任和支持！
-
-<!-- 快速上手请跳转[Quick Start](https://tita-development-manual-uc.readthedocs.io/zh-cn/latest/pages/quickstart.html) -->
+OTA 与系统恢复 <pages/OTA_model>
+常见问题 <pages/FAQ>
+```
 

@@ -1,9 +1,4 @@
 # WIFI 便携式应用
-```{toctree}
-:maxdepth: 1
-:glob:
-```
-------
 
 ## 安装部署
 ```

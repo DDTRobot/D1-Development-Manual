@@ -1,11 +1,6 @@
 # D1 各模块OTA
 
-```{toctree}
-:maxdepth: 1
-:glob:
-```
 
-------
 
 本章节介绍D1各模块OTA升级方法。
 
@@ -91,7 +86,7 @@ sudo apt install abootimg binfmt-support binutils cpio cpp device-tree-compiler 
 
 **三、结束标记**
 刷机完成时可以看到以下信息
-```{bash}
+```text
 1. Flash is successful
 2. Reboot device
 3. Cleaning up...

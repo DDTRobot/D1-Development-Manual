@@ -1,0 +1,5 @@
+<div class="sidebar-scroll">
+  <nav class="sidebar-tree" aria-label="文档目录">
+    {{ furo_navigation_tree | replace('role="heading"', 'role="heading" aria-level="2"') | replace('Toggle navigation of ', '展开或收起：') | safe }}
+  </nav>
+</div>

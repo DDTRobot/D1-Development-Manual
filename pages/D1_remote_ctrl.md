@@ -63,7 +63,7 @@ Menu items:
 #### Remote Controller Configuration（ROS2）
 
 Edit the YAML parameters in the teleop_command package:
-```{Markdown}
+```yaml
   teleop_command:
     ros__parameters:
       can_interface: vcan0

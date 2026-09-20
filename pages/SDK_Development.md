@@ -36,7 +36,7 @@ For details, see[Quick Start](Quick_Start.md)。
 This example shows how to use the `tita_robot` package to control robot joints and obtain battery information.
 Use only on an actual robot.
 
-```cpp{.hljs language-cpp background-color=#f0f0f0}
+```cpp
 #include <time.h>
 
 #include <algorithm>
@@ -168,7 +168,7 @@ Refer to the above `CMakeLists.txt` for linking.
 ### Battery Status Query Interfaces
 Used to obtain real-time battery parameters for power management and low-battery warnings.
 
-```cpp{.hljs language-cpp background-color=#f0f0f0}
+```cpp
   /**
      * @brief Get the current battery is connected.
      * @param index: the index of battery.
@@ -210,7 +210,7 @@ Used to obtain real-time battery parameters for power management and low-battery
 ### Robot Core State Interfaces
 These interfaces provide essential data for motion control and state estimation, covering IMU, motor, and joint modules.
 
-```cpp{.hljs language-cpp background-color=#f0f0f0}
+```cpp
 /**
      * @brief Get the current states update timeout.
      * @return bool: if current states not update, return true.

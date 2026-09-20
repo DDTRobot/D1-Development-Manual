@@ -94,7 +94,7 @@ Note: Some Ubuntu systems may lack **sshpass** and **nfs-kernel-server**. Instal
 **3. Completion Indication**
 When flashing is complete, you will see the following information:
 
-```{bash}
+```text
 1. Flash is successful
 2. Reboot device
 3. Cleaning up...

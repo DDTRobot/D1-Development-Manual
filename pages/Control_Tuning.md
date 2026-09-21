@@ -115,7 +115,7 @@ vim /opt/d1_ros2/share/rl_controller/config/d1/controller.yaml如下，在rl_pol
 ...
 ```
 
-(lqr-tuning)=
+<!-- (lqr-tuning)=
 ## LQR参数修改
 在双轮足模式下，通过vim /opt/d1_ros2/share/rl_controller/config/d1h/controllers.yaml中的lqr_controller可以修改LQR参数
 目前提供了以下几种LQR参数可供修改
@@ -145,7 +145,7 @@ z_mass1: 0.0
 x_mass2: -0.01
 z_mass2: 0.0
 ```
-修改后重启生效
+修改后重启生效 -->
 
 
 (controller-tuning)=

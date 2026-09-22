@@ -19,8 +19,8 @@ sudo apt-get install crsf-app
 <br> 
 3. 遥控器开机后 右边按键向左推进入界面后 按键依次进入Tools ->ExpressLRS-> bind模式，进行配对接收机.
  ![controller2](../_static/controller2.JPEG)
- ![controller3](../_static/controller3.JPEG) 
- <br>
+  ![controller3](../_static/controller3.JPEG) 
+  <br>
 4. 配对完成返回pair success
 ![controller4](../_static/controller4.jpg) 
 ---
@@ -35,17 +35,11 @@ sudo apt-get install crsf-app
 2. 等待遥控器的蓝灯慢闪或常亮后，即完成配对
 ## 远程急停开关配对
 
-1. 将机器的侧板拆开，露出远程急停开关的接收机和按钮。
-![remote_switch2](../_static/remote_switch2.png)
-<br>
-2. 长按接收机配对按钮5s，等待配对指示灯常亮。
-![remote_switch2](../_static/remote_switch1.png)
-<br>
-3. 同时长按远程急停开关的按钮1和按钮2，直至遥控器上的指示灯常亮。
-![remote_switch3](../_static/remote_switch3.png)
-<br>
-3. 再次按下按钮1
-![remote_switch4](../_static/remote_switch4.png)
-<br>
+1. 打开机器人遥控器页面一，选择04 Key Pair按下
 
-4. 重启后，配对完成！
+<img src="../_static/menu1.png"/>
+
+2. 听到蜂鸣器响后，按下远程开关的3键即可（可重复按）
+
+![remote_switch4](../_static/remote_switch5.png)
+

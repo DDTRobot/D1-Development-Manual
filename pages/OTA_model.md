@@ -11,6 +11,13 @@ This chapter describes the OTA upgrade methods for each D1 module.
 
 ## 1. D1 ros2
 1. Before upgrading, please ensure that the robot is operating normally and that the robot is in the prone position.
+
+```{warning}
+Before updating, switch off the 48 V supply and leave only the 12 V supply on. Otherwise, the robot may move uncontrollably.
+```
+
+![Remote switch controls: turn off only the 48 V supply before updating](../_static/off_48v.png)
+
 ```bash 
 sudo systemctl stop d1_bringup.service
 sudo apt update # If installation of the .deb package fails, execute this command and try installing again.
@@ -24,10 +31,7 @@ sudo rm -rf /opt/d1_ros2
 
 dpkg -l d1-ros2
 ```
-After installation, three services will be placed in the directory lib/systemd/system:
-```bash
-robot@tita:~$ ls /lib/systemd/system/ | grep d1_bringup.service
-```
+After installation, `d1_bringup.service` is added under `/lib/systemd/system`.
 ```{warning}
 If users are developing new controllers or new features, please stop the above services and do not perform biped-wheeled/quadruped mode switching.
 ```
@@ -65,7 +69,7 @@ Please note: To ensure successful upgrading, confirm that the robot is functioni
 
 Flashing tool: **Ubuntu 22.04 computer**
 
-Hardware: The flashing cable packaged with D1 (insert with mark A facing outward into DBG port; plug in the cable before powering on).
+Hardware: The flashing cable packaged with D1 (insert it into the DBG port; plug in the cable before powering on).
 
 This process requires downloading the flashing package to the computer (Linux system only). Create a new folder and extract the flashing package into this new folder.
 
@@ -126,7 +130,7 @@ Running `lsusb` will also show information similar to the following:
 ![cup6](../_static/cup6.PNG)
 ![cup7](../_static/cup7.PNG)
 (4) Restart the controller by pressing the power button. Then press the right button inward to enter the `mode select` interface:
-![cup8](../_static/cup8.JPEG)
+![Remote controller Mode menu after restarting](../_static/remote_1.png)
 **3.Update the Receiver**
 
 Completing the above steps finishes the first stage of the firmware upgrade.
@@ -140,6 +144,9 @@ Completing the above steps finishes the first stage of the firmware upgrade.
 (2) Connect your PC to the Wi-Fi network:
  Wi-Fi name: **ExpressLRS TX**
  Password: **expresslrs**
+
+After connecting to Wi-Fi, the update page should open in your browser. If it does not, enter `10.0.0.1` manually and make sure the Wi-Fi connection is active. Select the file to update.
+
 ![cup8](../_static/cup12.png)
 (3) Click **UPDATE**. If the update fails as shown, update the module in the first folder first:
 ![cup8](../_static/cup13.png)
@@ -150,8 +157,6 @@ Completing the above steps finishes the first stage of the firmware upgrade.
  Press to select (flashing indicates selected):
 ![cup8](../_static/cup15.png)
 (6) Scroll down to **1:8**, press the middle button to confirm. Configuration complete:
-![cup8](../_static/cup16.png)At this point, the controller firmware has been fully upgraded.
+![cup8](../_static/cup16.png)
 
-```
-
-```
+At this point, the controller firmware has been fully upgraded.

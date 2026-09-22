@@ -10,10 +10,8 @@
 
 ## Remote Controller Pairing Method 1
 
-Note: For older system versions, install the pairing tool using:
-
 ```{note}
-sudo apt install crsf-app
+For older system versions, install the pairing tool using `sudo apt install crsf-app`.
 ```
 
 1. Install crsf-app (skip if already installed):
@@ -44,30 +42,23 @@ sudo apt-get install crsf-app
  <br> <br>
 
 ## Remote Control Pairing Method 2
-1. Obtain the supplied dual-head USB-C cable or use your own full-featured USB-C to USB-C cable.
-![alt text](../_static/image.png)
-2. Keep the robot powered on; connect the cable to the USB-C port located next to the Gigabit-Ethernet jack and to the remote controller (see illustration).
-![alt text](../_static/image_2.png)
-Once the remote controller is linked to the robot, the handset will display a “Select Mode” menu—choose the third option: USB Serial.
-![alt text](../_static/image_3.png)
-3. Wait until the remote controller’s blue LED begins to blink slowly or stays solid; pairing is then complete.
+
+1. Keep the robot powered on. Connect the data cable to the robot's USB-C port shown below and to the remote controller.
+
+   ![USB-C connection between the powered-on robot and remote controller](../_static/typec_connect.png)
+
+   Once connected, the remote controller displays the `Select mode` menu. Choose the third option, `USB Serial`.
+
+   ![Select USB Serial on the remote controller](../_static/usb_serial.png)
+
+2. Wait until the remote controller's blue LED blinks slowly or stays on. Pairing is then complete.
+
 ## Remote Emergency Stop Switch Pairing
 
-1. Remove the robot side panel to expose the emergency-stop receiver and buttons.
-  ![remote_switch2](../_static/remote_switch2.png)
-  <br>
+1. Open page 1 of the robot's remote controller menu, select **04 Key Pair**, and press to confirm.
 
-2. Long‑press the pairing button on the receiver for 5 seconds until the indicator LED stays solid.
-  ![remote_switch1](../_static/remote_switch1.png)
-  <br>
+   <img src="../_static/menu1.png" alt="Remote controller menu, page 1, with 04 Key Pair" width="448">
 
-3. Simultaneously long‑press button 1 and button 2 on the emergency stop remote until its indicator light stays solid.
+2. When the buzzer sounds, press **button 3** on the remote emergency stop switch. You can press it repeatedly if needed.
 
-  ![remote_switch3](../_static/remote_switch3.png)
-  <br>
-
-4. Press button 1 again.
-  ![remote_switch4](../_static/remote_switch4.png)
-  <br>
-
-5. Reboot the robot. Pairing is now complete.
+   ![Press button 3 on the remote emergency stop switch](../_static/remote_switch5.png)

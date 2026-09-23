@@ -1,12 +1,5 @@
 # D1 modules OTA
 
-```{toctree}
-:maxdepth: 1
-:glob:
-```
-
-------
-
 This chapter describes the OTA upgrade methods for each D1 module.
 
 ## 1. D1 ros2
@@ -69,7 +62,7 @@ Please note: To ensure successful upgrading, confirm that the robot is functioni
 
 Flashing tool: **Ubuntu 22.04 computer**
 
-Hardware: The flashing cable packaged with D1 (insert it into the DBG port; plug in the cable before powering on).
+Hardware: The flashing cable packaged with D1 (insert it into the DBG port; plug in the cable before powering on). Run `lsusb` on the host computer to check for an NVIDIA device.
 
 This process requires downloading the flashing package to the computer (Linux system only). Create a new folder and extract the flashing package into this new folder.
 

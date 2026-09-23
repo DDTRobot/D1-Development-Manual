@@ -35,7 +35,7 @@ python3 airbot_joy_D1.py --namespace d13042528 --port 50000
 
 <img src="../_static/1.png" alt="D1 remote controller channel layout" width="400">
 
-**Channel mapping:**
+## Remote controller channel mapping
 
 | Channel | Control |
 |---------|---------|
@@ -48,14 +48,28 @@ python3 airbot_joy_D1.py --namespace d13042528 --port 50000
 | 7 | Right button |
 | 8 | Right three-position switch |
 
-**Buttons and switches:**
+## Button functions
 
-- **Left button:** Pressed selects Cartesian velocity mode; released selects joint control mode.
-- **Left three-position switch:** In Cartesian velocity mode, selects rotation about the X, Y, or Z axis in combination with Channel 4. In joint control mode, selects joints 1–2, 3–4, or 5–6 in combination with Channels 1 and 2.
-- **Right button:** A short press toggles the gripper. A long press returns the arm to the planned position. Maintain a safe clearance.
-- **Right three-position switch:** Selects one of three speed levels. The top position is the highest speed; use caution.
+### Left button (Channel 5)
 
-**Joysticks:**
+- Pressed: Cartesian velocity mode.
+- Released: Joint control mode.
+
+### Left three-position switch (Channel 6)
+
+- Cartesian velocity mode: Selects rotation about the X, Y, or Z axis in combination with Channel 4.
+- Joint control mode: Selects joints 1–2, 3–4, or 5–6 in combination with Channels 1 and 2.
+
+### Right button (Channel 7)
+
+- Short press: Toggles the gripper.
+- Long press: Returns the arm to the planned position. Maintain a safe clearance.
+
+### Right three-position switch (Channel 8)
+
+Selects one of three speed levels. The top position is the highest speed; use caution.
+
+## Joystick functions
 
 | Control | Cartesian velocity mode | Joint control mode |
 |---------|-------------------------|--------------------|
@@ -63,5 +77,7 @@ python3 airbot_joy_D1.py --namespace d13042528 --port 50000
 | Right stick, forward/backward | Linear motion along the X axis | Joint motion selected by Channel 6 |
 | Left stick, forward/backward | Linear motion along the Z axis | No control |
 | Left stick, left/right | Rotation about the X, Y, or Z axis, selected by Channel 6 | No control |
+
+## Development documentation
 
 For development examples, see the [Airbot Play Python SDK documentation](https://docs.airbots.online/airbot-play-python-sdk/latest/Python%20SDK/examples.html).

@@ -1,12 +1,4 @@
-
 # Hardware Pairing and Connection
-
-```{toctree}
-:maxdepth: 1
-:glob:
-```
-
-------
 
 ## Remote Controller Pairing Method 1
 
@@ -14,51 +6,51 @@
 For older system versions, install the pairing tool using `sudo apt install crsf-app`.
 ```
 
-1. Install crsf-app (skip if already installed):
-```bash
-sudo dpkg -i crsf-app
-# If not installed:
-sudo apt update
-sudo apt-get install crsf-app
-```
-2. Run the pairing command:
+1. Install the pairing tool with `sudo dpkg -i crsf-app` (skip this step if it is already included or installed).
 
-    ```
-    crsf-app -bind
-    ```
+   If `crsf-app` is not installed, you can also install it with:
 
-    ![f9](../_static/flash9.jpg) <br>You should see output similar to the screenshot.
+   ```bash
+   sudo apt update
+   sudo apt-get install crsf-app
+   ```
 
-3. Power on the remote controller. Push the right-side button left to enter the menu, then navigate:
-    Tools → ExpressLRS → Bind. This starts binding with the receiver.
+2. Run the pairing command and check its output:
 
-    ![controller2](../_static/controller2.JPEG)
-     ![controller3](../_static/controller3.JPEG) 
-     <br>
+   ```bash
+   crsf-app -bind
+   ```
 
-4. When pairing is successful, the controller will display: **pair success**
-  ![controller4](../_static/controller4.jpg) 
----
- <br> <br>
+   ![Pairing command output](../_static/flash9.jpg)
 
-## Remote Control Pairing Method 2
+3. Power on the remote controller. Push the right-side button left to enter the menu, then select `Tools` → `ExpressLRS` → `bind` to pair with the receiver.
+
+   ![Remote controller Tools menu](../_static/controller2.JPEG)
+
+   ![ExpressLRS pairing screen](../_static/controller3.JPEG)
+
+4. Successful pairing returns `pair success`.
+
+   ![Pairing success message](../_static/controller4.jpg)
+
+## Remote Controller Pairing Method 2
 
 1. Keep the robot powered on. Connect the data cable to the robot's USB-C port shown below and to the remote controller.
 
-   ![USB-C connection between the powered-on robot and remote controller](../_static/typec_connect.png)
+   ![USB-C connection between the robot and remote controller](../_static/typec_connect.png)
 
-   Once connected, the remote controller displays the `Select mode` menu. Choose the third option, `USB Serial`.
+   Once connected, the remote controller displays `Select mode`. Choose the third option, `USB Serial`.
 
    ![Select USB Serial on the remote controller](../_static/usb_serial.png)
 
-2. Wait until the remote controller's blue LED blinks slowly or stays on. Pairing is then complete.
+2. Wait until the remote controller's blue LED blinks slowly or stays on. Pairing is complete.
 
 ## Remote Emergency Stop Switch Pairing
 
-1. Open page 1 of the robot's remote controller menu, select **04 Key Pair**, and press to confirm.
+1. Open page 1 of the robot's remote controller menu, select `04 Key Pair`, and press to confirm.
 
-   <img src="../_static/menu1.png" alt="Remote controller menu, page 1, with 04 Key Pair" width="448">
+   <img src="../_static/menu1.png" alt="Remote controller page 1, showing the Key Pair option" width="448">
 
-2. When the buzzer sounds, press **button 3** on the remote emergency stop switch. You can press it repeatedly if needed.
+2. When the buzzer sounds, press button `3` on the remote emergency stop switch. You can press it repeatedly if needed.
 
-   ![Press button 3 on the remote emergency stop switch](../_static/remote_switch5.png)
+   ![Remote emergency stop switch buttons](../_static/remote_switch5.png)

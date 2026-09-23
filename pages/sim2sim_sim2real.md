@@ -1,14 +1,8 @@
 # sim2sim/sim2real
 
-```{toctree}
-:maxdepth: 1
-:glob:
-```
-
-------
 D1’s robot control system is built on ROS 2 Humble and supports reinforcement learning control, hardware control, and multiple simulation environments, providing a complete sim2sim and sim2real workflow.
 This chapter introduces system features, runtime environment, build methods, and simulation/hardware execution.
-This chapter is based on [this repository](https://github.com/DDTRobot/ddt_ros2_control)。
+This chapter is based on [this repository](https://github.com/DDTRobot/ddt_ros2_control).
 
 ## Overview
 The D1 control framework mainly includes the following modules:
@@ -63,6 +57,12 @@ mkdir -p ~/d1_ws/src
 ```
 Place the code into `src`, then run:
 
+```bash
+cd ~/d1_ws
+colcon build --symlink-install
+source install/setup.bash
+```
+
 ## Simulation Execution
 ### webots
 Supported terrains:
@@ -98,9 +98,7 @@ colcon build --symlink-install --packages-up-to rl_controller hardware_bridge
 ```
 ### Stop default system services
 ```bash
-sudo systemctl stop joy_controller.service
-sudo systemctl stop rl8_controller.service
-sudo systemctl stop rl16_controller.service
+sudo systemctl stop d1_bringup.service
 ```
 ### Start hardware controller
 ```bash
@@ -124,8 +122,8 @@ controller/rl_controller/config/<robot>/controllers.yaml
 ```
 Example ONNX models:
 
-- D1：```bash flat.onnx ```, ```bash stairs.onnx```
-- TITA：```bash stand.onnx```
+- D1: `flat.onnx`, `stairs.onnx`
+- TITA: `stand.onnx`
 
 When updating control strategies, remember to update:
 
@@ -143,7 +141,7 @@ This folder contains state definitions, transition logic, and action generation.
 ## FAQ
 
 - **Webots not found**: Ensure installation path is in the environment variables, e.g.
-```bash export WEBOTS_HOME=/usr/lib/webots```
+  `export WEBOTS_HOME=/usr/lib/webots`
 - **Mujoco not found**: Ensure `mujoco` is installed and `MUJOCO_DIR` is correctly set.
 - **Controller cannot load**: Check `controller_manager` logs and `controllers.yaml`.
 - **Model description load failure**: Ensure

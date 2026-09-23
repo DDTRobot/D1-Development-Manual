@@ -79,11 +79,20 @@ python3 piper_ctrl_moveJ_keyboard.py
 | R | J3 | +1° | F | J3 | -1° |
 | T | J4 | +1° | G | J4 | -1° |
 | Y | J5 | +1° | H | J5 | -1° |
-| Z | Gripper | +5mm | X | Gripper | -5mm |
+| Z | Gripper | +5 mm | X | Gripper | -5 mm |
 
-**Function keys:** Space (toggle gripper) / 1 (return to zero) / 2 (Home) / 3 (grasp) / 0 (emergency return to zero) / ESC (exit).
+**Function keys:**
 
-**Press and hold:** Holding a control key for more than 0.3 seconds activates continuous motion at 15Hz. Releasing the key stops the motion immediately.
+| Key | Function |
+| --- | --- |
+| Space | Toggle gripper |
+| 1 | Return to zero |
+| 2 | Home |
+| 3 | Grasp |
+| 0 | Emergency return to zero |
+| ESC | Exit |
+
+**Press and hold:** Holding a control key for more than 0.3 seconds activates continuous motion at 15 Hz. Releasing the key stops the motion immediately.
 
 ### SSH remote control when D1 has no keyboard
 
@@ -102,7 +111,6 @@ cd piper_control
 source /opt/ros/humble/setup.bash
 source /opt/d1_ros2/namespace.sh
 ros2 topic list | grep joy
-
 
 # Connect to can1 after confirming the axis directions and mode
 python3 example/teleop/betafpv_piper_teleop.py

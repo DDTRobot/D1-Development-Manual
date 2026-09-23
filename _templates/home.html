@@ -2,7 +2,7 @@
   <section class="home-hero" aria-labelledby="home-title">
     <div class="hero-copy" id="welcome-to-d1-robot-documentation">
       <h1 id="home-title">D1 Documentation</h1>
-      <p class="hero-description">{{ title | striptags }}<br>Connection setup, interface references, and development examples.</p>
+      <p class="hero-description">Connection setup, interface references, and examples for D1.<br>From ROS 2 applications to C++ / CAN FD interfaces.</p>
       <dl class="hero-environment">
         <dt>Environment</dt>
         <dd>Ubuntu 22.04 <span aria-hidden="true">/</span> ROS 2 Humble</dd>
@@ -26,13 +26,13 @@
     <div class="development-paths">
       <a class="path-card path-card-primary" href="{{ pathto('pages/Quick_Start') }}">
         <h3>ROS 2 development</h3>
-        <p>Set up your environment, connect to D1, and use ROS 2 interfaces.</p>
+        <p>Read robot state and control D1 through topics and services.</p>
         <span class="path-card-link">Quick Start <span aria-hidden="true">→</span></span>
       </a>
       <a class="path-card" href="{{ pathto('pages/SDK_Development') }}">
-        <h3>SDK development</h3>
-        <p>Explore joint control, battery information, and robot state interfaces.</p>
-        <span class="path-card-link">SDK Development <span aria-hidden="true">→</span></span>
+        <h3>C++ / CAN FD development</h3>
+        <p>Explore joint control, sensor data, and low-level communication interfaces.</p>
+        <span class="path-card-link">Low-level SDK <span aria-hidden="true">→</span></span>
       </a>
     </div>
   </section>
@@ -41,18 +41,26 @@
     <section class="task-section" aria-labelledby="task-heading">
       <h2 id="task-heading">Documentation</h2>
       <div class="task-list">
-        <a href="{{ pathto('pages/Quick_Start') }}#ros2-sdk"><strong>ROS2 SDK</strong><small>Controller status and command interfaces</small></a>
-        <a href="{{ pathto('pages/sim2sim_sim2real') }}"><strong>sim2sim/sim2real</strong><small>Simulation and hardware execution</small></a>
-        <a href="{{ pathto('pages/D1_remote_ctrl') }}"><strong>Remote Controller Instructions</strong><small>Control mappings, configuration, and error codes</small></a>
-        <a href="{{ pathto('pages/OTA_model') }}"><strong>D1 modules OTA</strong><small>Firmware updates and system recovery</small></a>
+        <a href="{{ pathto('pages/ROS2_Reference') }}"><strong>ROS 2 interface reference</strong><small>Topics, services, and state feedback</small></a>
+        <a href="{{ pathto('pages/sim2sim_sim2real') }}"><strong>Simulation & deployment</strong><small>Simulation and sim2real workflows</small></a>
+        <a href="{{ pathto('pages/Control_Tuning') }}"><strong>Policy & parameter tuning</strong><small>Policy replacement, LQR, and controller settings</small></a>
+        <a href="{{ pathto('pages/OTA_model') }}"><strong>OTA & system recovery</strong><small>Firmware updates and system maintenance</small></a>
       </div>
     </section>
     <div class="home-support">
       <section class="hardware-section" aria-labelledby="hardware-heading">
-        <h2 id="hardware-heading">Robotic arms</h2>
+        <h2 id="hardware-heading">Accessories & extensions</h2>
         <div class="hardware-links">
-          <a href="{{ pathto('pages/Airbot_on_D1') }}">Airbot</a>
-          <a href="{{ pathto('pages/PIPER_on_D1') }}">Piper</a>
+          <a href="{{ pathto('pages/Airbot_on_D1') }}">Airbot arm</a>
+          <a href="{{ pathto('pages/PIPER_on_D1') }}">Piper arm</a>
+          <a href="{{ pathto('pages/S2_lite_onD1') }}">Langyi navigation tower</a>
+        </div>
+      </section>
+      <section aria-labelledby="examples-heading">
+        <h2 id="examples-heading">Application examples</h2>
+        <div class="example-entry">
+          <a class="example-link" href="{{ pathto('pages/Application_Examples') }}#d1-follow-control">D1 follow control</a>
+          <p>Following with a D435i depth camera and UWB</p>
         </div>
       </section>
       <section aria-labelledby="support-heading">

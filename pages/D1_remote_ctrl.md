@@ -1,16 +1,8 @@
 # Remote Controller Instructions
-```{toctree}
-:maxdepth: 1
-:glob:
-```
-------
 
+![D1 remote controller button layout](../_static/D1_remove_ctrl.png)
 
-![D1_remove_ctrl](../_static/D1_remove_ctrl.png)
-
-
-For detailed information on how to pair the remote controller, see:[Remote Controller Pairing](how-to-pair.md)
-
+For detailed pairing instructions, see [Remote Controller Pairing](how-to-pair.md).
 
 ## Common Control Mappings
 
@@ -34,18 +26,19 @@ For detailed information on how to pair the remote controller, see:[Remote Contr
 | 05 (skill 3) | Released    | Up         | Any         | Degrees-of-freedom demonstration | Pose demonstration | Pose demonstration |
 | None         | Pressed     | Middle     | Any         | Forward jump mode     | Disabled       | Disabled     |
 
-### State Machine
-The controller's internal FSM transitions as shown below.Arrows indicate permissible transitions between states.Quadruped control does not include the car state. An asterisk (*) in the menu indicates the current state (03–07).
-![D1_ctrl_state_machine](../_static/D1_controler_state.png)
+## State Machine
 
+The controller's internal FSM transitions are shown below. Arrows indicate permissible transitions between states. Quadruped control does not include the `car` state. An asterisk in the menu indicates the current state (03–07).
 
-### Remote Controller Menu
+![D1 controller state-machine transitions](../_static/D1_controler_state.png)
 
-Press the right-side button to enter the menu. The left image shows page 1, and the right image shows page 2. Push the right-side directional button to the right to open page 2, or to the left to return to page 1.
+## Remote Controller Menu
 
-<img src="../_static/menu1.png" alt="Remote controller menu, page 1: Mode" width="448"> <img src="../_static/menu2.png" alt="Remote controller menu, page 2: Control" width="448">
+Press the right-side button to enter the menu. Push the right-side directional button to the right to open page 2, or to the left to return to page 1.
 
-**Page 1 — Mode**
+### Page 1 — Mode
+
+<img src="../_static/menu1.png" alt="Remote controller menu, page 1: Mode" width="448">
 
 - **01 Quadruped Mode:** Switch to quadruped mode by switching the system service.
 - **02 Unlock Bolt:** Unlock the docking mechanism; switch to biped-wheeled mode first.
@@ -53,7 +46,9 @@ Press the right-side button to enter the menu. The left image shows page 1, and 
 - **04 Key Pair:** Pair the remote emergency stop switch.
 - **05 Key Unpair:** Unpair the remote emergency stop switch.
 
-**Page 2 — Control**
+### Page 2 — Control
+
+<img src="../_static/menu2.png" alt="Remote controller menu, page 2: Control" width="448">
 
 - **01 Crawl Mode:** Crawl mode, available in biped-wheeled mode only.
 - **02 Lock Joints:** Lock the joints.
@@ -61,15 +56,15 @@ Press the right-side button to enter the menu. The left image shows page 1, and 
 - **04 Skill 2:** Biped-wheeled stair climbing / quadruped high-platform climbing.
 - **05 Skill 3:** Not enabled in biped-wheeled mode / pose demonstration in quadruped mode.
 
-### Unlock / Fusion Switching
+## Unlock / Fusion Switching
 
-![unlock](../_static/lock.png)
+![D1 docking and separation procedure](../_static/lock.png)
 
-### Configuration Modification
+## Configuration Modification
 
-#### Remote Controller Configuration（ROS2）
+### Remote Controller Configuration
 
-Edit the YAML parameters in the teleop_command package:
+Edit the corresponding YAML file to configure the ROS 2 remote controller parameters:
 ```yaml
   teleop_command:
     ros__parameters:
@@ -89,28 +84,29 @@ Edit the YAML parameters in the teleop_command package:
       max_roll: 0.2
       max_pitch: 0.4
 ```
-### Motion Control Adjustments
+## Motion Control Adjustments
 
-- Modify control frequency in:
+To change the control frequency, open the configuration file for the appropriate robot configuration.
 
-  Quadruped:
+**Quadruped:**
 
-  ```
-  vim /opt/y1_ros2/share/rl_controller/config/y1v0/controllers.yaml
-  ```
+```bash
+vim /opt/y1_ros2/share/rl_controller/config/y1v0/controllers.yaml
+```
 
-  Biped-wheeled:
+**Biped-wheeled:**
 
-  ```
-  vim /opt/y1_ros2/share/rl_controller/config/y1v0h_evt1/controllers.yaml
-  ```
+```bash
+vim /opt/y1_ros2/share/rl_controller/config/y1v0h_evt1/controllers.yaml
+```
 
-  Set the integer `update_rate` values under `controller_manager` and `*_rl_controller` to the desired control frequency in Hz. The default is 500 Hz. Restart the robot for the changes to take effect.
+Set the integer `update_rate` values under `controller_manager` and `*_rl_controller` to the desired control frequency in Hz. The default is 500 Hz. Restart the robot for the changes to take effect.
 
-  ![D1_ctrl_update_rate](../_static/control_motion.png)
-  ![D1_ctrl_update_rate](../_static/control_motion_yaml.png)
+![Control-frequency configuration file location](../_static/control_motion.png)
 
-### ERROR CODE 
+![Controller update_rate configuration example](../_static/control_motion_yaml.png)
+
+## ERROR CODE
 
 | Code   | Description                                                  | Version |
 | ------ | ------------------------------------------------------------ | ------- |

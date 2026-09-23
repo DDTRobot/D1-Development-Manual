@@ -1,18 +1,11 @@
 
 # FAQ
 
-```{toctree}
-:maxdepth: 1
-:glob:
-```
-
-------
-
 ## Abnormal noise at the robot’s connection joint
 
 If abnormal noise is heard at the robot’s connection joint, it may be caused by loosened screws in the connecting mechanism. To facilitate quick disassembly/installation or replacement of the docking mechanism, no anti-loosening measures are applied to the screws at the connection. Users should regularly check the tightness of the connection screws during use. If any looseness is found, tighten them with an Allen (hex) key.
 
-![faq1](../_static/faq1.png) 
+![Docking mechanism screw locations](../_static/faq1.webp)
 
 
 
@@ -34,6 +27,10 @@ ros2 run canfd_api leg_zero_calibration -l left
 Please place the left leg at the zero position, then press Enter...
 ```
 Move the corresponding leg to the mechanical zero position first, then press Enter...
+
+![Leg mechanical zero position](../_static/leg_setzero.webp)
+
+Move each marked joint to its mechanical stop, as indicated by the red arrows.
 
 For the other leg, replace `left` with `right` and repeat the above steps. Then restart the device.
 

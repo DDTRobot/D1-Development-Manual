@@ -37,6 +37,6 @@
 {% endif %}
 <div class="bottom-of-page{% if pagename == master_doc %} home-footer{% endif %}">
   <div class="left-details">© {{ copyright }} · D1 Documentation</div>
-  <div class="right-details">{% if pagename == master_doc and meta.last_updated %}<span>Last updated: <time datetime="{{ meta.last_updated }}">{{ meta.last_updated }}</time></span>{% endif %}<span>Sphinx / Furo</span></div>
+  <div class="right-details">{% if pagename == master_doc %}<span>Content updated <time datetime="2026-09-11">2026-09-11</time></span>{% endif %}<span>Sphinx / Furo</span></div>
 </div>
 {% endblock %}

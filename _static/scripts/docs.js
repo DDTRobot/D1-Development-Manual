@@ -1,4 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.location.pathname.endsWith('/Quick_Start.html')) {
+    const legacyAnchors = {
+      '#environment-dependencies': 'Environment.html#environment-dependencies',
+      '#system-environment': 'Environment.html#system-environment',
+      '#network-environment': 'Environment.html#network-environment',
+      '#wi-fi-hotspot-connection': 'Environment.html#wi-fi-connection',
+      '#wi-fi-ap-hotspot-mode': 'Environment.html#wi-fi-ap-hotspot-mode',
+      '#ethernet-port-configuration': 'Environment.html#ethernet-port-configuration',
+      '#install-build-tools': 'Environment.html#install-build-tools',
+      '#ros2-sdk': 'ROS2_Reference.html#ros2-sdk',
+      '#get-the-quadruped-biped-controller-status': 'ROS2_Reference.html#api-controller-state',
+      '#upper-level-command-sdk-interface': 'ROS2_Reference.html#api-command',
+      '#policy-replacement': 'Control_Tuning.html#policy-replacement',
+      '#controller-tuning': 'Control_Tuning.html#controller-tuning',
+    };
+    const destination = legacyAnchors[window.location.hash];
+    if (destination) {
+      window.location.replace(destination);
+      return;
+    }
+  }
+
   const specificationsLink = document.querySelector('.d1-home .product-preview');
   const legacyHomeSections = new Set([
     '#product-introduction',

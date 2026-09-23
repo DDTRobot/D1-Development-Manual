@@ -1,49 +1,55 @@
 ---
-last_updated: "2025-11-21"
+hide-toc: true
+myst:
+  html_meta:
+    description: D1 modular wheel-legged robot documentation. Explore the ROS 2 quick start, C++ and CAN FD SDK, simulation, accessories, and system maintenance.
 ---
 
-# Welcome to D1-Robot Documentation!
+# D1 Documentation
+
+From ROS 2 applications to C++ / CAN FD control, choose the development path that fits your task.
 
 ```{toctree}
-:maxdepth: 3
 :caption: Get started
+:maxdepth: 3
 :hidden:
 
-pages/Quick_Start
+Quick Start <pages/Quick_Start>
+Environment & network <pages/Environment>
 Product & Specifications <pages/Specifications>
-
 ```
 
 ```{toctree}
-:maxdepth: 3
 :caption: Development & control
+:maxdepth: 3
 :hidden:
 
-pages/SDK_Development
-pages/sim2sim_sim2real
-
+ROS 2 interface reference <pages/ROS2_Reference>
+Low-level SDK (CAN FD) <pages/SDK_Development>
+Simulation & deployment <pages/sim2sim_sim2real>
+Policy & parameter tuning <pages/Control_Tuning>
+Application examples <pages/Application_Examples>
 ```
 
 ```{toctree}
+:caption: Accessories & extensions
 :maxdepth: 3
-:caption: Hardware & extensions
 :hidden:
 
-pages/D1_remote_ctrl
-pages/how-to-pair
+Remote controller <pages/D1_remote_ctrl>
+Hardware pairing <pages/how-to-pair>
 Airbot robotic arm <pages/Airbot_on_D1>
 Piper robotic arm <pages/PIPER_on_D1>
-pages/TITA-wifi_app
-
+Langyi navigation tower (S2 Lite) <pages/S2_lite_onD1>
+Wi-Fi hotspot <pages/TITA-wifi_app>
 ```
 
 ```{toctree}
-:maxdepth: 3
 :caption: Maintenance & support
+:maxdepth: 3
 :hidden:
 
-pages/OTA_model
-pages/FAQ
-
+OTA & system recovery <pages/OTA_model>
+FAQ <pages/FAQ>
 ```
 

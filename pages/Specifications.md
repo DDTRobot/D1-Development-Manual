@@ -4,7 +4,9 @@
 
 D-INFINITE (referred to as D1) is the world’s first wheel-legged robot featuring fully modular whole-machine architecture. It perfectly combines the agility of wheeled robots with the adaptability of legged robots, and additionally supports physical fusion and separation between two robots. With a modular design and open interfaces, it can carry vision modules, communication modules, AI computers, edge processors, and a variety of sensors. It also supports replacing wheel hubs to transform into point-foot or flat-foot configurations, offering high playability and significant research value.
 
-![tita](../_static/D1.png)
+![D1 modular wheel-legged robot in quadruped configuration](../_static/d1-product.webp)
+
+-------
 
 (d1-specifications)=
 ## D-infinite (D1) Specification V2.3
@@ -22,7 +24,7 @@ D-INFINITE (referred to as D1) is the world’s first wheel-legged robot featuri
 | Electrical  | WiFi Type                        | WIFI6                                                        |
 | Electrical  | Remote Controller Link           | ELRS                                                         |
 | Electrical  | Battery Specifications           | Single unit: 43.2V 9Ah (388.8 Wh)                            |
-| Electrical  | Battery Compartment              | Single battery for single-unit, two batteries for Biped-unit |
+| Electrical  | Battery Compartment              | One battery per unit; two batteries for two docked units |
 | Electrical  | External Interfaces              | USB Type-C ×2, Gigabit Ethernet ×1, Battery Port ×1          |
 | Electrical  | Fusion Communication Port        | CAN-FD                                                       |
 | Electrical  | Remote Power Cutoff              | Supported                                                    |
@@ -38,7 +40,7 @@ D-INFINITE (referred to as D1) is the world’s first wheel-legged robot featuri
 | Performance | Continuous Walking Load          | Quadruped: >10 kg / Biped-wheeled: >5 kg                     |
 | Performance | Stair-climbing Ability           | Biped-wheeled: 15 cm / Quadruped: 15 cm                      |
 | Performance | Crawling Load Capacity           | >100 kg                                                      |
-| Performance | Max Continuous Speed             | ~3 m/s                                                       |
+| Performance | Max Continuous Speed             | Quadruped: 3.2 m/s / Biped-wheeled: 2 m/s |
 | Performance | Slope Capability                 | Quadruped: >35° / Biped-wheeled: >25°                        |
 | Performance | Climbing Height                  | Max 70 cm, recommended 50 cm                                 |
 | Performance | Turning Radius (Single)          | About 270 mm                                                 |

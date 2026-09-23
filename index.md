@@ -39,6 +39,7 @@ ROS 2 接口参考 <pages/ROS2_Reference>
 硬件配对 <pages/how-to-pair>
 Airbot 机械臂 <pages/Airbot_on_D1>
 Piper 机械臂 <pages/PIPER_on_D1>
+朗毅S2 部署 <pages/S2_lite_onD1>
 Wi-Fi 热点应用 <pages/TITA-wifi_app>
 ```
 
@@ -50,4 +51,3 @@ Wi-Fi 热点应用 <pages/TITA-wifi_app>
 OTA 与系统恢复 <pages/OTA_model>
 常见问题 <pages/FAQ>
 ```
-

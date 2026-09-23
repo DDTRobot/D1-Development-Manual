@@ -1,13 +1,10 @@
-# Piper 机械臂在d1 上的控制指南
+# Piper 机械臂在 D1 上的控制指南
 
-
-
-开源仓库链接：`https://github.com/DDTRobot/piper-environment-deployment.git`
-
+开源仓库：[DDTRobot/piper-environment-deployment](https://github.com/DDTRobot/piper-environment-deployment.git)
 
 ## 硬件拓扑
 
-```
+```text
 D1 Orin NX (d1)
     │
     ├── can0 (板载 mttcan)    → d1 电机控制
@@ -41,8 +38,9 @@ sudo modprobe gs_usb
 
 ### 2. 激活 CAN 接口
 
-can1 (Piper，通过 USB-CAN)
-```
+激活 `can1`（Piper，通过 USB-CAN）：
+
+```bash
 sudo ip link set can1 down
 sudo ip link set can1 type can bitrate 1000000
 sudo ip link set can1 up
@@ -55,8 +53,6 @@ candump can1
 ```
 
 应看到帧不断刷新。
-
----
 
 ## 控制例程
 
@@ -83,19 +79,28 @@ python3 piper_ctrl_moveJ_keyboard.py
 | R | J3 | +1° | F | J3 | -1° |
 | T | J4 | +1° | G | J4 | -1° |
 | Y | J5 | +1° | H | J5 | -1° |
-| Z | 夹爪 | +5mm | X | 夹爪 | -5mm |
+| Z | 夹爪 | +5 mm | X | 夹爪 | -5 mm |
 
-**功能键：** 空格(夹爪开关) / 1(归零) / 2(Home) / 3(抓取) / 0(紧急归零) / ESC(退出)
+**功能键：**
 
-**长按机制：** 按住控制键超过 0.3 秒进入连续运动模式（15Hz），松开立即停止。
+| 按键 | 功能 |
+|------|------|
+| 空格 | 夹爪开关 |
+| 1 | 归零 |
+| 2 | Home |
+| 3 | 抓取 |
+| 0 | 紧急归零 |
+| ESC | 退出 |
 
-### SSH 远程控制（d1 无键盘时）
+**长按机制：** 按住控制键超过 0.3 秒进入连续运动模式（15 Hz），松开立即停止。
+
+### SSH 远程控制（D1 无键盘时）
 
 ```bash
 python3 piper_ctrl_moveJ_keyboard_ssh.py
 ```
 
-此版本不需要 `pynput`，直接读取 SSH 终端按键。按键表同上，按住不放终端自动重复 -> 连续运动。Ctrl+C 退出。
+此版本不需要 `pynput`，直接读取 SSH 终端按键。按键表同上，按住不放时终端自动重复，实现连续运动。按 `Ctrl+C` 退出。
 
 ### D1 遥控器控制
 
@@ -107,20 +112,19 @@ source /opt/ros/humble/setup.bash
 source /opt/d1_ros2/namespace.sh
 ros2 topic list | grep joy
 
-
 # 确认轴向和模式正确后连接 can1
-python3 example/teleop/betafpv_piper_teleop.py 
+python3 example/teleop/betafpv_piper_teleop.py
 ```
 
-运行前在遥控器菜单选择 `use-sdk mode`为`true`。完整模式表和参数见
+运行前在遥控器菜单选择 `use-sdk mode` 为 `true`。完整模式表和参数见
 `piper_control/CONTROL_README.md`，分阶段实机测试流程见
 `piper_control/BETAFPV_PIPER_TEST_README.md`。
 
----
 ### 一键启动
-```
+
+```bash
 cd piper_D1_adaption
-./start_piper_teleop.sh 
+./start_piper_teleop.sh
 ```
 
 ## 常见问题
@@ -136,9 +140,11 @@ A: Piper 没上电或 CAN 线松了。检查 Piper 电源和 CAN 端子连接。
 **Q: 键盘脚本报 `CAN socket can1 does not exist`？**
 
 A: 脚本里写死了 `can0`，但 Piper 在 `can1` 上。执行：
+
 ```bash
 sed -i 's/"can0"/"can1"/g' piper_sdk/piper_ctrl_moveJ_keyboard.py
 ```
+
 ## 接口速查表
 
 | 接口 | 类型 | 用途 |

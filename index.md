@@ -25,6 +25,7 @@ myst:
 :hidden:
 
 ROS 2 接口参考 <pages/ROS2_Reference>
+D1 ROS 2 网络与服务配置 <pages/D1_ROS2_Network_Config>
 底层 SDK（CAN FD） <pages/SDK_Development>
 仿真与实机部署 <pages/sim2sim_sim2real>
 策略与参数调优 <pages/Control_Tuning>

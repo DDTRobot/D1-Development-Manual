@@ -1,13 +1,12 @@
 # 遥控器说明
 
-![D1_remove_ctrl](../_static/D1_remove_ctrl.png)
+![D1 遥控器按键说明](../_static/D1_remove_ctrl.png)
 
-想详细了解如何进行遥控器配对，请查看[遥控器配对](how-to-pair.md)
+想详细了解如何进行遥控器配对，请查看[遥控器配对](how-to-pair.md)。
 
 ## 常用组合
 
-### 双轮足模式(默认)
-
+### 双轮足模式（默认）
 
 | 模式选择(mode)  | 启动按键 | 三级开关(左) | 三级开关(右) | 描述         | 左摇杆     | 右摇杆             |
 | --------------- | -------- | ------------ | ------------ | ------------ | ---------- | ------------------ |
@@ -19,7 +18,6 @@
 
 ### 四轮足模式（默认）
 
-
 | 模式选择(mode) | 跳跃按键 | 三级开关(左) | 三级开关(右) | 描述         | 左摇杆     | 右摇杆   |
 | -------------- | -------- | ------------ | ------------ | ------------ | ---------- | -------- |
 | 不选           | 弹起     | 中           | 任意         | RL平地模式   | 前进及转弯 | 侧走     |
@@ -28,45 +26,45 @@
 | 05 (skill 3)   | 弹起     | 上           | 任意         | 自由度展示   | 姿态展示   | 姿态展示 |
 | 不选           | 按下     | 中           | 任意         | 向前跳跃模式 | 无效       | 无效     |
 
-### 状态机
+## 状态机
 
-控制器内部状态机流转如下图所示，箭头方向表示可从A状态切换到B状态，四足控制无car状态机。部分在菜单内显示的状态机星号表示处于当前状态机（03到07）。
-![D1_ctrl_state_machine](../_static/D1_controler_state.png)
+控制器内部状态机流转如下图所示，箭头方向表示可从 A 状态切换到 B 状态，四足控制无 car 状态机。部分在菜单内显示的状态机星号表示处于当前状态机（03 到 07）。
 
-### 遥控器菜单页
+![D1 控制器状态机流转](../_static/D1_controler_state.png)
 
-1、进入菜单页
+## 遥控器菜单页
 
-- 按下右侧按键进入菜单页，左边页面一，右边页面二。页面切换：右侧十字按钮往右拨，进入页面二，往左拨进入页面一，如下图：
-  <img src="../_static/menu1.png" style="zoom: 35%;" /><img src="../_static/menu2.png" style="zoom: 35%;" />
+按下右侧按键进入菜单页。通过右侧十字按钮切换页面：向右拨进入页面二，向左拨进入页面一。
 
-进入菜单,界面如上, 功能分别为:
+### 页面一
 
-页面一：
+<img src="../_static/menu1.png" alt="遥控器菜单页面一" width="448">
 
-- 01 切换四足模式（本质为上述*.service切换）
+- 01 切换四足模式（本质为上述 `*.service` 切换）
 - 02 解锁拼接机构（先切换为双轮足后解锁）
-- 03 joystick sdk mode，关闭ros2 command话题发布
+- 03 joystick sdk mode，关闭 ROS 2 command 话题发布
 - 04 远程开关配对
 - 05 远程开关解除配对
 
-页面二：
+### 页面二
 
-- 01匍匐模式(双轮足启用)
+<img src="../_static/menu2.png" alt="遥控器菜单页面二" width="448">
+
+- 01 匍匐模式（双轮足启用）
 - 02 锁定关节
-- 03 强化控制策略1(双轮足侧走/四轮足爬楼梯)
-- 04 强化控制策略2(双轮足爬台阶/四轮足爬高台)
-- 05 强化控制策略3(双轮足未启用/四轮足展示姿态)
+- 03 强化控制策略 1（双轮足侧走/四轮足爬楼梯）
+- 04 强化控制策略 2（双轮足爬台阶/四轮足爬高台）
+- 05 强化控制策略 3（双轮足未启用/四轮足展示姿态）
 
-### 解锁/拼接切换
+## 解锁/拼接切换
 
-![unlock](../_static/lock.png)
+![D1 解锁与拼接切换说明](../_static/lock.png)
 
-### 配置修改
+## 配置修改
 
-#### 遥控器
+### 遥控器
 
-基于ROS2框架，修改对应文件来下的yaml文件来配置，下述为遥控器一些相关配置：
+基于 ROS 2 框架，可修改对应的 YAML 文件进行配置。以下为遥控器相关配置：
 
 ```yaml
   teleop_command:
@@ -88,16 +86,29 @@
       max_pitch: 0.4
 ```
 
-### 运动控制
+## 运动控制
 
-- 修改控制频率
-  `vim /opt/y1_ros2/share/rl_controller/config/y1v0/controllers.yaml` 修改四轮足
-  `vim /opt/y1_ros2/share/rl_controller/config/y1v0h_evt1/controllers.yaml` 修改双轮足
-  查找对应`update_rate`字段，修改对应控制器中`update_rate`整形值（控制频率，Hz）目前默认为500Hz。修改`controller_manager`和`*_rl_controller`）下的update_rate后重启即可。
-  ![D1_ctrl_update_rate](../_static/control_motion.png)
-  ![D1_ctrl_update_rate](../_static/control_motion_yaml.png)
+修改控制频率时，先打开对应构型的配置文件。
 
-### ERROR CODE
+**四轮足：**
+
+```bash
+vim /opt/y1_ros2/share/rl_controller/config/y1v0/controllers.yaml
+```
+
+**双轮足：**
+
+```bash
+vim /opt/y1_ros2/share/rl_controller/config/y1v0h_evt1/controllers.yaml
+```
+
+查找对应的 `update_rate` 字段，修改控制器中的整数值（控制频率，单位 Hz），目前默认为 500 Hz。修改 `controller_manager` 和 `*_rl_controller` 下的 `update_rate` 后重启即可。
+
+![控制频率配置文件位置](../_static/control_motion.png)
+
+![控制器 update_rate 配置示例](../_static/control_motion_yaml.png)
+
+## ERROR CODE
 
 
 | 错误码 | 说明                                                                                                                                                                                                                                                                                                                                                                             | 版本 |

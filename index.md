@@ -2,7 +2,7 @@
 hide-toc: true
 myst:
   html_meta:
-    description: D1 模块化轮足机器人开发文档。查阅 ROS 2 快速开始、C++ 与 CAN FD 底层 SDK、仿真部署、机械臂扩展及升级维护指南。
+    description: D1 模块化轮足机器人开发文档。查阅 ROS 2 快速开始、C++ 与 CAN FD 底层 SDK、仿真部署、配件扩展及升级维护指南。
 ---
 
 # D1 开发文档
@@ -29,10 +29,11 @@ D1 ROS 2 网络与服务配置 <pages/D1_ROS2_Network_Config>
 底层 SDK（CAN FD） <pages/SDK_Development>
 仿真与实机部署 <pages/sim2sim_sim2real>
 策略与参数调优 <pages/Control_Tuning>
+应用示例 <pages/Application_Examples>
 ```
 
 ```{toctree}
-:caption: 硬件与扩展
+:caption: 配件与扩展
 :maxdepth: 3
 :hidden:
 
@@ -40,7 +41,7 @@ D1 ROS 2 网络与服务配置 <pages/D1_ROS2_Network_Config>
 硬件配对 <pages/how-to-pair>
 Airbot 机械臂 <pages/Airbot_on_D1>
 Piper 机械臂 <pages/PIPER_on_D1>
-朗毅S2 部署 <pages/S2_lite_onD1>
+朗毅导航塔（S2 Lite） <pages/S2_lite_onD1>
 Wi-Fi 热点应用 <pages/TITA-wifi_app>
 ```
 

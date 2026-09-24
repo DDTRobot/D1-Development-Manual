@@ -261,14 +261,3 @@ sudo systemctl restart d1_bringup.service
 sudo systemctl restart d1_command.service
 ```
 
-## 配置备份
-
-本次配置对应的备份文件：
-
-```text
-/home/robot/.bashrc.bak.20260924_ros2
-/opt/d1_ros2/cyclonedds.xml.bak.20260924-cross-host
-/home/luo/.bashrc.bak.20260924-d1-ros2
-```
-
-回滚 Cyclone DDS 配置后，需要重新加载 systemd 并重启三个 ROS 2 服务。

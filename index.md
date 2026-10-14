@@ -25,6 +25,7 @@ Product & Specifications <pages/Specifications>
 :hidden:
 
 ROS 2 interface reference <pages/ROS2_Reference>
+D1 ROS 2 network and service configuration <pages/D1_ROS2_Network_Config>
 Low-level SDK (CAN FD) <pages/SDK_Development>
 Simulation & deployment <pages/sim2sim_sim2real>
 Policy & parameter tuning <pages/Control_Tuning>

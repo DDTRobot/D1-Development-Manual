@@ -25,6 +25,10 @@ Use the USB Type-C port closest to the Ethernet port. Do not use the flashing ca
 
 ## Connect to the robot
 
+To access the robot's system, wait **about 10 seconds after powering on the robot**, then connect your own USB Type-C cable to the **Type-C port closest to the Ethernet port**, as shown below.
+
+<img src="../_static/robot_connect.png" alt="USB Type-C port for connecting to the robot" width="500">
+
 Run this in a terminal on your **development computer**:
 
 ```bash

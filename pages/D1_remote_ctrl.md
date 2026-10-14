@@ -112,3 +112,42 @@ Set the integer `update_rate` values under `controller_manager` and `*_rl_contro
 | ------ | ------------------------------------------------------------ | ------- |
 | 0x1000 | The first digit, 1, indicates a read error; the second and third digits contain the motor error code (00, 01, 03); the fourth digit is the motor index (0–F). For example, in 0x1623, 1 indicates an error, 62 is the error code, and 3 identifies the fourth motor.<br>0x1000: all front-unit motors are offline; self-check failed.<br>0x1008: all rear-unit motors are offline; self-check failed.<br>0x1010: front-unit left-leg motor 0 is offline.<br>0x1033: front-unit left-leg motor 3 (wheel motor) has an overvoltage error.<br>Note: Only wheel-hub motors currently provide detailed error codes; joint motors report only error 01. |         |
 | 0x385  | Fusion connector CAN data abnormal, possibly disconnected or cable damaged |         |
+
+### Wheel-Hub Motor Error Codes
+
+Wheel-hub motor fault codes are hexadecimal.
+
+| Fault Code | Description |
+| ---------- | ----------- |
+| `0x00` | No fault |
+| `0x02` | Undervoltage 2: DC bus voltage < 36 V |
+| `0x01` | Undervoltage 1: 36 V < DC bus voltage < 40 V |
+| `0x03` | Overvoltage: DC bus voltage > 60 V |
+| `0x0A` | Overcurrent: DC bus current > 16 A by default |
+| `0x20` | Overtemperature 1: motor winding temperature > 80 °C |
+| `0x1F` | Overtemperature 2: motor winding temperature > 110 °C |
+| `0x29` | Current-sense resistor fault |
+| `0x2A` | Position sensor fault |
+| `0x2B` | Position sensor signal interference |
+| `0x2D` | Temperature sensor out of range |
+| `0x3C` | Communication timeout: protection is disabled by default and must be enabled by the user |
+| `0x62` | Motor stall |
+
+### Joint Motor Error Codes
+
+The following joint motor driver fault codes use decimal numbering. The remote controller currently reports only joint motor error `01`; the codes below describe the driver's faults.
+
+| Fault Code | Fault | Trigger Condition | Notes |
+| ---------- | ----- | ----------------- | ----- |
+| `1` | Bus disconnection | With the bus heartbeat enabled, no CAN command is received within the configured timeout; detection interval: 1 ms | — |
+| `2` | DC bus overvoltage | DC bus voltage exceeds the configured overvoltage threshold; detection interval: 1 ms | — |
+| `3` | DC bus undervoltage | DC bus voltage remains below the configured threshold for 100 ms; detection interval: 1 ms | — |
+| `4` | Overcurrent | Current exceeds the configured limit; detection interval: 1 ms | Possible causes: excessive DC bus current, phase loss, MOS damage, or other issues |
+| `5` | Excessive ADC offset | Deviation from the 1.65 reference exceeds the configured limit; checked only during initialization | — |
+| `6` | Position error | Repeated consecutive errors in the position signal | — |
+| `7` | Overload | Current exceeds the configured rated current for a specified duration | Protection trips after 15 s above 1.5 times rated current, 5 s above 2 times rated current, or 2 s above 2.5 times rated current |
+| `8` | Overspeed | Speed exceeds 1.5 times the configured speed limit | — |
+| `9` | MOS overtemperature | MOS temperature reaches 100 °C | Possible causes: overheating during continuous operation or MOS damage |
+| `10` | Motor overtemperature | Motor temperature exceeds the configured limit | Possible causes: overheating during continuous operation or MOS damage |
+| `11` | Overcurrent | Current exceeds the configured limit; detection interval: 50 μs | Unbalanced three-phase currents |
+| `12` | Overcurrent | Current exceeds the configured limit; detection interval: 50 μs | Excessive phase current |

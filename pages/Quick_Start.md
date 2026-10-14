@@ -27,6 +27,10 @@
 
 ## 连接机器人
 
+为了进入机器人系统，在机器人完成开机**约10s**以后，可自备一根USB type-c线束，插入**距离网口最近的type-c口**，如下图所示。
+
+<img src="../_static/robot_connect.png" alt="机器人的typeC插线位置" width="500">
+
 在**开发电脑终端**中执行：
 
 ```bash
